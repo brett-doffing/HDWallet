@@ -1,12 +1,13 @@
 //
-//  HDWallet.swift
+//  BIP32.swift
+//  HDWallet
 //
 // REFERENCES:
 // https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki
 
 import Foundation
 
-class HDWallet {
+class BIP32 {
     
     let secp256k1 = SECP256K1()
     let masterSecretKey: String
@@ -18,16 +19,16 @@ class HDWallet {
         // (Key = "Bitcoin seed") as hex
         let hexKey = "426974636f696e2073656564"
         let hdMasterKey = HMAC_SHA512.digest(withKey: hexKey, andDataString: seed)
-//        let hdMasterKey = HMAC_SHA512.digest(withKey: hexKey, andDataString: "fffcf9f6f3f0edeae7e4e1dedbd8d5d2cfccc9c6c3c0bdbab7b4b1aeaba8a5a29f9c999693908d8a8784817e7b7875726f6c696663605d5a5754514e4b484542")
+        //        let hdMasterKey = HMAC_SHA512.digest(withKey: hexKey, andDataString: "fffcf9f6f3f0edeae7e4e1dedbd8d5d2cfccc9c6c3c0bdbab7b4b1aeaba8a5a29f9c999693908d8a8784817e7b7875726f6c696663605d5a5754514e4b484542")
         
         self.masterSecretKey = String(hdMasterKey[..<hdMasterKey.index(hdMasterKey.startIndex, offsetBy: 64)])
         self.masterChainCode = String(hdMasterKey[hdMasterKey.index(hdMasterKey.startIndex, offsetBy: 64)...])
-//        test()
+        //        test()
     }
     
     func test() {
-//        CKDpriv(kPar: masterSecretKey, cPar: masterChainCode, index: BInt(1))
-//        CKDpriv(kPar: masterSecretKey, cPar: masterChainCode, index: hardenedMin)
+        //        CKDpriv(kPar: masterSecretKey, cPar: masterChainCode, index: BInt(1))
+        //        CKDpriv(kPar: masterSecretKey, cPar: masterChainCode, index: hardenedMin)
     }
     
     // Private parent key → private child key
@@ -81,7 +82,7 @@ class HDWallet {
         let IR = String(I[I.index(I.startIndex, offsetBy: 64)...])
         
         // The returned child key Ki is point(parse256(IL)) + Kpar.
-//        let kI = BInt(hex: IL) + KPar
+        //        let kI = BInt(hex: IL) + KPar
         // The returned chain code ci is IR.
         // In case parse256(IL) ≥ n or Ki is the point at infinity, the resulting key is invalid, and one should proceed with the next value for i.
         return (KIndex: "String", cIndex: IR)
@@ -101,7 +102,7 @@ class HDWallet {
                 } else {
                     intPath = BInt(pathIndex)!
                 }
-//                print(intPath)
+                //                print(intPath)
                 if intPath != nil {
                     let indexedKey = CKDpriv(kPar: parentSecretKey, cPar: parentChainCode, index: intPath!)
                     print("indexedSecretKey = \(indexedKey.kIndex)")
