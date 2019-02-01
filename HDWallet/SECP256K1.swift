@@ -38,6 +38,7 @@
 
 import Foundation
 
+// TODO: Implement validation
 class SECP256K1 {
     /// Equivalent to 2**256 - 2**32 - 2**9 - 2**8 - 2**7 - 2**6 - 2**4 - 1 or 2**256 - 2**32 - 977
     let p = BInt(hex: "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFC2F")
