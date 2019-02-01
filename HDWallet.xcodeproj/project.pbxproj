@@ -60,7 +60,6 @@
 		BC2D65F82204FF6C001C6DA3 /* HDWalletUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HDWalletUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC2D65FC2204FF6C001C6DA3 /* HDWalletUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDWalletUITests.swift; sourceTree = "<group>"; };
 		BC2D65FE2204FF6C001C6DA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BC2D6621220500C2001C6DA3 /* Bitcoin_iOS-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bitcoin_iOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		BC2D6622220500D5001C6DA3 /* SECP256K1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SECP256K1.swift; sourceTree = "<group>"; };
 		BC2D6623220500D5001C6DA3 /* SMP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMP.swift; sourceTree = "<group>"; };
 		BC2D6624220500D5001C6DA3 /* HDWallet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDWallet.swift; sourceTree = "<group>"; };
@@ -133,7 +132,6 @@
 				BC2D6629220500D5001C6DA3 /* SMP+Bitcoin.swift */,
 				BC2D662C220500D5001C6DA3 /* String+Bitcoin.swift */,
 				BC2D662A220500D5001C6DA3 /* UInt32+CircularShift.swift */,
-				BC2D6621220500C2001C6DA3 /* Bitcoin_iOS-Bridging-Header.h */,
 				BC2D65D92204FF6B001C6DA3 /* AppDelegate.swift */,
 				BC2D65DB2204FF6B001C6DA3 /* ViewController.swift */,
 				BC2D65DD2204FF6B001C6DA3 /* Main.storyboard */,
