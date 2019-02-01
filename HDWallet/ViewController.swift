@@ -1,10 +1,6 @@
 //
 //  ViewController.swift
 //  HDWallet
-//
-//  Created by Brett Doffing on 2/1/19.
-//  Copyright © 2019 Brett Doffing. All rights reserved.
-//
 
 import UIKit
 
