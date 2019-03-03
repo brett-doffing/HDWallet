@@ -1,0 +1,11 @@
+framework module secp256k1 {
+  umbrella header "secp256k1.h"
+
+  export *
+  module * { export * }
+}
+
+module secp256k1.Swift {
+    header "secp256k1-Swift.h"
+    requires objc
+}
