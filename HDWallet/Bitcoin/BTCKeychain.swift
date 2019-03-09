@@ -4,9 +4,6 @@ import Foundation
 
 class BTCKeychain {
     
-    var masterPrivateKey: Data
-    var masterChainCode: Data
-    var masterPublicKey: Data
     var key: BTCKey
     var extendedPublicKey: ExtendedPublicKey?
     var extendedPrivateKey: ExtendedPrivateKey?
@@ -16,17 +13,13 @@ class BTCKeychain {
     init(seed: Data) {
         self.extendedPrivateKey = ExtendedPrivateKey(seed: seed)
         self.extendedPublicKey = ExtendedPublicKey(extPrivateKey: self.extendedPrivateKey!)
-        self.masterPrivateKey = (self.extendedPrivateKey?.raw)!
-        self.masterChainCode = (self.extendedPrivateKey?.chainCode)!
-        self.masterPublicKey = (self.extendedPublicKey?.raw)!
+        self.key = BTCKey(withPrivateKey: (self.extendedPrivateKey?.raw)!)
     }
     
     init(withExtendedPrivateKey extPrvkey: ExtendedPrivateKey) {
         self.extendedPrivateKey = extPrvkey
         self.extendedPublicKey = ExtendedPublicKey(extPrivateKey: self.extendedPrivateKey!)
-        self.masterPrivateKey = (self.extendedPrivateKey?.raw)!
-        self.masterChainCode = (self.extendedPrivateKey?.chainCode)!
-        self.masterPublicKey = (self.extendedPublicKey?.raw)!
+        self.key = BTCKey(withPrivateKey: (self.extendedPrivateKey?.raw)!)
     }
     
     func CKDPriv(kPar: Data, cPar: Data, index i: UInt32) -> (kIndex: Data, cIndex: Data){
@@ -79,8 +72,8 @@ class BTCKeychain {
     /// Private Key Derivation
     func derivedKeychain(withPath path: String) -> BTCKeychain? {
         let pathArray: [String] = path.components(separatedBy:"/")
-        var parentPrivateKey = masterPrivateKey
-        var parentChainCode = masterChainCode
+        var parentPrivateKey = self.extendedPrivateKey?.raw
+        var parentChainCode = self.extendedPrivateKey?.chainCode
         var childPrivateKey: Data
         var childChainCode: Data
         var newKeychain: BTCKeychain
@@ -95,11 +88,11 @@ class BTCKeychain {
                 } else {
                     keyIndex = UInt32(pathComponent)!
                 }
-                let indexedKey = CKDPriv(kPar: parentPrivateKey, cPar: parentChainCode, index: keyIndex)
+                let indexedKey = CKDPriv(kPar: parentPrivateKey!, cPar: parentChainCode!, index: keyIndex)
                 childPrivateKey = indexedKey.kIndex
                 childChainCode = indexedKey.cIndex
                 if i == pathArray.count - 1 {
-                    let fingerprint = getFingerprint(forParentPrvkey: parentPrivateKey)
+                    let fingerprint = getFingerprint(forParentPrvkey: parentPrivateKey!)
                     let xPrv = ExtendedPrivateKey(privateKey: childPrivateKey, chainCode: childChainCode, depth: UInt8(i), fingerprint: fingerprint, index: keyIndex, network: BTCNetwork.main)
                     newKeychain = BTCKeychain(withExtendedPrivateKey: xPrv)
                     return newKeychain
