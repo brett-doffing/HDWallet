@@ -10,6 +10,18 @@ class BTCCurve {
     // TODO: Make non-optional
     let context: secp256k1_context?
     let order = BInt(hex: "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141")
+//    struct Signature: CustomDebugStringConvertible {
+//         let x: Data, y: Data
+//
+//         var debugDescription: String {
+//             return "(\(x), \(y))"
+//         }
+//     }
+
+//     let p = Point(x: 21, y: 30)
+//     let s = String(reflecting: p)
+//     print(s)
+//     // Prints "(21, 30)"
     
     /*private*/ init() {
         self.context = secp256k1_context_create([SECP256K1_FLAGS.SECP256K1_CONTEXT_SIGN, SECP256K1_FLAGS.SECP256K1_CONTEXT_VERIFY])
@@ -77,6 +89,17 @@ class BTCCurve {
             var length = UInt(33)
             if !(secp256k1_ec_pubkey_serialize(ctx, &serializedPubkey, &length, pubkey, [SECP256K1_FLAGS.SECP256K1_EC_COMPRESSED])) { return nil }
             return serializedPubkey.data
+        } else { return nil }
+    }
+    
+    func sign(key: [UInt8], message: [UInt8]) -> (r: Data, s: Data)? {
+        if let ctx = context {
+            var signature = secp256k1_ecdsa_signature()
+            #warning("TODO: noncefp uses secp256k1_nonce_function_default when set to nil")
+            guard secp256k1_ecdsa_sign(ctx, &signature, message, key, nil, nil) == true else { return nil }
+            let r = [UInt8](signature.data[0..<32])
+            let s = [UInt8](signature.data[32..<64])
+            return (r: r.data, s: s.data)
         } else { return nil }
     }
 }
