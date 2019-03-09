@@ -102,4 +102,12 @@ extension String {
         
         return returnArray
     }
+    
+    func stringWithRange(startingIndex: Int, endingIndex: Int) -> String {
+        let start = self.index(self.startIndex, offsetBy: startingIndex)
+        let end = self.index(self.startIndex, offsetBy: endingIndex)
+        let range = start..<end
+        return String(self[range])
+    }
+
 }

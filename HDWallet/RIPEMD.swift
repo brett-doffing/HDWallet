@@ -4,6 +4,8 @@
 //
 // https://github.com/CryptoCoinSwift/RIPEMD-Swift
 
+// Another implementation: https://stackoverflow.com/questions/43091858/swift-hash-a-string-using-hash-hmac-with-ripemd160/43191938
+
 import Foundation
 
 public struct RIPEMD {

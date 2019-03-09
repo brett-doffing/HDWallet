@@ -10,16 +10,26 @@ extension String {
      Hashes any input string (self) using SHA256, and returns the digest as Data.
      */
     func hashSHA256() -> String {
+//        let messageData = self.data(using:.utf8)!
+//
+//        return messageData.hashDataSHA256().toHexString()
+        // TODO: Make similar to Data extension
         let messageData = self.data(using:.utf8)!
+        var digestData = Data(count: Int(CC_SHA256_DIGEST_LENGTH))
         
-        return messageData.hashDataSHA256().toHexString()
+        _ = digestData.withUnsafeMutableBytes {digestBytes in
+            messageData.withUnsafeBytes {messageBytes in
+                CC_SHA256(messageBytes, CC_LONG(messageData.count), digestBytes)
+            }
+        }
+        return digestData.toHexString()
     }
     
     /**
      Double Hashes a hexadecimal string using SHA256, and returns the digest as a hexadecimal String.
      */
     func doubleSHA256() -> String {
-        return self.hexStringData().doubleSHA256()
+        return self.hexStringData().doubleSHA256ToString()
     }
     
     /**
@@ -44,12 +54,19 @@ extension Data {
     /**
      Double Hashes data using SHA256, and returns the digest as a hexadecimal String.
      */
-    func doubleSHA256() -> String {
+    func doubleSHA256ToString() -> String {
         return self.hashDataSHA256().hashDataSHA256().toHexString()
     }
     
+    /**
+     Double Hashes data using SHA256, and returns the digest as Data.
+     */
+    func doubleSHA256() -> Data {
+        return self.hashDataSHA256().hashDataSHA256()
+    }
+    
     func SHA256ChecksumHexString() -> String {
-        let doubleSHA256 = self.doubleSHA256()
+        let doubleSHA256 = self.doubleSHA256ToString()
         // Grab first 4 bytes
         let checksum = doubleSHA256.substring(to: doubleSHA256.index(doubleSHA256.startIndex, offsetBy: 8))
         
@@ -108,6 +125,18 @@ public struct HMAC_SHA512 {
         let hash = data.toHexString()
         
         return hash
+    }
+    
+    ///
+    public static func digest(key: Data, data: Data) -> Data {
+        let dataLen = data.count
+        let keyLen = key.count
+        let digestLen = Int(CC_SHA512_DIGEST_LENGTH)
+        let result = UnsafeMutablePointer<CUnsignedChar>.allocate(capacity: digestLen)
+        let algorithm = CCHmacAlgorithm(kCCHmacAlgSHA512)
+        CCHmac(algorithm, NSData(data: key).bytes, keyLen, NSData(data: data).bytes, dataLen, result)
+        let returnData = NSData(bytesNoCopy: result, length: digestLen) as Data
+        return returnData
     }
 }
 
