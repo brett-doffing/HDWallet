@@ -70,8 +70,8 @@ class BTCKeychainTests: XCTestCase {
         let seed = String("87eaaac5a539ab028df44d9110defbef3797ddb805ca309f61a69ff96dbaa7ab5b24038cf029edec5235d933110f0aea8aeecf939ed14fc20730bba71e4b1110").hexStringData()
         let keyChain = BTCKeychain(seed: seed)
         let derived47 = keyChain.derivedKeychain(withPath: "m/47'/0'/0'/0")
-        print(derived47?.key.privateKey?.toHexString())
-        print(derived47?.key.publicKey?.toHexString())
-        print(derived47?.key.address)
+        XCTAssertEqual(derived47?.key.privateKey?.toHexString(), "04448fd1be0c9c13a5ca0b530e464b619dc091b299b98c5cab9978b32b4a1b8b")
+        XCTAssertEqual(derived47?.key.publicKey?.toHexString(), "024ce8e3b04ea205ff49f529950616c3db615b1e37753858cc60c1ce64d17e2ad8")
+        XCTAssertEqual(derived47?.key.address, "1ChvUUvht2hUQufHBXF8NgLhW8SwE2ecGV")
     }
 }
