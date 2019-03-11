@@ -24,6 +24,14 @@ extension Array where Element == UInt8 {
     var data : Data{
         return Data(bytes:(self))
     }
+    
+    func bigToLittleEndian() -> [UInt8] {
+        var littleEndianArray: [UInt8] = []
+        for byte in self {
+            littleEndianArray.insert(byte.littleEndian, at: 0)
+        }
+        return littleEndianArray
+    }
 }
 
 #warning("TODO: Find out what 'Self' is here, and place below in separate file.")
