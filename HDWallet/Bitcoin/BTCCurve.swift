@@ -102,4 +102,28 @@ class BTCCurve {
             return (r: r.data, s: s.data)
         } else { return nil }
     }
+    
+    func sign(key: [UInt8], message: [UInt8]) -> secp256k1_ecdsa_signature? {
+        if let ctx = context {
+            var signature = secp256k1_ecdsa_signature()
+            #warning("TODO: noncefp uses secp256k1_nonce_function_default when set to nil")
+            guard secp256k1_ecdsa_sign(ctx, &signature, message, key, nil, nil) == true else { return nil }
+            return signature
+        } else { return nil }
+    }
+    
+    func encodeDER(signature: secp256k1_ecdsa_signature?, hashType: UInt8, pubkey: [UInt8]) -> [UInt8]? {
+        if let ctx = context, let sig = signature {
+            // add 7 bytes to account for various encoding bytes
+            var length = UInt(sig.data.count + 7)
+            var output = [UInt8](repeating: 0, count:Int(length))
+            guard secp256k1_ecdsa_signature_serialize_der(ctx, &output, &length, sig) else { return nil }
+            output.append(hashType)
+            let derLengthByte: UInt8 = UInt8(output.count)
+            output.insert(derLengthByte, at: 0)
+            output.append(UInt8(pubkey.count))
+            output += pubkey
+            return output
+        } else { return nil }
+    }
 }
