@@ -22,7 +22,8 @@ class BTCTransactionTests: XCTestCase {
         newRawTx += UInt32(0x00000001).littleEndian
         
         let doubleSha256 = newRawTx.doubleSHA256().bytes
-        let privateKey = "16CD529C995D9D8E21AEF7C575F6D2520416308139CB2CEADC3EFB3111DD8E05".unhexlify()
+        var privateKey = "cNM2T9Qd2cCuNrJMPL9X83R8dFWJd6rugZthJqjJes2MpjZCS5Qm".base58CheckDecode()!
+        privateKey.removeFirst(); privateKey.removeLast()
         let signature: secp256k1_ecdsa_signature? = BTCCurve.shared.sign(key: privateKey, message: doubleSha256)
         let publicKey = BTCCurve.shared.generatePublicKey(privateKey: privateKey.data)
         let encodedSig = BTCCurve.shared.encodeDER(signature: signature, hashType: 0x01, pubkey: (publicKey?.bytes)!)
