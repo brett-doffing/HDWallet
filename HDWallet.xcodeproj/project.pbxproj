@@ -15,18 +15,39 @@
 		BC2D65E72204FF6B001C6DA3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC2D65E52204FF6B001C6DA3 /* LaunchScreen.storyboard */; };
 		BC2D65F22204FF6C001C6DA3 /* HDWalletTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2D65F12204FF6C001C6DA3 /* HDWalletTests.swift */; };
 		BC2D65FD2204FF6C001C6DA3 /* HDWalletUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2D65FC2204FF6C001C6DA3 /* HDWalletUITests.swift */; };
-		BC2D662D220500D5001C6DA3 /* SECP256K1.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2D6622220500D5001C6DA3 /* SECP256K1.swift */; };
 		BC2D662E220500D5001C6DA3 /* SMP.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2D6623220500D5001C6DA3 /* SMP.swift */; };
 		BC2D6630220500D5001C6DA3 /* RIPEMD.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2D6625220500D5001C6DA3 /* RIPEMD.swift */; };
 		BC2D6631220500D5001C6DA3 /* Data+Bitcoin.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2D6626220500D5001C6DA3 /* Data+Bitcoin.swift */; };
 		BC2D6632220500D5001C6DA3 /* RIPEMD+Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2D6627220500D5001C6DA3 /* RIPEMD+Block.swift */; };
-		BC2D6633220500D5001C6DA3 /* BTCAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2D6628220500D5001C6DA3 /* BTCAddress.swift */; };
 		BC2D6634220500D5001C6DA3 /* SMP+Bitcoin.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2D6629220500D5001C6DA3 /* SMP+Bitcoin.swift */; };
 		BC2D6635220500D5001C6DA3 /* UInt32+CircularShift.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2D662A220500D5001C6DA3 /* UInt32+CircularShift.swift */; };
 		BC2D6636220500D5001C6DA3 /* SHA256.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2D662B220500D5001C6DA3 /* SHA256.swift */; };
 		BC2D6637220500D5001C6DA3 /* String+Bitcoin.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2D662C220500D5001C6DA3 /* String+Bitcoin.swift */; };
 		BC2D663922050A7D001C6DA3 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2D663822050A7D001C6DA3 /* HomeVC.swift */; };
-		BC2D663B22050C9C001C6DA3 /* BIP32.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2D663A22050C9C001C6DA3 /* BIP32.swift */; };
+		BC2D663D220646DD001C6DA3 /* WalletCreationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2D663C220646DD001C6DA3 /* WalletCreationVC.swift */; };
+		BC2D664122095BC1001C6DA3 /* WalletCreationPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2D664022095BC1001C6DA3 /* WalletCreationPageVC.swift */; };
+		BC2D664322095D5A001C6DA3 /* WalletCreationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2D664222095D5A001C6DA3 /* WalletCreationCell.swift */; };
+		BC2D664F220A5B34001C6DA3 /* PasswordOptionPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2D664E220A5B34001C6DA3 /* PasswordOptionPageVC.swift */; };
+		BC2D6651220A9ECC001C6DA3 /* PathsPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2D6650220A9ECC001C6DA3 /* PathsPageVC.swift */; };
+		BC2D6653220A9EEA001C6DA3 /* SeedWordsPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2D6652220A9EEA001C6DA3 /* SeedWordsPageVC.swift */; };
+		BC2D6655220AA243001C6DA3 /* RecoverOrCreatePageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2D6654220AA243001C6DA3 /* RecoverOrCreatePageVC.swift */; };
+		BC55824E221280B60004A40D /* PathsPageTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC55824D221280B60004A40D /* PathsPageTVC.swift */; };
+		BC55826E2217D6E50004A40D /* BlockstreamService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC55826D2217D6E50004A40D /* BlockstreamService.swift */; };
+		BC73645622242274009E2533 /* secp256k1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC73645422242274009E2533 /* secp256k1.framework */; };
+		BC7364572224228A009E2533 /* secp256k1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC73645422242274009E2533 /* secp256k1.framework */; };
+		BC7364582224228A009E2533 /* secp256k1.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BC73645422242274009E2533 /* secp256k1.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BC7364F7222AFD43009E2533 /* BTCCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7364F6222AFD43009E2533 /* BTCCurve.swift */; };
+		BC7364F9222B549E009E2533 /* BTCCurveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7364F8222B549E009E2533 /* BTCCurveTests.swift */; };
+		BC7364FD222DA4B2009E2533 /* BTCKeychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7364FC222DA4B2009E2533 /* BTCKeychain.swift */; };
+		BC7364FF222DA4C3009E2533 /* BTCKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7364FE222DA4C3009E2533 /* BTCKey.swift */; };
+		BC736501222DC1B7009E2533 /* BTCKeychainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC736500222DC1B7009E2533 /* BTCKeychainTests.swift */; };
+		BC7365052232CC03009E2533 /* ExtendedPublicKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7365042232CC03009E2533 /* ExtendedPublicKey.swift */; };
+		BC7365072232CC18009E2533 /* ExtendedPrivateKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7365062232CC18009E2533 /* ExtendedPrivateKey.swift */; };
+		BC7365092232DA77009E2533 /* BTCNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7365082232DA77009E2533 /* BTCNetwork.swift */; };
+		BC73650B22333A99009E2533 /* BTCKeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC73650A22333A99009E2533 /* BTCKeyTests.swift */; };
+		BC73650D223442BE009E2533 /* BTCTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC73650C223442BE009E2533 /* BTCTransaction.swift */; };
+		BC736511223471DA009E2533 /* TxOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC736510223471DA009E2533 /* TxOutput.swift */; };
+		BC73652122367702009E2533 /* BTCTransactionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC73652022367702009E2533 /* BTCTransactionTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +67,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		BC7363B322241E6C009E2533 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				BC7364582224228A009E2533 /* secp256k1.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		BC2D65D62204FF6B001C6DA3 /* HDWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HDWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC2D65D92204FF6B001C6DA3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -61,18 +96,37 @@
 		BC2D65F82204FF6C001C6DA3 /* HDWalletUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HDWalletUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC2D65FC2204FF6C001C6DA3 /* HDWalletUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDWalletUITests.swift; sourceTree = "<group>"; };
 		BC2D65FE2204FF6C001C6DA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BC2D6622220500D5001C6DA3 /* SECP256K1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SECP256K1.swift; sourceTree = "<group>"; };
 		BC2D6623220500D5001C6DA3 /* SMP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMP.swift; sourceTree = "<group>"; };
 		BC2D6625220500D5001C6DA3 /* RIPEMD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RIPEMD.swift; sourceTree = "<group>"; };
 		BC2D6626220500D5001C6DA3 /* Data+Bitcoin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Bitcoin.swift"; sourceTree = "<group>"; };
 		BC2D6627220500D5001C6DA3 /* RIPEMD+Block.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RIPEMD+Block.swift"; sourceTree = "<group>"; };
-		BC2D6628220500D5001C6DA3 /* BTCAddress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTCAddress.swift; sourceTree = "<group>"; };
 		BC2D6629220500D5001C6DA3 /* SMP+Bitcoin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SMP+Bitcoin.swift"; sourceTree = "<group>"; };
 		BC2D662A220500D5001C6DA3 /* UInt32+CircularShift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UInt32+CircularShift.swift"; sourceTree = "<group>"; };
 		BC2D662B220500D5001C6DA3 /* SHA256.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHA256.swift; sourceTree = "<group>"; };
 		BC2D662C220500D5001C6DA3 /* String+Bitcoin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Bitcoin.swift"; sourceTree = "<group>"; };
 		BC2D663822050A7D001C6DA3 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
-		BC2D663A22050C9C001C6DA3 /* BIP32.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BIP32.swift; sourceTree = "<group>"; };
+		BC2D663C220646DD001C6DA3 /* WalletCreationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCreationVC.swift; sourceTree = "<group>"; };
+		BC2D664022095BC1001C6DA3 /* WalletCreationPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCreationPageVC.swift; sourceTree = "<group>"; };
+		BC2D664222095D5A001C6DA3 /* WalletCreationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCreationCell.swift; sourceTree = "<group>"; };
+		BC2D664E220A5B34001C6DA3 /* PasswordOptionPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordOptionPageVC.swift; sourceTree = "<group>"; };
+		BC2D6650220A9ECC001C6DA3 /* PathsPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathsPageVC.swift; sourceTree = "<group>"; };
+		BC2D6652220A9EEA001C6DA3 /* SeedWordsPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedWordsPageVC.swift; sourceTree = "<group>"; };
+		BC2D6654220AA243001C6DA3 /* RecoverOrCreatePageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoverOrCreatePageVC.swift; sourceTree = "<group>"; };
+		BC55824D221280B60004A40D /* PathsPageTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathsPageTVC.swift; sourceTree = "<group>"; };
+		BC55826D2217D6E50004A40D /* BlockstreamService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockstreamService.swift; sourceTree = "<group>"; };
+		BC73645422242274009E2533 /* secp256k1.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = secp256k1.framework; sourceTree = "<group>"; };
+		BC7364F6222AFD43009E2533 /* BTCCurve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTCCurve.swift; sourceTree = "<group>"; };
+		BC7364F8222B549E009E2533 /* BTCCurveTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTCCurveTests.swift; sourceTree = "<group>"; };
+		BC7364FC222DA4B2009E2533 /* BTCKeychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTCKeychain.swift; sourceTree = "<group>"; };
+		BC7364FE222DA4C3009E2533 /* BTCKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTCKey.swift; sourceTree = "<group>"; };
+		BC736500222DC1B7009E2533 /* BTCKeychainTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTCKeychainTests.swift; sourceTree = "<group>"; };
+		BC7365042232CC03009E2533 /* ExtendedPublicKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedPublicKey.swift; sourceTree = "<group>"; };
+		BC7365062232CC18009E2533 /* ExtendedPrivateKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedPrivateKey.swift; sourceTree = "<group>"; };
+		BC7365082232DA77009E2533 /* BTCNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTCNetwork.swift; sourceTree = "<group>"; };
+		BC73650A22333A99009E2533 /* BTCKeyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTCKeyTests.swift; sourceTree = "<group>"; };
+		BC73650C223442BE009E2533 /* BTCTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTCTransaction.swift; sourceTree = "<group>"; };
+		BC736510223471DA009E2533 /* TxOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxOutput.swift; sourceTree = "<group>"; };
+		BC73652022367702009E2533 /* BTCTransactionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTCTransactionTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +134,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC7364572224228A009E2533 /* secp256k1.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,6 +142,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC73645622242274009E2533 /* secp256k1.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,6 +159,7 @@
 		BC2D65CD2204FF6A001C6DA3 = {
 			isa = PBXGroup;
 			children = (
+				BC73645422242274009E2533 /* secp256k1.framework */,
 				BC2D65D82204FF6B001C6DA3 /* HDWallet */,
 				BC2D65F02204FF6C001C6DA3 /* HDWalletTests */,
 				BC2D65FB2204FF6C001C6DA3 /* HDWalletUITests */,
@@ -123,16 +180,9 @@
 		BC2D65D82204FF6B001C6DA3 /* HDWallet */ = {
 			isa = PBXGroup;
 			children = (
-				BC2D6628220500D5001C6DA3 /* BTCAddress.swift */,
-				BC2D6626220500D5001C6DA3 /* Data+Bitcoin.swift */,
-				BC2D6625220500D5001C6DA3 /* RIPEMD.swift */,
-				BC2D6627220500D5001C6DA3 /* RIPEMD+Block.swift */,
-				BC2D6622220500D5001C6DA3 /* SECP256K1.swift */,
-				BC2D662B220500D5001C6DA3 /* SHA256.swift */,
-				BC2D6623220500D5001C6DA3 /* SMP.swift */,
-				BC2D6629220500D5001C6DA3 /* SMP+Bitcoin.swift */,
-				BC2D662C220500D5001C6DA3 /* String+Bitcoin.swift */,
-				BC2D662A220500D5001C6DA3 /* UInt32+CircularShift.swift */,
+				BC7365222236D7DC009E2533 /* Networking */,
+				BC7365032232CB3C009E2533 /* ViewContollers */,
+				BC7365022232CA73009E2533 /* Bitcoin */,
 				BC2D65D92204FF6B001C6DA3 /* AppDelegate.swift */,
 				BC2D65DB2204FF6B001C6DA3 /* ViewController.swift */,
 				BC2D65DD2204FF6B001C6DA3 /* Main.storyboard */,
@@ -140,8 +190,6 @@
 				BC2D65E52204FF6B001C6DA3 /* LaunchScreen.storyboard */,
 				BC2D65E82204FF6B001C6DA3 /* Info.plist */,
 				BC2D65E02204FF6B001C6DA3 /* HDWallet.xcdatamodeld */,
-				BC2D663822050A7D001C6DA3 /* HomeVC.swift */,
-				BC2D663A22050C9C001C6DA3 /* BIP32.swift */,
 			);
 			path = HDWallet;
 			sourceTree = "<group>";
@@ -151,6 +199,10 @@
 			children = (
 				BC2D65F12204FF6C001C6DA3 /* HDWalletTests.swift */,
 				BC2D65F32204FF6C001C6DA3 /* Info.plist */,
+				BC7364F8222B549E009E2533 /* BTCCurveTests.swift */,
+				BC736500222DC1B7009E2533 /* BTCKeychainTests.swift */,
+				BC73650A22333A99009E2533 /* BTCKeyTests.swift */,
+				BC73652022367702009E2533 /* BTCTransactionTests.swift */,
 			);
 			path = HDWalletTests;
 			sourceTree = "<group>";
@@ -164,6 +216,53 @@
 			path = HDWalletUITests;
 			sourceTree = "<group>";
 		};
+		BC7365022232CA73009E2533 /* Bitcoin */ = {
+			isa = PBXGroup;
+			children = (
+				BC2D6626220500D5001C6DA3 /* Data+Bitcoin.swift */,
+				BC2D6625220500D5001C6DA3 /* RIPEMD.swift */,
+				BC2D6627220500D5001C6DA3 /* RIPEMD+Block.swift */,
+				BC2D662B220500D5001C6DA3 /* SHA256.swift */,
+				BC2D6623220500D5001C6DA3 /* SMP.swift */,
+				BC2D6629220500D5001C6DA3 /* SMP+Bitcoin.swift */,
+				BC2D662C220500D5001C6DA3 /* String+Bitcoin.swift */,
+				BC2D662A220500D5001C6DA3 /* UInt32+CircularShift.swift */,
+				BC7364F6222AFD43009E2533 /* BTCCurve.swift */,
+				BC7364FC222DA4B2009E2533 /* BTCKeychain.swift */,
+				BC7364FE222DA4C3009E2533 /* BTCKey.swift */,
+				BC7365082232DA77009E2533 /* BTCNetwork.swift */,
+				BC73650C223442BE009E2533 /* BTCTransaction.swift */,
+				BC7365042232CC03009E2533 /* ExtendedPublicKey.swift */,
+				BC7365062232CC18009E2533 /* ExtendedPrivateKey.swift */,
+				BC736510223471DA009E2533 /* TxOutput.swift */,
+			);
+			path = Bitcoin;
+			sourceTree = "<group>";
+		};
+		BC7365032232CB3C009E2533 /* ViewContollers */ = {
+			isa = PBXGroup;
+			children = (
+				BC2D663822050A7D001C6DA3 /* HomeVC.swift */,
+				BC2D664022095BC1001C6DA3 /* WalletCreationPageVC.swift */,
+				BC2D6654220AA243001C6DA3 /* RecoverOrCreatePageVC.swift */,
+				BC2D664E220A5B34001C6DA3 /* PasswordOptionPageVC.swift */,
+				BC55824D221280B60004A40D /* PathsPageTVC.swift */,
+				BC2D6652220A9EEA001C6DA3 /* SeedWordsPageVC.swift */,
+				BC2D663C220646DD001C6DA3 /* WalletCreationVC.swift */,
+				BC2D664222095D5A001C6DA3 /* WalletCreationCell.swift */,
+				BC2D6650220A9ECC001C6DA3 /* PathsPageVC.swift */,
+			);
+			path = ViewContollers;
+			sourceTree = "<group>";
+		};
+		BC7365222236D7DC009E2533 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				BC55826D2217D6E50004A40D /* BlockstreamService.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -174,6 +273,7 @@
 				BC2D65D22204FF6A001C6DA3 /* Sources */,
 				BC2D65D32204FF6A001C6DA3 /* Frameworks */,
 				BC2D65D42204FF6A001C6DA3 /* Resources */,
+				BC7363B322241E6C009E2533 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -295,18 +395,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC736511223471DA009E2533 /* TxOutput.swift in Sources */,
 				BC2D65DC2204FF6B001C6DA3 /* ViewController.swift in Sources */,
+				BC7364F7222AFD43009E2533 /* BTCCurve.swift in Sources */,
+				BC7365092232DA77009E2533 /* BTCNetwork.swift in Sources */,
 				BC2D6632220500D5001C6DA3 /* RIPEMD+Block.swift in Sources */,
+				BC2D6651220A9ECC001C6DA3 /* PathsPageVC.swift in Sources */,
 				BC2D662E220500D5001C6DA3 /* SMP.swift in Sources */,
+				BC73650D223442BE009E2533 /* BTCTransaction.swift in Sources */,
+				BC55824E221280B60004A40D /* PathsPageTVC.swift in Sources */,
+				BC2D664122095BC1001C6DA3 /* WalletCreationPageVC.swift in Sources */,
 				BC2D6631220500D5001C6DA3 /* Data+Bitcoin.swift in Sources */,
+				BC2D664322095D5A001C6DA3 /* WalletCreationCell.swift in Sources */,
+				BC7364FD222DA4B2009E2533 /* BTCKeychain.swift in Sources */,
 				BC2D6635220500D5001C6DA3 /* UInt32+CircularShift.swift in Sources */,
-				BC2D663B22050C9C001C6DA3 /* BIP32.swift in Sources */,
 				BC2D663922050A7D001C6DA3 /* HomeVC.swift in Sources */,
+				BC55826E2217D6E50004A40D /* BlockstreamService.swift in Sources */,
 				BC2D65DA2204FF6B001C6DA3 /* AppDelegate.swift in Sources */,
-				BC2D6633220500D5001C6DA3 /* BTCAddress.swift in Sources */,
-				BC2D662D220500D5001C6DA3 /* SECP256K1.swift in Sources */,
+				BC2D663D220646DD001C6DA3 /* WalletCreationVC.swift in Sources */,
+				BC2D6655220AA243001C6DA3 /* RecoverOrCreatePageVC.swift in Sources */,
 				BC2D6634220500D5001C6DA3 /* SMP+Bitcoin.swift in Sources */,
 				BC2D6630220500D5001C6DA3 /* RIPEMD.swift in Sources */,
+				BC7365072232CC18009E2533 /* ExtendedPrivateKey.swift in Sources */,
+				BC7364FF222DA4C3009E2533 /* BTCKey.swift in Sources */,
+				BC2D6653220A9EEA001C6DA3 /* SeedWordsPageVC.swift in Sources */,
+				BC7365052232CC03009E2533 /* ExtendedPublicKey.swift in Sources */,
+				BC2D664F220A5B34001C6DA3 /* PasswordOptionPageVC.swift in Sources */,
 				BC2D6637220500D5001C6DA3 /* String+Bitcoin.swift in Sources */,
 				BC2D65E22204FF6B001C6DA3 /* HDWallet.xcdatamodeld in Sources */,
 				BC2D6636220500D5001C6DA3 /* SHA256.swift in Sources */,
@@ -317,7 +431,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC736501222DC1B7009E2533 /* BTCKeychainTests.swift in Sources */,
+				BC73650B22333A99009E2533 /* BTCKeyTests.swift in Sources */,
 				BC2D65F22204FF6C001C6DA3 /* HDWalletTests.swift in Sources */,
+				BC73652122367702009E2533 /* BTCTransactionTests.swift in Sources */,
+				BC7364F9222B549E009E2533 /* BTCCurveTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -485,6 +603,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = HDWallet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -502,6 +624,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = HDWallet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -520,6 +646,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = HDWalletTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -540,6 +670,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = HDWalletTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -4,6 +4,7 @@
 
 import XCTest
 @testable import HDWallet
+@testable import secp256k1
 
 class HDWalletTests: XCTestCase {
 
@@ -16,8 +17,17 @@ class HDWalletTests: XCTestCase {
     }
 
     func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        // (Key = "Bitcoin seed") as hex
+//        let hexKey = "426974636f696e2073656564"
+//        let seed = "000102030405060708090a0b0c0d0e0f"
+//        let hdMasterKey = HMAC_SHA512.digest(withKey: hexKey, andDataString: seed)
+//
+//        let key = "Bitcoin seed".data(using: .ascii)
+//        let test = HMAC_SHA512.digest(key: key!, data: seed.hexStringData())
+//
+//        XCTAssertEqual(hdMasterKey, test.hexDescription())
+        
+        
     }
 
     func testPerformanceExample() {
