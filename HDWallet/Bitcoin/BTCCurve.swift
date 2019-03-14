@@ -130,7 +130,6 @@ class BTCCurve {
         output.insert(derLengthByte, at: 0)
         #warning("TODO: Account for other scripts.")
         let scriptPubKeyCheck = [UInt8](scriptPubKey[0..<3]).data.toHexString()
-        print(scriptPubKeyCheck)
         if scriptPubKeyCheck == "76a914" {
             output.append(UInt8(pubkey.count))
             output += pubkey
