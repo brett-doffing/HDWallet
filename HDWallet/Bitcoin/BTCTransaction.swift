@@ -38,18 +38,20 @@ public class BTCTransaction {
         var coordinatedIndex = 0
         for utxo in utxos {
             rawTX += utxo.txid!
-            rawTX += utxo.n!
             if scriptSigs.count == utxos.count {
+                rawTX += utxo.n!
                 let myScriptSig = scriptSigs[coordinatedIndex]
                 let size = UInt8(myScriptSig.count)
                 rawTX += size
                 rawTX += myScriptSig
             } else if coordinatedIndex == scriptSigs.count {
+                rawTX += utxo.n!
                 let myScriptPubKey = utxo.script
                 let size = UInt8(myScriptPubKey!.count)
                 rawTX += size // How does this know to print 19 for 25 bytes?
                 rawTX += myScriptPubKey!
             } else {
+                // The zeroes represent the 32 bit int "n", and size? byte
                 let placeholderData = [UInt8](repeating: 0, count:5).data
                 rawTX += placeholderData
             }

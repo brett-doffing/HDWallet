@@ -112,18 +112,29 @@ class BTCCurve {
         } else { return nil }
     }
     
-    func encodeDER(signature: secp256k1_ecdsa_signature?, hashType: UInt8, pubkey: [UInt8]) -> [UInt8]? {
+    func encodeDER(signature: secp256k1_ecdsa_signature?) -> [UInt8]? {
         if let ctx = context, let sig = signature {
             // add 7 bytes to account for various encoding bytes
             var length = UInt(sig.data.count + 7)
             var output = [UInt8](repeating: 0, count:Int(length))
             guard secp256k1_ecdsa_signature_serialize_der(ctx, &output, &length, sig) else { return nil }
-            output.append(hashType)
-            let derLengthByte: UInt8 = UInt8(output.count)
-            output.insert(derLengthByte, at: 0)
-            output.append(UInt8(pubkey.count))
-            output += pubkey
             return output
         } else { return nil }
+    }
+    
+    #warning("TODO: Decode scriptPubKey to get pubkey, and move or make private func.")
+    func appendDERbytes(encodedDERSig: [UInt8], hashType: UInt8, scriptPubKey: [UInt8], pubkey: [UInt8]) -> [UInt8] {
+        var output = encodedDERSig
+        output.append(hashType)
+        let derLengthByte: UInt8 = UInt8(output.count)
+        output.insert(derLengthByte, at: 0)
+        #warning("TODO: Account for other scripts.")
+        let scriptPubKeyCheck = [UInt8](scriptPubKey[0..<3]).data.toHexString()
+        print(scriptPubKeyCheck)
+        if scriptPubKeyCheck == "76a914" {
+            output.append(UInt8(pubkey.count))
+            output += pubkey
+        }
+        return output
     }
 }
