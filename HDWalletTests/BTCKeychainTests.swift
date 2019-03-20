@@ -74,4 +74,25 @@ class BTCKeychainTests: XCTestCase {
         XCTAssertEqual(derived47?.key.publicKey?.toHexString(), "024ce8e3b04ea205ff49f529950616c3db615b1e37753858cc60c1ce64d17e2ad8")
         XCTAssertEqual(derived47?.key.address, "1ChvUUvht2hUQufHBXF8NgLhW8SwE2ecGV")
     }
+    
+    func testKeychain47() {
+        let seed = String("64dca76abc9c6f0cf3d212d248c380c4622c8f93b2c425ec6a5567fd5db57e10d3e6f94a2f6af4ac2edb8998072aad92098db73558c323777abf5bd1082d970a").hexStringData()
+        let keychain = BTCKeychain(seed: seed)
+        let kc47 = keychain.keychain47
+        let kc47FirstKey = kc47?.derivedKeychain(withPath: "0")
+        XCTAssertEqual(kc47FirstKey?.key.privateKey?.toHexString(), "8d6a8ecd8ee5e0042ad0cb56e3a971c760b5145c3917a8e7beaf0ed92d7a520c")
+        XCTAssertEqual(kc47FirstKey?.key.publicKey?.toHexString(), "0353883a146a23f988e0f381a9507cbdb3e3130cd81b3ce26daf2af088724ce683")
+    }
+    
+    func testKeychain84() {
+        let seed = String("5eb00bbddcf069084889a8ab9155568165f5c453ccb85e70811aaed6f6da5fc19a5ac40b389cd370d086206dec8aa6c43daea6690f20ad3d8d48b2d2ce9e38e4").hexStringData()
+        let keychain = BTCKeychain(seed: seed)
+        let kc84 = keychain.keychain84
+        let firstReceiveKey = kc84?.recieveKey(atIndex: 0)
+        let secondReceiveKey = kc84?.recieveKey(atIndex: 1)
+        let firstChangeKey = kc84?.recieveKey(atIndex: 0)
+        XCTAssertEqual(firstReceiveKey?.publicKey?.toHexString(), "0330d54fd0dd420a6e5f8d3624f5f3482cae350f79d5f0753bf5beef9c2d91af3c")
+        XCTAssertEqual(secondReceiveKey?.publicKey?.toHexString(), "03e775fd51f0dfb8cd865d9ff1cca2a158cf651fe997fdc9fee9c1d3b5e995ea77")
+        XCTAssertEqual(firstChangeKey?.publicKey?.toHexString(), "0330d54fd0dd420a6e5f8d3624f5f3482cae350f79d5f0753bf5beef9c2d91af3c")
+    }
 }

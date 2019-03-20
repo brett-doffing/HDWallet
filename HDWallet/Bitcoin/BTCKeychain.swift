@@ -9,17 +9,25 @@ class BTCKeychain {
     var extendedPrivateKey: ExtendedPrivateKey?
     /// 2^31 = 2147483648
     let hardenedMin = UInt32(2147483648)
+    /// A BIP 44 keychain derived from the master keychain.
+    lazy var keychain44 = self.derivedKeychain(withPath: "m/44'/0'/0'")
+    /// A BIP 47 keychain derived from the master keychain.
+    lazy var keychain47 = self.derivedKeychain(withPath: "m/47'/0'/0'")
+    /// A BIP 49 keychain derived from the master keychain.
+    lazy var keychain49 = self.derivedKeychain(withPath: "m/49'/0'/0'")
+    /// A BIP 84 keychain derived from the master keychain.
+    lazy var keychain84 = self.derivedKeychain(withPath: "m/84'/0'/0'")
     
     init(seed: Data) {
         self.extendedPrivateKey = ExtendedPrivateKey(seed: seed)
         self.extendedPublicKey = ExtendedPublicKey(extPrivateKey: self.extendedPrivateKey!)
-        self.key = BTCKey(withPrivateKey: (self.extendedPrivateKey?.raw)!)
+        self.key = BTCKey(withPrivateKey: self.extendedPrivateKey!.raw, andPublicKey: self.extendedPublicKey!.raw)
     }
     
     init(withExtendedPrivateKey extPrvkey: ExtendedPrivateKey) {
         self.extendedPrivateKey = extPrvkey
         self.extendedPublicKey = ExtendedPublicKey(extPrivateKey: self.extendedPrivateKey!)
-        self.key = BTCKey(withPrivateKey: (self.extendedPrivateKey?.raw)!)
+        self.key = BTCKey(withPrivateKey: self.extendedPrivateKey!.raw, andPublicKey: self.extendedPublicKey!.raw)
     }
     
     func CKDPriv(kPar: Data, cPar: Data, index i: UInt32) -> (kIndex: Data, cIndex: Data){
@@ -118,5 +126,15 @@ class BTCKeychain {
         let hashedPubkey = pubkey.hashDataSHA256()
         let hash160: Data = RIPEMD.digest(input: hashedPubkey)
         return hash160
+    }
+    
+    func recieveKey(atIndex index: Int) -> BTCKey {
+        let receiveKeychain = derivedKeychain(withPath: "0/\(index)")
+        return receiveKeychain!.key
+    }
+    
+    func changeKey(atIndex index: Int) -> BTCKey {
+        let changeKeychain = derivedKeychain(withPath: "1/\(index)")
+        return changeKeychain!.key
     }
 }
