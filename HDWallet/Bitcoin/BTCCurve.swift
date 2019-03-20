@@ -10,18 +10,6 @@ class BTCCurve {
     // TODO: Make non-optional
     let context: secp256k1_context?
     let order = BInt(hex: "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141")
-//    struct Signature: CustomDebugStringConvertible {
-//         let x: Data, y: Data
-//
-//         var debugDescription: String {
-//             return "(\(x), \(y))"
-//         }
-//     }
-
-//     let p = Point(x: 21, y: 30)
-//     let s = String(reflecting: p)
-//     print(s)
-//     // Prints "(21, 30)"
     
     /*private*/ init() {
         self.context = secp256k1_context_create([SECP256K1_FLAGS.SECP256K1_CONTEXT_SIGN, SECP256K1_FLAGS.SECP256K1_CONTEXT_VERIFY])
