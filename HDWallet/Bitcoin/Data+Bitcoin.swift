@@ -17,6 +17,15 @@ extension Data {
         return self.map { String(format: "%02hhx", $0) }.joined()
     }
     
+    /**
+     Performs two hash functions: sha256, then ripemd160.
+     */
+    func hash160() -> Data {
+        let hashedPubkey = self.hashDataSHA256()
+        let hash160: Data = RIPEMD.digest(input: hashedPubkey)
+        return hash160
+    }
+    
 }
 
 #warning("TODO: Check to see if already exists in secp256k1.framework")

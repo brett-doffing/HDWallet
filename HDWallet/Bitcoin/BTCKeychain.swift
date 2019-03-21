@@ -117,15 +117,8 @@ class BTCKeychain {
     
     func getFingerprint(forParentPrvkey parPrvkey: Data) -> UInt32 {
         let parentPubkey = BTCCurve.shared.generatePublicKey(privateKey: parPrvkey)
-        let fingerprint: UInt32 = hash160(pubkey: parentPubkey!).withUnsafeBytes { $0.pointee }
+        let fingerprint: UInt32 = parentPubkey!.hash160().withUnsafeBytes { $0.pointee }
         return fingerprint
-    }
-    
-    /// Duplicate of function used in BTCKey
-    private func hash160(pubkey: Data) -> Data {
-        let hashedPubkey = pubkey.hashDataSHA256()
-        let hash160: Data = RIPEMD.digest(input: hashedPubkey)
-        return hash160
     }
     
     func recieveKey(atIndex index: Int) -> BTCKey {
