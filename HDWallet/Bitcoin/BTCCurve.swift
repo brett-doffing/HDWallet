@@ -36,16 +36,15 @@ class BTCCurve {
         } else { return "" }
     }
     
-    func ECDH(withPubkey publicKey: secp256k1_pubkey?, andPrvkey hexPrivateKey: String) -> String {
+    func ECDH(withPubkey publicKey: secp256k1_pubkey?, andPrivateKey privateKey: Data) -> Data? {
         if let ctx = context, var pubkey = publicKey {
-            let privateKey = hexPrivateKey.unhexlify()
-            if !(secp256k1_ec_pubkey_tweak_mul(ctx, &pubkey, privateKey)) { return "" }
+            if !(secp256k1_ec_pubkey_tweak_mul(ctx, &pubkey, privateKey.bytes)) { return nil }
             var serializedPubkey = [UInt8](repeating: 0, count:33)
             var length = UInt(33)
-            if !(secp256k1_ec_pubkey_serialize(ctx, &serializedPubkey, &length, pubkey, [SECP256K1_FLAGS.SECP256K1_EC_COMPRESSED])) { return "" }
-            return serializedPubkey.hexDescription()
+            if !(secp256k1_ec_pubkey_serialize(ctx, &serializedPubkey, &length, pubkey, [SECP256K1_FLAGS.SECP256K1_EC_COMPRESSED])) { return nil }
+            return serializedPubkey.data
         }
-        return ""
+        return nil
     }
     
     /// Multiplies input by generator point and adds to public key point.
