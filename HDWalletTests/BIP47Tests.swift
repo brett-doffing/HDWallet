@@ -16,6 +16,16 @@ class BIP47Tests: XCTestCase {
                       "d3ea8f780bed7ef2cd0e38c5d943639663236247c0a77c2c16d374e5a202455b",
                       "efb86ca2a3bad69558c2f7c2a1e2d7008bf7511acad5c2cbf909b851eb77e8f3",
                       "18bcf19b0b4148e59e2bba63414d7a8ead135a7c2f500ae7811125fb6f7ce941"]
+    let bobPubkeys = ["024ce8e3b04ea205ff49f529950616c3db615b1e37753858cc60c1ce64d17e2ad8",
+                      "03e092e58581cf950ff9c8fc64395471733e13f97dedac0044ebd7d60ccc1eea4d",
+                      "029b5f290ef2f98a0462ec691f5cc3ae939325f7577fcaf06cfc3b8fc249402156",
+                      "02094be7e0eef614056dd7c8958ffa7c6628c1dab6706f2f9f45b5cbd14811de44",
+                      "031054b95b9bc5d2a62a79a58ecfe3af000595963ddc419c26dab75ee62e613842",
+                      "03dac6d8f74cacc7630106a1cfd68026c095d3d572f3ea088d9a078958f8593572",
+                      "02396351f38e5e46d9a270ad8ee221f250eb35a575e98805e94d11f45d763c4651",
+                      "039d46e873827767565141574aecde8fb3b0b4250db9668c73ac742f8b72bca0d0",
+                      "038921acc0665fd4717eb87f81404b96f8cba66761c847ebea086703a6ae7b05bd",
+                      "03d51a06c6b48f067ff144d5acdfbe046efa2e83515012cf4990a89341c1440289"]
     let sharedSecrets = ["f5bb84706ee366052471e6139e6a9a969d586e5fe6471a9b96c3d8caefe86fef",
                          "adfb9b18ee1c4460852806a8780802096d67a8c1766222598dc801076beb0b4d",
                          "79e860c3eb885723bb5a1d54e5cecb7df5dc33b1d56802906762622fa3c18ee5",
@@ -33,6 +43,22 @@ class BIP47Tests: XCTestCase {
             let ecdhResult = BTCCurve.shared.ECDH(withPubkey: bobPubkey, andPrivateKey: alicePrvkey.unhexlify().data)
             // Remove 1 byte prefix (parity sign)
             XCTAssertEqual(ecdhResult![1...].toHexString(), sharedSecrets[i])
+        }
+    }
+    
+    func testDecodePaymentCode() {
+        let paymentCode = "PM8TJS2JxQ5ztXUpBBRnpTbcUXbUHy2T1abfrb3KkAAtMEGNbey4oumH7Hc578WgQJhPjBxteQ5GHHToTYHE3A1w6p7tU6KSoFmWBVbFGjKPisZDbP97".base58CheckDecode()
+        XCTAssertEqual(paymentCode!.data.toHexString(), "470100029d125e1cb89e5a1a108192643ee25370c2e75c192b10aac18de8d5a09b5f48d51db1243aaa57c7fbea3072249c1bd4dab9482b4fee4d25e1c69707e8144dc13700000000000000000000000000")
+        let pubkey = [UInt8](paymentCode![3..<36])
+        let chainCode = [UInt8](paymentCode![36..<68])
+        let depth = UInt8(3)
+        let fingerprint: UInt32 = 0x00000000
+        let index: UInt32 = 0x80000000
+        let xPub = ExtendedPublicKey(pubkey.data, chainCode.data, depth, fingerprint, index.bigEndian)
+        let kc = BTCKeychain(withExtendedPublicKey: xPub)
+        for i in 0..<bobPubkeys.count {
+            let derivedKeychain = kc.derivedKeychain(withPath: "\(i)")
+            XCTAssertEqual(derivedKeychain?.extendedPublicKey?.raw.toHexString(), bobPubkeys[i])
         }
     }
 
