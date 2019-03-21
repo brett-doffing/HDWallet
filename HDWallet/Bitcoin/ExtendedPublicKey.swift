@@ -34,4 +34,13 @@ struct ExtendedPublicKey {
         self.index = extPrivateKey.index
         self.network = extPrivateKey.network
     }
+    
+    init(_ publicKey: Data, _ chainCode: Data, _ depth: UInt8, _ fingerprint: UInt32, _ index: UInt32, _ network: BTCNetwork = .main) {
+        self.raw = publicKey
+        self.chainCode = chainCode
+        self.depth = depth
+        self.fingerprint = fingerprint
+        self.index = index
+        self.network = network
+    }
 }
