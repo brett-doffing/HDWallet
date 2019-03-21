@@ -30,7 +30,6 @@ class BTCCurve {
                 var serializedPubkey = [UInt8](repeating: 0, count:65)
                 var length = UInt(65)
                 if !(secp256k1_ec_pubkey_serialize(ctx, &serializedPubkey, &length, pubkey, [SECP256K1_FLAGS.SECP256K1_EC_UNCOMPRESSED])) { return "" }
-//                if !(secp256k1_ec_pubkey_parse(ctx, &pubkey, serializedPubkey, UInt(serializedPubkey.count)))
                 return serializedPubkey.hexDescription()
             }
         } else { return "" }
@@ -47,16 +46,17 @@ class BTCCurve {
         return nil
     }
     
-    /// Multiplies input by generator point and adds to public key point.
-    func add(generatorMultipliedBy hexString: String, toPubkey publicKey: secp256k1_pubkey?) -> String {
-        if let ctx = context, var pubkey = publicKey {
-            let s = hexString.unhexlify()
-            if !(secp256k1_ec_pubkey_tweak_add(ctx, &pubkey, s)) { return "" }
+    /// Multiplies tweak by generator point and adds to public key point.
+    func add(_ publicKey: Data, _ tweak: Data) -> Data? {
+        if let ctx = context {
+            var pubkey = secp256k1_pubkey()
+            if !secp256k1_ec_pubkey_parse(ctx, &pubkey, publicKey.bytes, UInt(publicKey.count)) { return nil }
+            if !(secp256k1_ec_pubkey_tweak_add(ctx, &pubkey, tweak.bytes)) { return nil }
             var serializedPubkey = [UInt8](repeating: 0, count:33)
             var length = UInt(33)
-            if !(secp256k1_ec_pubkey_serialize(ctx, &serializedPubkey, &length, pubkey, [SECP256K1_FLAGS.SECP256K1_EC_COMPRESSED])) { return "" }
-            return serializedPubkey.hexDescription()
-        } else { return "" }
+            if !(secp256k1_ec_pubkey_serialize(ctx, &serializedPubkey, &length, pubkey, [SECP256K1_FLAGS.SECP256K1_EC_COMPRESSED])) { return nil }
+            return serializedPubkey.data
+        } else { return nil }
     }
     
     func getPubkeyForPrivateKey(_ hexPrivateKey: String) -> secp256k1_pubkey? {
