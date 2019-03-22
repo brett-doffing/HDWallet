@@ -55,7 +55,6 @@ class BTCTransactionTests: XCTestCase {
         var scriptSigs: [Data] = []
         var newRawTx = BTCTransaction.shared.createTX(scriptSigs: scriptSigs, satoshis: satoshisArray, receivingAddresses: addressArray, utxos: utxos)
         newRawTx += UInt32(0x00000001).littleEndian
-        print(newRawTx.toHexString())
         var doubleSha256 = newRawTx.doubleSHA256().bytes
         
         var privateKey1 = "cSp57iWuu5APuzrPGyGc4PGUeCg23PjenZPBPoUs24HtJawccHPm".base58CheckDecode()!
@@ -70,7 +69,6 @@ class BTCTransactionTests: XCTestCase {
         
         newRawTx = BTCTransaction.shared.createTX(scriptSigs: scriptSigs, satoshis: satoshisArray, receivingAddresses: addressArray, utxos: utxos)
         newRawTx += UInt32(0x00000001).littleEndian
-        print(newRawTx.toHexString())
         doubleSha256 = newRawTx.doubleSHA256().bytes
 
         let signature2: secp256k1_ecdsa_signature? = BTCCurve.shared.sign(key: privateKey2, message: doubleSha256)
