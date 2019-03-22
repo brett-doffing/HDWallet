@@ -21,19 +21,19 @@ class BTCKeychain {
     init(seed: Data) {
         self.extendedPrivateKey = ExtendedPrivateKey(seed: seed)
         self.extendedPublicKey = ExtendedPublicKey(extPrivateKey: self.extendedPrivateKey!)
-        self.key = BTCKey(withPrivateKey: self.extendedPrivateKey!.raw, andPublicKey: self.extendedPublicKey!.raw)
+        self.key = BTCKey(withPrivateKey: self.extendedPrivateKey!.privateKey, andPublicKey: self.extendedPublicKey!.publicKey)
     }
     
     init(withExtendedPrivateKey extPrvkey: ExtendedPrivateKey) {
         self.extendedPrivateKey = extPrvkey
         self.extendedPublicKey = ExtendedPublicKey(extPrivateKey: self.extendedPrivateKey!)
-        self.key = BTCKey(withPrivateKey: self.extendedPrivateKey!.raw, andPublicKey: self.extendedPublicKey!.raw)
+        self.key = BTCKey(withPrivateKey: self.extendedPrivateKey!.privateKey, andPublicKey: self.extendedPublicKey!.publicKey)
     }
     
     init(withExtendedPublicKey extPubkey: ExtendedPublicKey) {
         self.extendedPrivateKey = nil
         self.extendedPublicKey = extPubkey
-        self.key = BTCKey(withPublicKey: self.extendedPublicKey!.raw)
+        self.key = BTCKey(withPublicKey: self.extendedPublicKey!.publicKey)
     }
     
     /// Private parent key → private child key
@@ -85,7 +85,7 @@ class BTCKeychain {
     func derivedKeychain(withPath path: String) -> BTCKeychain? {
         if self.extendedPrivateKey == nil { // CKDpub
             let pathArray: [String] = path.components(separatedBy:"/")
-            var parentPublicKey = self.extendedPublicKey?.raw
+            var parentPublicKey = self.extendedPublicKey?.publicKey
             var parentChainCode = self.extendedPublicKey?.chainCode
             var childPublicKey: Data
             var childChainCode: Data
@@ -118,7 +118,7 @@ class BTCKeychain {
             }
         } else { // CKDpriv
             let pathArray: [String] = path.components(separatedBy:"/")
-            var parentPrivateKey = self.extendedPrivateKey?.raw
+            var parentPrivateKey = self.extendedPrivateKey?.privateKey
             var parentChainCode = self.extendedPrivateKey?.chainCode
             var childPrivateKey: Data
             var childChainCode: Data

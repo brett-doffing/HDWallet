@@ -15,33 +15,23 @@ class BTCKey {
         let pubkey = BTCCurve.shared.generatePublicKey(privateKey: prvkey)
         self.publicKey = pubkey
         let hashedPk = pubkey!.hash160()
-        let modifiedPubKey = concatenateAddress(hashedPublicKey: hashedPk, network: network)
-        self.address = modifiedPubKey.toHexString().base58CheckEncodeHexString()
+        let prependedPublicKey = [network.publicKeyHash].data + hashedPk
+        self.address = prependedPublicKey.base58CheckEncodedString
     }
     
     init(withPrivateKey prvkey: Data, andPublicKey pubkey: Data, network: BTCNetwork = .main) {
         self.privateKey = prvkey
         self.publicKey = pubkey
         let hashedPk = pubkey.hash160()
-        let modifiedPubKey = concatenateAddress(hashedPublicKey: hashedPk, network: network)
-        self.address = modifiedPubKey.toHexString().base58CheckEncodeHexString()
+        let prependedPublicKey = [network.publicKeyHash].data + hashedPk
+        self.address = prependedPublicKey.base58CheckEncodedString
     }
     
     init(withPublicKey pubkey: Data, network: BTCNetwork = .main) {
         self.publicKey = pubkey
         let hashedPk = pubkey.hash160()
-        let modifiedPubKey = concatenateAddress(hashedPublicKey: hashedPk, network: network)
-        address = modifiedPubKey.toHexString().base58CheckEncodeHexString()
-    }
-    
-    /**
-     Concatenates the final address (version || payload || checksum).
-     */
-    private func concatenateAddress(hashedPublicKey: Data, network: BTCNetwork = .main) -> Data {
-        let prependedPublicKey = [network.publicKeyHash].data + hashedPublicKey
-        let checksum = prependedPublicKey.doubleSHA256().prefix(4)
-        let modifiedPublicKey = prependedPublicKey + checksum
-        return modifiedPublicKey
+        let prependedPublicKey = [network.publicKeyHash].data + hashedPk
+        self.address = prependedPublicKey.base58CheckEncodedString
     }
     
 }
