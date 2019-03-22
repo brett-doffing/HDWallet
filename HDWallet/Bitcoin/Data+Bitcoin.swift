@@ -26,9 +26,68 @@ extension Data {
         return hash160
     }
     
+    func base58EncodedString() -> String {
+        let alphabet = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
+        var bytes = self
+        var zerosCount = 0
+        var length = 0
+        
+        for b in bytes {
+            if b != 0 { break }
+            zerosCount += 1
+        }
+        
+        bytes.removeFirst(zerosCount)
+        
+        let size = bytes.count * 138 / 100 + 1
+        
+        var base58: [UInt8] = Array(repeating: 0, count: size)
+        for b in bytes {
+            var carry = Int(b)
+            var i = 0
+            
+            for j in 0...base58.count-1 where carry != 0 || i < length {
+                carry += 256 * Int(base58[base58.count - j - 1])
+                base58[base58.count - j - 1] = UInt8(carry % 58)
+                carry /= 58
+                i += 1
+            }
+            
+            assert(carry == 0)
+            
+            length = i
+        }
+        
+        // skip leading zeros
+        var zerosToRemove = 0
+        var str = ""
+        for b in base58 {
+            if b != 0 { break }
+            zerosToRemove += 1
+        }
+        base58.removeFirst(zerosToRemove)
+        
+        while 0 < zerosCount {
+            str = "\(str)1"
+            zerosCount -= 1
+        }
+        
+        for b in base58 {
+            str = "\(str)\(alphabet[String.Index(encodedOffset: Int(b))])"
+        }
+        
+        return str
+    }
+    
+    public var base58CheckEncodedString: String {
+        let checksum = self.doubleSHA256().prefix(4)
+        let dataPlusChecksum = self + checksum
+        return dataPlusChecksum.base58EncodedString()
+    }
+    
 }
 
-#warning("TODO: Check to see if already exists in secp256k1.framework")
+// TODO: Check to see if already exists in secp256k1.framework
 extension Array where Element == UInt8 {
     var data : Data{
         return Data(bytes:(self))
@@ -43,7 +102,6 @@ extension Array where Element == UInt8 {
     }
 }
 
-#warning("TODO: Find out what 'Self' is here, and place below in separate file.")
 protocol DataConvertable {
     static func +(lhs: Data, rhs: Self) -> Data
     static func +=(lhs: inout Data, rhs: Self)

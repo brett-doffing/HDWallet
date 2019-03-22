@@ -22,61 +22,6 @@ extension String {
         return data
     }
     
-    /**
-     Encodes a hexadecimal string to base 58 encoding.
-     */
-    func base58EncodeHexString() -> String {
-        var big = BInt(hex: self)
-        var base58encodedString = ""
-        let code_string: [Character] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-        while big > 0 {
-            let bigRemainder  = big % 58
-            let remainder = bigRemainder.toInt()
-            base58encodedString = String("\(code_string[remainder!])\(base58encodedString)")
-            big = big/58
-        }
-        return base58encodedString
-    }
-    
-    /**
-     Encodes a hexadecimal string to base58check encoding. Bitcoin addresses are implemented using the Base58Check encoding of the hash of either, P2SH or P2PKH addresses.
-     */
-    func base58CheckEncodeHexString() -> String {
-        // Get leading zero bytes
-        var checkLeadingZeros = true
-        var leadingZeroCount = 0
-        while checkLeadingZeros {
-            let myIndex = self.index(startIndex, offsetBy: leadingZeroCount)
-            if self[myIndex] == "0" {
-                leadingZeroCount += 1
-            } else {
-                checkLeadingZeros = false
-            }
-        }
-        
-        var big = BInt(hex: self)
-        var base58CheckEncodedString = ""
-        let code_string: [Character] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-        while big > 0 {
-            let remainder  = (big % 58).toInt()
-            base58CheckEncodedString = "\(code_string[remainder!])\(base58CheckEncodedString)"
-            big = big/58
-        }
-        
-        // Prepend
-        if leadingZeroCount >= 2 {
-            if leadingZeroCount % 2 == 0 {
-                let padding = String(repeating: "1", count: leadingZeroCount/2)
-                return "\(padding)\(base58CheckEncodedString)"
-            } else {
-                let padding = String(repeating: "1", count: (leadingZeroCount-1)/2)
-                return "\(padding)\(base58CheckEncodedString)"
-            }
-        }
-        
-        return base58CheckEncodedString
-    }
-    
     func bytesFromBase58() -> [UInt8] {
         let alphabet = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
         // remove leading and trailing whitespaces
@@ -135,7 +80,7 @@ extension String {
         
         let calculatedChecksum = Data(bytes: bytes).doubleSHA256().prefix(4).bytes
         
-        if checksum != calculatedChecksum { print("not equal"); return nil }
+        if checksum != calculatedChecksum { return nil }
         return bytes
     }
     
@@ -163,13 +108,6 @@ extension String {
         }
         
         return returnArray
-    }
-    
-    func stringWithRange(startingIndex: Int, endingIndex: Int) -> String {
-        let start = self.index(self.startIndex, offsetBy: startingIndex)
-        let end = self.index(self.startIndex, offsetBy: endingIndex)
-        let range = start..<end
-        return String(self[range])
     }
 
 }
