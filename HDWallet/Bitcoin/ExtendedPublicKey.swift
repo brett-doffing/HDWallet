@@ -4,30 +4,30 @@ import Foundation
 
 struct ExtendedPublicKey {
     
-    let raw: Data
+    let publicKey: Data
     let chainCode: Data
     let depth: UInt8
     let fingerprint: UInt32
     let index: UInt32
     let network: BTCNetwork
-    public var hex: String {
+    public var raw: Data {
         var extendedPublicKeyData = Data()
         extendedPublicKeyData += network.publicKeyVersion.bigEndian
         extendedPublicKeyData += depth.littleEndian
         extendedPublicKeyData += fingerprint.littleEndian
         extendedPublicKeyData += index.littleEndian
         extendedPublicKeyData += chainCode
-        extendedPublicKeyData += raw
+        extendedPublicKeyData += publicKey
         let checksum = extendedPublicKeyData.doubleSHA256().prefix(4)
         extendedPublicKeyData += checksum
-        return extendedPublicKeyData.toHexString()
+        return extendedPublicKeyData
     }
     var base58: String {
-        return self.hex.base58EncodeHexString()
+        return self.raw.base58EncodedString()
     }
     
     init(extPrivateKey: ExtendedPrivateKey) {
-        self.raw = BTCCurve.shared.generatePublicKey(privateKey: extPrivateKey.raw)!
+        self.publicKey = BTCCurve.shared.generatePublicKey(privateKey: extPrivateKey.privateKey)!
         self.chainCode = extPrivateKey.chainCode
         self.depth = extPrivateKey.depth
         self.fingerprint = extPrivateKey.fingerprint
@@ -36,7 +36,7 @@ struct ExtendedPublicKey {
     }
     
     init(_ publicKey: Data, _ chainCode: Data, _ depth: UInt8, _ fingerprint: UInt32, _ index: UInt32, _ network: BTCNetwork = .main) {
-        self.raw = publicKey
+        self.publicKey = publicKey
         self.chainCode = chainCode
         self.depth = depth
         self.fingerprint = fingerprint
