@@ -85,6 +85,12 @@ extension Data {
         return dataPlusChecksum.base58EncodedString()
     }
     
+    func XOR(keyData: Data) -> Data {
+        var xorData = [UInt8]()
+        for i in 0..<self.count { xorData.append(self[i] ^ keyData[i]) }
+        return Data(bytes: xorData)
+    }
+    
 }
 
 // TODO: Check to see if already exists in secp256k1.framework
