@@ -46,7 +46,7 @@ class BIP47Tests: XCTestCase {
         }
     }
     
-    func testDecodePaymentCode() {
+    func testPaymentCodeToKeychain() {
         let paymentCode = "PM8TJS2JxQ5ztXUpBBRnpTbcUXbUHy2T1abfrb3KkAAtMEGNbey4oumH7Hc578WgQJhPjBxteQ5GHHToTYHE3A1w6p7tU6KSoFmWBVbFGjKPisZDbP97".base58CheckDecode()
         XCTAssertEqual(paymentCode!.data.toHexString(), "470100029d125e1cb89e5a1a108192643ee25370c2e75c192b10aac18de8d5a09b5f48d51db1243aaa57c7fbea3072249c1bd4dab9482b4fee4d25e1c69707e8144dc13700000000000000000000000000")
         let pubkey = [UInt8](paymentCode![3..<36])
@@ -58,8 +58,23 @@ class BIP47Tests: XCTestCase {
         let kc = BTCKeychain(withExtendedPublicKey: xPub)
         for i in 0..<bobPubkeys.count {
             let derivedKeychain = kc.derivedKeychain(withPath: "\(i)")
-            XCTAssertEqual(derivedKeychain?.extendedPublicKey?.raw.toHexString(), bobPubkeys[i])
+            XCTAssertEqual(derivedKeychain?.extendedPublicKey?.publicKey.toHexString(), bobPubkeys[i])
         }
+    }
+    
+    func testPaymentCodeFromKeychain() {
+        let aliceSeed = String("64dca76abc9c6f0cf3d212d248c380c4622c8f93b2c425ec6a5567fd5db57e10d3e6f94a2f6af4ac2edb8998072aad92098db73558c323777abf5bd1082d970a").hexStringData()
+        let aliceKeychain = BTCKeychain(seed: aliceSeed)
+        let alice47 = aliceKeychain.keychain47
+        let alicePaymentCode = BIP47.shared.paymentCode(forBIP47Keychain: alice47!)
+        
+        let bobSeed = String("87eaaac5a539ab028df44d9110defbef3797ddb805ca309f61a69ff96dbaa7ab5b24038cf029edec5235d933110f0aea8aeecf939ed14fc20730bba71e4b1110").hexStringData()
+        let bobKeychain = BTCKeychain(seed: bobSeed)
+        let bob47 = bobKeychain.keychain47
+        let bobPaymentCode = BIP47.shared.paymentCode(forBIP47Keychain: bob47!)
+        
+        XCTAssertEqual(alicePaymentCode, "PM8TJTLJbPRGxSbc8EJi42Wrr6QbNSaSSVJ5Y3E4pbCYiTHUskHg13935Ubb7q8tx9GVbh2UuRnBc3WSyJHhUrw8KhprKnn9eDznYGieTzFcwQRya4GA")
+        XCTAssertEqual(bobPaymentCode, "PM8TJS2JxQ5ztXUpBBRnpTbcUXbUHy2T1abfrb3KkAAtMEGNbey4oumH7Hc578WgQJhPjBxteQ5GHHToTYHE3A1w6p7tU6KSoFmWBVbFGjKPisZDbP97")
     }
 
 }
