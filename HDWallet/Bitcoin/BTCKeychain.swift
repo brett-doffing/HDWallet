@@ -159,13 +159,18 @@ class BTCKeychain {
         return fingerprint
     }
     
-    func recieveKey(atIndex index: Int) -> BTCKey {
+    func recieveKey(atIndex index: UInt32) -> BTCKey {
         let receiveKeychain = derivedKeychain(withPath: "0/\(index)")
         return receiveKeychain!.key
     }
     
-    func changeKey(atIndex index: Int) -> BTCKey {
+    func changeKey(atIndex index: UInt32) -> BTCKey {
         let changeKeychain = derivedKeychain(withPath: "1/\(index)")
         return changeKeychain!.key
+    }
+    
+    func key(atIndex index: UInt32) -> BTCKey {
+        let keychain = derivedKeychain(withPath: "\(index)")
+        return keychain!.key
     }
 }

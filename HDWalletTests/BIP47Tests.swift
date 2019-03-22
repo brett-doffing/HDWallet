@@ -36,6 +36,16 @@ class BIP47Tests: XCTestCase {
                          "5f5ecc738095a6fb1ea47acda4996f1206d3b30448f233ef6ed27baf77e81e46",
                          "1e794128ac4c9837d7c3696bbc169a8ace40567dc262974206fcf581d56defb4",
                          "fe36c27c62c99605d6cd7b63bf8d9fe85d753592b14744efca8be20a4d767c37"]
+    let recvAddresses = ["141fi7TY3h936vRUKh1qfUZr8rSBuYbVBK",
+                         "12u3Uued2fuko2nY4SoSFGCoGLCBUGPkk6",
+                         "1FsBVhT5dQutGwaPePTYMe5qvYqqjxyftc",
+                         "1CZAmrbKL6fJ7wUxb99aETwXhcGeG3CpeA",
+                         "1KQvRShk6NqPfpr4Ehd53XUhpemBXtJPTL",
+                         "1KsLV2F47JAe6f8RtwzfqhjVa8mZEnTM7t",
+                         "1DdK9TknVwvBrJe7urqFmaxEtGF2TMWxzD",
+                         "16DpovNuhQJH7JUSZQFLBQgQYS4QB9Wy8e",
+                         "17qK2RPGZMDcci2BLQ6Ry2PDGJErrNojT5",
+                         "1GxfdfP286uE24qLZ9YRP3EWk2urqXgC4s"]
 
     func testECDH() {
         for i in 0..<bobPrvkeys.count {
@@ -75,6 +85,21 @@ class BIP47Tests: XCTestCase {
         
         XCTAssertEqual(alicePaymentCode, "PM8TJTLJbPRGxSbc8EJi42Wrr6QbNSaSSVJ5Y3E4pbCYiTHUskHg13935Ubb7q8tx9GVbh2UuRnBc3WSyJHhUrw8KhprKnn9eDznYGieTzFcwQRya4GA")
         XCTAssertEqual(bobPaymentCode, "PM8TJS2JxQ5ztXUpBBRnpTbcUXbUHy2T1abfrb3KkAAtMEGNbey4oumH7Hc578WgQJhPjBxteQ5GHHToTYHE3A1w6p7tU6KSoFmWBVbFGjKPisZDbP97")
+    }
+    
+    func testReceiverAddressCreation() {
+        let aliceSeed = String("64dca76abc9c6f0cf3d212d248c380c4622c8f93b2c425ec6a5567fd5db57e10d3e6f94a2f6af4ac2edb8998072aad92098db73558c323777abf5bd1082d970a").hexStringData()
+        let aliceKeychain = BTCKeychain(seed: aliceSeed)
+        let alice47 = aliceKeychain.keychain47!
+        
+        let bobSeed = String("87eaaac5a539ab028df44d9110defbef3797ddb805ca309f61a69ff96dbaa7ab5b24038cf029edec5235d933110f0aea8aeecf939ed14fc20730bba71e4b1110").hexStringData()
+        let bobKeychain = BTCKeychain(seed: bobSeed)
+        let bob47 = bobKeychain.keychain47!
+        
+        for i in 0..<10 {
+            let key = BIP47.shared.getReceiveKey(forReceivingKeychain: bob47, atKeyIndex: UInt32(i), andSendingKeychain: alice47, atAccountIndex: 0)
+            XCTAssertEqual(key.address, recvAddresses[i])
+        }
     }
 
 }

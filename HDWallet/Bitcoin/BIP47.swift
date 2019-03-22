@@ -31,4 +31,19 @@ class BIP47 {
         paymentCode += Data(repeating: 0x00, count: 13) // Bytes 67 - 79: reserved for future expansion, zero-filled unless otherwise noted
         return paymentCode.base58CheckEncodedString
     }
+    
+    func getReceiveKey(forReceivingKeychain receiver: BTCKeychain, atKeyIndex keyIndex: UInt32, andSendingKeychain sender: BTCKeychain, atAccountIndex acctIndex: UInt32) -> BTCKey {
+        // Assumes BIP47 keychain: m/47'/0'/0'
+        
+        let senderPrvkey = sender.key(atIndex: acctIndex).privateKey!
+        let pubkeyData = receiver.key(atIndex: keyIndex).publicKey!
+        let receiverPubkey = BTCCurve.shared.parsePubkey(pubkeyData)!
+        let secretPoint = BTCCurve.shared.ECDH(withPubkey: receiverPubkey, andPrivateKey: senderPrvkey)!
+        // Remove 1 byte prefix (parity sign)
+        let x = Data(secretPoint[1...])
+        #warning("TODO: If the value of s is not in the secp256k1 group, sender MUST increment the index used to derive receiver's public key and try again.")
+        let s = x.hashDataSHA256()
+        let Bp = BTCCurve.shared.add(pubkeyData, s)!
+        return BTCKey(withPublicKey: Bp)
+    }
 }

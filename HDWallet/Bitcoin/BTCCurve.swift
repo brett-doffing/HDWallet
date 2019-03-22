@@ -59,6 +59,14 @@ class BTCCurve {
         } else { return nil }
     }
     
+    func parsePubkey(_ publicKey: Data) -> secp256k1_pubkey? {
+        if let ctx = context {
+            var pubkey = secp256k1_pubkey()
+            if !secp256k1_ec_pubkey_parse(ctx, &pubkey, publicKey.bytes, UInt(publicKey.count)) { return nil }
+            return pubkey
+        } else { return nil }
+    }
+    
     func getPubkeyForPrivateKey(_ hexPrivateKey: String) -> secp256k1_pubkey? {
         if let ctx = context {
             let privateKey = hexPrivateKey.unhexlify()
