@@ -86,8 +86,8 @@ extension Data {
     }
     
     func XOR(keyData: Data) -> Data {
-        var xorData = [UInt8]()
-        for i in 0..<self.count { xorData.append(self[i] ^ keyData[i]) }
+        var xorData = Data()
+        for i in 0..<self.count { xorData += (self[i] ^ keyData[i]) }
         return Data(bytes: xorData)
     }
     
