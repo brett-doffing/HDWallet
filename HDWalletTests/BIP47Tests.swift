@@ -101,5 +101,27 @@ class BIP47Tests: XCTestCase {
             XCTAssertEqual(key.address, recvAddresses[i])
         }
     }
+    
+    func testBlindningPaymentCode() {
+        let aliceSeed = String("64dca76abc9c6f0cf3d212d248c380c4622c8f93b2c425ec6a5567fd5db57e10d3e6f94a2f6af4ac2edb8998072aad92098db73558c323777abf5bd1082d970a").hexStringData()
+        let aliceKeychain = BTCKeychain(seed: aliceSeed)
+        let alice47 = aliceKeychain.keychain47!
+        
+        let bobSeed = String("87eaaac5a539ab028df44d9110defbef3797ddb805ca309f61a69ff96dbaa7ab5b24038cf029edec5235d933110f0aea8aeecf939ed14fc20730bba71e4b1110").hexStringData()
+        let bobKeychain = BTCKeychain(seed: bobSeed)
+        let bob47 = bobKeychain.keychain47!
+        
+        let utxo = TxOutput()
+        utxo.n = 1
+        utxo.txid = "9c6000d597c5008f7bfc2618aed5e4a6ae57677aab95078aae708e1cab11f486".hexStringData()
+        var outpointPrvkey = "Kx983SRhAZpAhj7Aac1wUXMJ6XZeyJKqCxJJ49dxEbYCT4a1ozRD".base58CheckDecode()!.data
+        // Remove first (version) and last bits of private key
+        outpointPrvkey.removeFirst()
+        outpointPrvkey.removeLast()
+        
+        let blindedPaymentCode = BIP47.shared.createBlindedPaymentCode(forReceivingKeychain: bob47, andSendingKeychain: alice47, withUTXO: utxo, andOutpointPrvKey: outpointPrvkey)
+        
+        XCTAssertEqual(blindedPaymentCode.toHexString(), "010002063e4eb95e62791b06c50e1a3a942e1ecaaa9afbbeb324d16ae6821e091611fa96c0cf048f607fe51a0327f5e2528979311c78cb2de0d682c61e1180fc3d543b00000000000000000000000000")
+    }
 
 }

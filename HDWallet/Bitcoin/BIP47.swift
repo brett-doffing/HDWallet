@@ -33,7 +33,7 @@ class BIP47 {
     }
     
     func getReceiveKey(forReceivingKeychain receiver: BTCKeychain, atKeyIndex keyIndex: UInt32, andSendingKeychain sender: BTCKeychain, atAccountIndex acctIndex: UInt32) -> BTCKey {
-        // Assumes BIP47 keychain: m/47'/0'/0'
+        // Assumes BIP47 keychains: m/47'/0'/0'
         
         let senderPrvkey = sender.key(atIndex: acctIndex).privateKey!
         let pubkeyData = receiver.key(atIndex: keyIndex).publicKey!
@@ -46,4 +46,35 @@ class BIP47 {
         let Bp = BTCCurve.shared.add(pubkeyData, s)!
         return BTCKey(withPublicKey: Bp)
     }
+    
+    func createBlindedPaymentCode(forReceivingKeychain receiver: BTCKeychain, andSendingKeychain sender: BTCKeychain, withUTXO utxo: TxOutput, andOutpointPrvKey outpointPrvKey: Data) -> Data {
+        // Assumes BIP47 keychains: m/47'/0'/0'
+        
+        let pubkeyData = receiver.key(atIndex: 0).publicKey!
+        let receiverPubkey = BTCCurve.shared.parsePubkey(pubkeyData)!
+        let secretPoint = BTCCurve.shared.ECDH(withPubkey: receiverPubkey, andPrivateKey: outpointPrvKey)!
+        // Remove 1 byte prefix (parity sign)
+        let x = Data(secretPoint[1...])
+        let outpoint = Data(utxo.txid!.bytes.bigToLittleEndian().data + utxo.n!.littleEndian)
+        let s = HMAC_SHA512.digest(key: outpoint, data: x)
+        let f32 = s[0..<32]
+        let l32 = s[32..<64]
+        let senderPubkey = sender.extendedPublicKey?.publicKey
+        #warning("FIXME: Find out why XOR() won't play nice unless arguments are explicitly recast!?")
+        let xP = Data(senderPubkey![1...]).XOR(keyData: f32)
+        let c: Data = (sender.extendedPublicKey?.chainCode)!
+        let cP = Data(c).XOR(keyData: Data(l32))
+        
+        // Payment code payload after blinding:
+        var blindedPaymentCode = Data()
+        blindedPaymentCode += UInt8(0x01) // version byte
+        blindedPaymentCode += UInt8(0x00) // features byte
+        blindedPaymentCode += senderPubkey![0] // pubkey sign
+        blindedPaymentCode += xP
+        blindedPaymentCode += cP
+        blindedPaymentCode += Data(repeating: 0x00, count: 13)
+    
+        return blindedPaymentCode
+    }
+
 }
