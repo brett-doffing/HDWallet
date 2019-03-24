@@ -76,13 +76,20 @@ class BTCCurve {
         } else { return nil }
     }
     
-    func generatePublicKey(privateKey: Data) -> Data? {
+    func generatePublicKey(privateKey: Data, compressed: Bool = true) -> Data? {
         if let ctx = context {
             var pubkey = secp256k1_pubkey()
             if !(secp256k1_ec_pubkey_create(ctx, &pubkey, privateKey.bytes)) { return nil }
-            var serializedPubkey = [UInt8](repeating: 0, count:33)
-            var length = UInt(33)
-            if !(secp256k1_ec_pubkey_serialize(ctx, &serializedPubkey, &length, pubkey, [SECP256K1_FLAGS.SECP256K1_EC_COMPRESSED])) { return nil }
+            var serializedPubkey: [UInt8]
+            if compressed {
+                serializedPubkey = [UInt8](repeating: 0, count:33)
+                var length = UInt(33)
+                if !(secp256k1_ec_pubkey_serialize(ctx, &serializedPubkey, &length, pubkey, [SECP256K1_FLAGS.SECP256K1_EC_COMPRESSED])) { return nil }
+            } else {
+                serializedPubkey = [UInt8](repeating: 0, count:65)
+                var length = UInt(65)
+                if !(secp256k1_ec_pubkey_serialize(ctx, &serializedPubkey, &length, pubkey, [SECP256K1_FLAGS.SECP256K1_EC_UNCOMPRESSED])) { return nil }
+            }
             return serializedPubkey.data
         } else { return nil }
     }
