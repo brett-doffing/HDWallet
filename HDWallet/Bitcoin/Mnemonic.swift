@@ -11,7 +11,7 @@ import Foundation
 public final class Mnemonic {
     public enum Strength: Int {
         case normal = 128
-        case hight = 256
+        case high = 256
     }
     
     public static func create(strength: Strength = .normal, language: WordList = .english) -> String {
@@ -23,7 +23,7 @@ public final class Mnemonic {
     
     public static func create(entropy: Data, language: WordList = .english) -> String {
         let entropybits = String(entropy.flatMap { ("00000000" + String($0, radix: 2)).suffix(8) })
-        let hashBits = String(entropy.sha256().flatMap { ("00000000" + String($0, radix: 2)).suffix(8) })
+        let hashBits = String(entropy.hashDataSHA256().flatMap { ("00000000" + String($0, radix: 2)).suffix(8) })
         let checkSum = String(hashBits.prefix((entropy.count * 8) / 32))
         
         let words = language.words
@@ -49,7 +49,7 @@ public final class Mnemonic {
             fatalError("Nomalizing salt failed in \(self)")
         }
         
-        return Crypto.PBKDF2SHA512(password: password.bytes, salt: salt.bytes)
+        return PBKDF2.SHA512(password: password, salt: salt)!
     }
 }
 
