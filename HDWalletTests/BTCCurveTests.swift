@@ -69,7 +69,7 @@ class BTCCurveTests: XCTestCase {
         let signature:(r: Data, s: Data)? = BTCCurve.shared.sign(key: pk1, message: m1)
         let r = "934b1ea10a4b3c1757e2b0c017d0b6143ce3c9a7e6a4a49860d7a6ab210ee3d8"
         let s = "2442ce9d2b916064108014783e923ec36b49743e2ffa1c4496f01a512aafd9e5"
-        XCTAssertEqual(signature!.r.toHexString(), r)
-        XCTAssertEqual(signature!.s.toHexString(), s)
+        XCTAssertEqual(signature!.r.hexString(), r)
+        XCTAssertEqual(signature!.s.hexString(), s)
     }
 }

@@ -52,13 +52,13 @@ class BIP47Tests: XCTestCase {
             let bobPubkey = BTCCurve.shared.getPubkeyForPrivateKey(bobPrvkeys[i])
             let ecdhResult = BTCCurve.shared.ECDH(withPubkey: bobPubkey, andPrivateKey: alicePrvkey.unhexlify().data)
             // Remove 1 byte prefix (parity sign)
-            XCTAssertEqual(ecdhResult![1...].toHexString(), sharedSecrets[i])
+            XCTAssertEqual(ecdhResult![1...].hexString(), sharedSecrets[i])
         }
     }
     
     func testPaymentCodeToKeychain() {
         let paymentCode = "PM8TJS2JxQ5ztXUpBBRnpTbcUXbUHy2T1abfrb3KkAAtMEGNbey4oumH7Hc578WgQJhPjBxteQ5GHHToTYHE3A1w6p7tU6KSoFmWBVbFGjKPisZDbP97".base58CheckDecode()
-        XCTAssertEqual(paymentCode!.data.toHexString(), "470100029d125e1cb89e5a1a108192643ee25370c2e75c192b10aac18de8d5a09b5f48d51db1243aaa57c7fbea3072249c1bd4dab9482b4fee4d25e1c69707e8144dc13700000000000000000000000000")
+        XCTAssertEqual(paymentCode!.data.hexString(), "470100029d125e1cb89e5a1a108192643ee25370c2e75c192b10aac18de8d5a09b5f48d51db1243aaa57c7fbea3072249c1bd4dab9482b4fee4d25e1c69707e8144dc13700000000000000000000000000")
         let pubkey = [UInt8](paymentCode![3..<36])
         let chainCode = [UInt8](paymentCode![36..<68])
         let depth = UInt8(3)
@@ -68,7 +68,7 @@ class BIP47Tests: XCTestCase {
         let kc = BTCKeychain(withExtendedPublicKey: xPub)
         for i in 0..<bobPubkeys.count {
             let derivedKeychain = kc.derivedKeychain(withPath: "\(i)")
-            XCTAssertEqual(derivedKeychain?.extendedPublicKey?.publicKey.toHexString(), bobPubkeys[i])
+            XCTAssertEqual(derivedKeychain?.extendedPublicKey?.publicKey.hexString(), bobPubkeys[i])
         }
     }
     
@@ -121,7 +121,7 @@ class BIP47Tests: XCTestCase {
         
         let blindedPaymentCode = BIP47.shared.createBlindedPaymentCode(forReceivingKeychain: bob47, andSendingKeychain: alice47, withUTXO: utxo, andOutpointPrvKey: outpointPrvkey)
         
-        XCTAssertEqual(blindedPaymentCode.toHexString(), "010002063e4eb95e62791b06c50e1a3a942e1ecaaa9afbbeb324d16ae6821e091611fa96c0cf048f607fe51a0327f5e2528979311c78cb2de0d682c61e1180fc3d543b00000000000000000000000000")
+        XCTAssertEqual(blindedPaymentCode.hexString(), "010002063e4eb95e62791b06c50e1a3a942e1ecaaa9afbbeb324d16ae6821e091611fa96c0cf048f607fe51a0327f5e2528979311c78cb2de0d682c61e1180fc3d543b00000000000000000000000000")
     }
 
 }

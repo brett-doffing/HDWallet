@@ -71,8 +71,8 @@ class BTCKeychainTests: XCTestCase { // TODO: need to add support for testnet ke
         let seed = String("87eaaac5a539ab028df44d9110defbef3797ddb805ca309f61a69ff96dbaa7ab5b24038cf029edec5235d933110f0aea8aeecf939ed14fc20730bba71e4b1110").hexStringData()
         let keyChain = BTCKeychain(seed: seed)
         let derived47 = keyChain.derivedKeychain(withPath: "m/47'/0'/0'/0")
-        XCTAssertEqual(derived47?.key.privateKey?.toHexString(), "04448fd1be0c9c13a5ca0b530e464b619dc091b299b98c5cab9978b32b4a1b8b")
-        XCTAssertEqual(derived47?.key.publicKey?.toHexString(), "024ce8e3b04ea205ff49f529950616c3db615b1e37753858cc60c1ce64d17e2ad8")
+        XCTAssertEqual(derived47?.key.privateKey?.hexString(), "04448fd1be0c9c13a5ca0b530e464b619dc091b299b98c5cab9978b32b4a1b8b")
+        XCTAssertEqual(derived47?.key.publicKey?.hexString(), "024ce8e3b04ea205ff49f529950616c3db615b1e37753858cc60c1ce64d17e2ad8")
         XCTAssertEqual(derived47?.key.address, "1ChvUUvht2hUQufHBXF8NgLhW8SwE2ecGV")
     }
     
@@ -81,8 +81,8 @@ class BTCKeychainTests: XCTestCase { // TODO: need to add support for testnet ke
         let keychain = BTCKeychain(seed: seed)
         let kc47 = keychain.keychain47
         let kc47FirstKey = kc47?.derivedKeychain(withPath: "0")
-        XCTAssertEqual(kc47FirstKey?.key.privateKey?.toHexString(), "8d6a8ecd8ee5e0042ad0cb56e3a971c760b5145c3917a8e7beaf0ed92d7a520c")
-        XCTAssertEqual(kc47FirstKey?.key.publicKey?.toHexString(), "0353883a146a23f988e0f381a9507cbdb3e3130cd81b3ce26daf2af088724ce683")
+        XCTAssertEqual(kc47FirstKey?.key.privateKey?.hexString(), "8d6a8ecd8ee5e0042ad0cb56e3a971c760b5145c3917a8e7beaf0ed92d7a520c")
+        XCTAssertEqual(kc47FirstKey?.key.publicKey?.hexString(), "0353883a146a23f988e0f381a9507cbdb3e3130cd81b3ce26daf2af088724ce683")
     }
     
     // https://github.com/bitcoin/bips/blob/master/bip-0084.mediawiki#test-vectors
@@ -93,9 +93,9 @@ class BTCKeychainTests: XCTestCase { // TODO: need to add support for testnet ke
         let firstReceiveKey = kc84?.recieveKey(atIndex: 0)
         let secondReceiveKey = kc84?.recieveKey(atIndex: 1)
         let firstChangeKey = kc84?.changeKey(atIndex: 0)
-        XCTAssertEqual(firstReceiveKey?.publicKey?.toHexString(), "0330d54fd0dd420a6e5f8d3624f5f3482cae350f79d5f0753bf5beef9c2d91af3c")
-        XCTAssertEqual(secondReceiveKey?.publicKey?.toHexString(), "03e775fd51f0dfb8cd865d9ff1cca2a158cf651fe997fdc9fee9c1d3b5e995ea77")
-        XCTAssertEqual(firstChangeKey?.publicKey?.toHexString(), "03025324888e429ab8e3dbaf1f7802648b9cd01e9b418485c5fa4c1b9b5700e1a6")
+        XCTAssertEqual(firstReceiveKey?.publicKey?.hexString(), "0330d54fd0dd420a6e5f8d3624f5f3482cae350f79d5f0753bf5beef9c2d91af3c")
+        XCTAssertEqual(secondReceiveKey?.publicKey?.hexString(), "03e775fd51f0dfb8cd865d9ff1cca2a158cf651fe997fdc9fee9c1d3b5e995ea77")
+        XCTAssertEqual(firstChangeKey?.publicKey?.hexString(), "03025324888e429ab8e3dbaf1f7802648b9cd01e9b418485c5fa4c1b9b5700e1a6")
         
         let keyHash1 = firstReceiveKey?.publicKey?.hash160()
         let keyHash2 = secondReceiveKey?.publicKey?.hash160()

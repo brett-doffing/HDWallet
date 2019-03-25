@@ -22,7 +22,7 @@ extension String {
                 CC_SHA256(messageBytes, CC_LONG(messageData.count), digestBytes)
             }
         }
-        return digestData.toHexString()
+        return digestData.hexString()
     }
     
     /**
@@ -55,7 +55,7 @@ extension Data {
      Double Hashes data using SHA256, and returns the digest as a hexadecimal String.
      */
     func doubleSHA256ToString() -> String {
-        return self.hashDataSHA256().hashDataSHA256().toHexString()
+        return self.hashDataSHA256().hashDataSHA256().hexString()
     }
     
     /**
@@ -78,7 +78,7 @@ extension Data {
      */
     func createPrivateKey() -> String {
         let hashedInput = self.hashDataSHA256()
-        let hexOfHash = hashedInput.toHexString()
+        let hexOfHash = hashedInput.hexString()
         
         return hexOfHash
     }
@@ -100,7 +100,7 @@ public struct HMAC_SHA256 {
         CCHmac(algorithm, keyStr, keyLen, dataStr, dataLen, result)
         
         let data = NSData(bytesNoCopy: result, length: digestLen) as Data
-        let hash = data.toHexString()
+        let hash = data.hexString()
         
         return hash
     }
@@ -122,7 +122,7 @@ public struct HMAC_SHA512 {
         CCHmac(algorithm, keyStr, keyLen, dataStr, dataLen, result)
         
         let data = NSData(bytesNoCopy: result, length: digestLen) as Data
-        let hash = data.toHexString()
+        let hash = data.hexString()
         
         return hash
     }

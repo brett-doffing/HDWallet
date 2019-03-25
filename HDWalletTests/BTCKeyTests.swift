@@ -24,9 +24,9 @@ class BTCKeyTests: XCTestCase {
         let publicKey1 = BTCCurve.shared.generatePublicKey(privateKey: (privateKey1?.data)!, compressed: false)
         let publicKey2 = BTCCurve.shared.generatePublicKey(privateKey: (privateKey2?.data)!, compressed: false)
         let publicKey3 = BTCCurve.shared.generatePublicKey(privateKey: (privateKey3?.data)!, compressed: false)
-        XCTAssertEqual(publicKey1?.toHexString(), "0491bba2510912a5bd37da1fb5b1673010e43d2c6d812c514e91bfa9f2eb129e1c183329db55bd868e209aac2fbc02cb33d98fe74bf23f0c235d6126b1d8334f86")
-        XCTAssertEqual(publicKey2?.toHexString(), "04865c40293a680cb9c020e7b1e106d8c1916d3cef99aa431a56d253e69256dac09ef122b1a986818a7cb624532f062c1d1f8722084861c5c3291ccffef4ec6874")
-        XCTAssertEqual(publicKey3?.toHexString(), "048d2455d2403e08708fc1f556002f1b6cd83f992d085097f9974ab08a28838f07896fbab08f39495e15fa6fad6edbfb1e754e35fa1c7844c41f322a1863d46213")
+        XCTAssertEqual(publicKey1?.hexString(), "0491bba2510912a5bd37da1fb5b1673010e43d2c6d812c514e91bfa9f2eb129e1c183329db55bd868e209aac2fbc02cb33d98fe74bf23f0c235d6126b1d8334f86")
+        XCTAssertEqual(publicKey2?.hexString(), "04865c40293a680cb9c020e7b1e106d8c1916d3cef99aa431a56d253e69256dac09ef122b1a986818a7cb624532f062c1d1f8722084861c5c3291ccffef4ec6874")
+        XCTAssertEqual(publicKey3?.hexString(), "048d2455d2403e08708fc1f556002f1b6cd83f992d085097f9974ab08a28838f07896fbab08f39495e15fa6fad6edbfb1e754e35fa1c7844c41f322a1863d46213")
                 
         var redeemScript = Data()
         redeemScript += OP_2
@@ -49,7 +49,7 @@ class BTCKeyTests: XCTestCase {
         scriptPubKey += hash
         scriptPubKey += OP_EQUAL
         
-        XCTAssertEqual(scriptPubKey.toHexString(), "a914f815b036d9bbbce5e9f2a00abd1bf3dc91e9551087")
+        XCTAssertEqual(scriptPubKey.hexString(), "a914f815b036d9bbbce5e9f2a00abd1bf3dc91e9551087")
     }
     
     // https://github.com/bitcoin/bips/blob/master/bip-0049.mediawiki#test-vectors
@@ -57,7 +57,7 @@ class BTCKeyTests: XCTestCase {
         var privateKey = "cULrpoZGXiuC19Uhvykx7NugygA3k86b3hmdCeyvHYQZSxojGyXJ".base58CheckDecode()?.data
         privateKey?.removeFirst()
         privateKey?.removeLast()
-        XCTAssertEqual(privateKey?.toHexString(), "c9bdb49cfbaedca21c4b1f3a7803c34636b1d7dc55a717132443fc3f4c5867e8")
+        XCTAssertEqual(privateKey?.hexString(), "c9bdb49cfbaedca21c4b1f3a7803c34636b1d7dc55a717132443fc3f4c5867e8")
         
         let publicKey = BTCCurve.shared.generatePublicKey(privateKey: privateKey!)
         let keyHash = publicKey?.hash160()
