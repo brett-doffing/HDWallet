@@ -3,9 +3,10 @@
 import XCTest
 @testable import HDWallet
 
-class BTCKeychainTests: XCTestCase {
+class BTCKeychainTests: XCTestCase { // TODO: need to add support for testnet keychains
     
-    func testMasterKeychains() {
+    // https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki#test-vectors
+    func testKeychains() {
         let seed = String("000102030405060708090a0b0c0d0e0f")
         let keyChain = BTCKeychain(seed: seed.hexStringData())
         XCTAssertEqual(keyChain.extendedPrivateKey?.base58, "xprv9s21ZrQH143K3QTDL4LXw2F7HEK3wJUD2nW2nRk4stbPy6cq3jPPqjiChkVvvNKmPGJxWUtg6LnF5kejMRNNU3TGtRBeJgk33yuGBxrMPHi")
@@ -66,7 +67,7 @@ class BTCKeychainTests: XCTestCase {
         XCTAssertEqual(W3_m_0H?.extendedPublicKey?.base58, "xpub68NZiKmJWnxxS6aaHmn81bvJeTESw724CRDs6HbuccFQN9Ku14VQrADWgqbhhTHBaohPX4CjNLf9fq9MYo6oDaPPLPxSb7gwQN3ih19Zm4Y")
     }
     
-    func testKeys() {
+    func testKeysFromKeychain() {
         let seed = String("87eaaac5a539ab028df44d9110defbef3797ddb805ca309f61a69ff96dbaa7ab5b24038cf029edec5235d933110f0aea8aeecf939ed14fc20730bba71e4b1110").hexStringData()
         let keyChain = BTCKeychain(seed: seed)
         let derived47 = keyChain.derivedKeychain(withPath: "m/47'/0'/0'/0")
@@ -84,15 +85,28 @@ class BTCKeychainTests: XCTestCase {
         XCTAssertEqual(kc47FirstKey?.key.publicKey?.toHexString(), "0353883a146a23f988e0f381a9507cbdb3e3130cd81b3ce26daf2af088724ce683")
     }
     
+    // https://github.com/bitcoin/bips/blob/master/bip-0084.mediawiki#test-vectors
     func testKeychain84() {
         let seed = String("5eb00bbddcf069084889a8ab9155568165f5c453ccb85e70811aaed6f6da5fc19a5ac40b389cd370d086206dec8aa6c43daea6690f20ad3d8d48b2d2ce9e38e4").hexStringData()
         let keychain = BTCKeychain(seed: seed)
         let kc84 = keychain.keychain84
         let firstReceiveKey = kc84?.recieveKey(atIndex: 0)
         let secondReceiveKey = kc84?.recieveKey(atIndex: 1)
-        let firstChangeKey = kc84?.recieveKey(atIndex: 0)
+        let firstChangeKey = kc84?.changeKey(atIndex: 0)
         XCTAssertEqual(firstReceiveKey?.publicKey?.toHexString(), "0330d54fd0dd420a6e5f8d3624f5f3482cae350f79d5f0753bf5beef9c2d91af3c")
         XCTAssertEqual(secondReceiveKey?.publicKey?.toHexString(), "03e775fd51f0dfb8cd865d9ff1cca2a158cf651fe997fdc9fee9c1d3b5e995ea77")
-        XCTAssertEqual(firstChangeKey?.publicKey?.toHexString(), "0330d54fd0dd420a6e5f8d3624f5f3482cae350f79d5f0753bf5beef9c2d91af3c")
+        XCTAssertEqual(firstChangeKey?.publicKey?.toHexString(), "03025324888e429ab8e3dbaf1f7802648b9cd01e9b418485c5fa4c1b9b5700e1a6")
+        
+        let keyHash1 = firstReceiveKey?.publicKey?.hash160()
+        let keyHash2 = secondReceiveKey?.publicKey?.hash160()
+        let keyHash3 = firstChangeKey?.publicKey?.hash160()
+        
+        let recvAddr1 = try? SegwitAddrCoder.init().encode(hrp: BTCNetwork.main.bech32, version: 0, program: keyHash1!)
+        let recvAddr2 = try? SegwitAddrCoder.init().encode(hrp: BTCNetwork.main.bech32, version: 0, program: keyHash2!)
+        let changeAddr1 = try? SegwitAddrCoder.init().encode(hrp: BTCNetwork.main.bech32, version: 0, program: keyHash3!)
+        XCTAssertEqual(recvAddr1, "bc1qcr8te4kr609gcawutmrza0j4xv80jy8z306fyu")
+        XCTAssertEqual(recvAddr2, "bc1qnjg0jd8228aq7egyzacy8cys3knf9xvrerkf9g")
+        XCTAssertEqual(changeAddr1, "bc1q8c6fshw2dlwun7ekn9qwf37cu2rn755upcp6el")
     }
+
 }
