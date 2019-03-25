@@ -5,6 +5,7 @@ import XCTest
 
 class MnemonicTests: XCTestCase {
 
+    // https://github.com/trezor/python-mnemonic/blob/master/vectors.json
     func testBIP39() {
         let testVectors: [[String]] = [
             [
