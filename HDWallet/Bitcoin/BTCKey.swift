@@ -15,7 +15,7 @@ class BTCKey {
         let pubkey = BTCCurve.shared.generatePublicKey(privateKey: prvkey)
         self.publicKey = pubkey
         let hashedPk = pubkey!.hash160()
-        let prependedPublicKey = [network.publicKeyHash].data + hashedPk
+        let prependedPublicKey = network.publicKeyHash + hashedPk
         self.address = prependedPublicKey.base58CheckEncodedString
     }
     
@@ -23,14 +23,14 @@ class BTCKey {
         self.privateKey = prvkey
         self.publicKey = pubkey
         let hashedPk = pubkey.hash160()
-        let prependedPublicKey = [network.publicKeyHash].data + hashedPk
+        let prependedPublicKey = network.publicKeyHash + hashedPk
         self.address = prependedPublicKey.base58CheckEncodedString
     }
     
     init(withPublicKey pubkey: Data, network: BTCNetwork = .main) {
         self.publicKey = pubkey
         let hashedPk = pubkey.hash160()
-        let prependedPublicKey = [network.publicKeyHash].data + hashedPk
+        let prependedPublicKey = network.publicKeyHash + hashedPk
         self.address = prependedPublicKey.base58CheckEncodedString
     }
     

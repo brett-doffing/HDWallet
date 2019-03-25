@@ -108,16 +108,25 @@ extension Array where Element == UInt8 {
     }
 }
 
+// MARK: DataConvertable
 protocol DataConvertable {
     static func +(lhs: Data, rhs: Self) -> Data
+    static func +(lhs: Self, rhs: Data) -> Data
     static func +=(lhs: inout Data, rhs: Self)
 }
 
+// FIXME: Struggles with consecutive inline operations such as: OP_0 + UInt8(0x00) + Data.
 extension DataConvertable {
     static func +(lhs: Data, rhs: Self) -> Data {
         var value = rhs
         let data = Data(buffer: UnsafeBufferPointer(start: &value, count: 1))
         return lhs + data
+    }
+    
+    static func +(lhs: Self, rhs: Data) -> Data {
+        var value = lhs
+        let data = Data(buffer: UnsafeBufferPointer(start: &value, count: 1))
+        return data + rhs
     }
     
     static func +=(lhs: inout Data, rhs: Self) {
