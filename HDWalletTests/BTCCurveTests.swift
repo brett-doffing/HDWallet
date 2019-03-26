@@ -47,8 +47,9 @@ class BTCCurveTests: XCTestCase {
     func testCompressedPublicKeys() {
         self.measure {
             for i in 0..<prvkeys.count {
-                let publicKey: String = BTCCurve.shared.pubkeyForHexPrivateKey(prvkeys[i])
-                XCTAssertEqual(publicKey, pubkeys[i])
+                let privateKey = prvkeys[i].hexStringData()
+                let publicKey = BTCCurve.shared.generatePublicKey(privateKey: privateKey)
+                XCTAssertEqual(publicKey?.hexString(), pubkeys[i])
             }
         }
     }
@@ -56,8 +57,9 @@ class BTCCurveTests: XCTestCase {
     func testUncompressedPublicKeys() {
         self.measure {
             for i in 0..<prvkeys.count {
-                let publicKey: String = BTCCurve.shared.pubkeyForHexPrivateKey(prvkeys[i], compressed: false)
-                XCTAssertEqual(publicKey, uncompressedPubkeys[i])
+                let privateKey = prvkeys[i].hexStringData()
+                let publicKey = BTCCurve.shared.generatePublicKey(privateKey: privateKey, compressed: false)
+                XCTAssertEqual(publicKey?.hexString(), uncompressedPubkeys[i])
             }
         }
     }

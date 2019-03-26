@@ -16,26 +16,6 @@ class BTCCurve {
         self.context = secp256k1_context_create([SECP256K1_FLAGS.SECP256K1_CONTEXT_SIGN, SECP256K1_FLAGS.SECP256K1_CONTEXT_VERIFY])
     }
     
-    func pubkeyForHexPrivateKey(_ hexPrivateKey: String, compressed: Bool = true) -> String {
-        if let ctx = context {
-            let privateKey = hexPrivateKey.unhexlify()
-//            let boolVerified = secp256k1_ec_seckey_verify(ctx, privateKey)
-            var pubkey = secp256k1_pubkey()
-            if !(secp256k1_ec_pubkey_create(ctx, &pubkey, privateKey)) { return "" }
-            if compressed {
-                var serializedPubkey = [UInt8](repeating: 0, count:33)
-                var length = UInt(33)
-                if !(secp256k1_ec_pubkey_serialize(ctx, &serializedPubkey, &length, pubkey, [SECP256K1_FLAGS.SECP256K1_EC_COMPRESSED])) { return "" }
-                return serializedPubkey.hexDescription()
-            } else {
-                var serializedPubkey = [UInt8](repeating: 0, count:65)
-                var length = UInt(65)
-                if !(secp256k1_ec_pubkey_serialize(ctx, &serializedPubkey, &length, pubkey, [SECP256K1_FLAGS.SECP256K1_EC_UNCOMPRESSED])) { return "" }
-                return serializedPubkey.hexDescription()
-            }
-        } else { return "" }
-    }
-    
     func ECDH(withPubkey publicKey: secp256k1_pubkey?, andPrivateKey privateKey: Data) -> Data? {
         if let ctx = context, var pubkey = publicKey {
             if !(secp256k1_ec_pubkey_tweak_mul(ctx, &pubkey, privateKey.bytes)) { return nil }
@@ -80,17 +60,12 @@ class BTCCurve {
     func generatePublicKey(privateKey: Data, compressed: Bool = true) -> Data? {
         if let ctx = context {
             var pubkey = secp256k1_pubkey()
+//            if !(secp256k1_ec_seckey_verify(ctx, privateKey.bytes)) { return nil }
             if !(secp256k1_ec_pubkey_create(ctx, &pubkey, privateKey.bytes)) { return nil }
-            var serializedPubkey: [UInt8]
-            if compressed {
-                serializedPubkey = [UInt8](repeating: 0, count:33)
-                var length = UInt(33)
-                if !(secp256k1_ec_pubkey_serialize(ctx, &serializedPubkey, &length, pubkey, [SECP256K1_FLAGS.SECP256K1_EC_COMPRESSED])) { return nil }
-            } else {
-                serializedPubkey = [UInt8](repeating: 0, count:65)
-                var length = UInt(65)
-                if !(secp256k1_ec_pubkey_serialize(ctx, &serializedPubkey, &length, pubkey, [SECP256K1_FLAGS.SECP256K1_EC_UNCOMPRESSED])) { return nil }
-            }
+            var size: UInt = compressed ? 33 : 65
+            var serializedPubkey = [UInt8](repeating: 0, count: Int(size))
+            let flag = compressed ? SECP256K1_FLAGS.SECP256K1_EC_COMPRESSED : SECP256K1_FLAGS.SECP256K1_EC_UNCOMPRESSED
+            if !(secp256k1_ec_pubkey_serialize(ctx, &serializedPubkey, &size, pubkey, flag)) { return nil }
             return serializedPubkey.data
         } else { return nil }
     }
