@@ -13,17 +13,6 @@ extension BInt {
         return self.asString(withBase: 16)
     }
     
-    // Used namely for HD wallet serialization
-    func atLeast4ByteHex() -> String {
-        let hex = self.asString(withBase: 16)
-        if hex.count < 8 {
-            var newHex = hex
-            while newHex.count < 8 { newHex.insert("0", at: newHex.startIndex) }
-            return newHex
-        }
-        return hex
-    }
-    
     var data: Data {
         let count = limbs.count
         var data = Data(count: count * 8)
