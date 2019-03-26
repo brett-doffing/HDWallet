@@ -86,7 +86,7 @@ public class BTCTransaction {
                 rawTX += utxo.n!
                 let myScriptPubKey = utxo.script
                 let size = UInt8(myScriptPubKey!.count)
-                rawTX += size // TODO: How does this know to print 19 for 25 bytes?
+                rawTX += size
                 rawTX += myScriptPubKey!
             } else {
                 // The zeroes represent the 32 bit int "n", and size? byte
