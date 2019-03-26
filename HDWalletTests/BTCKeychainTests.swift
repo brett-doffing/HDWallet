@@ -85,6 +85,25 @@ class BTCKeychainTests: XCTestCase { // TODO: need to add support for testnet ke
         XCTAssertEqual(kc47FirstKey?.key.publicKey?.hexString(), "0353883a146a23f988e0f381a9507cbdb3e3130cd81b3ce26daf2af088724ce683")
     }
     
+    // https://github.com/bitcoin/bips/blob/master/bip-0049.mediawiki#test-vectors
+    func testBIP49testnet() { 
+        let seed = Mnemonic.createSeed(mnemonic: "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about")
+        let keychain = BTCKeychain(seed: seed, network: .test)
+        let kc49 = keychain.keychain49
+        let key0 = kc49?.recieveKey(atIndex: 0)
+        XCTAssertEqual(key0?.privateKey?.hexString(), "c9bdb49cfbaedca21c4b1f3a7803c34636b1d7dc55a717132443fc3f4c5867e8")
+        
+        let publicKey = key0?.publicKey
+        let keyHash = publicKey?.hash160()
+        var scriptSig = Data()
+        scriptSig += OP_0
+        scriptSig += UInt8(0x14)
+        scriptSig += keyHash!
+        let addressBytes = scriptSig.hash160()
+        let address = (BTCNetwork.test.scriptHash + addressBytes).base58CheckEncodedString
+        XCTAssertEqual(address, "2Mww8dCYPUpKHofjgcXcBCEGmniw9CoaiD2")
+    }
+    
     // https://github.com/bitcoin/bips/blob/master/bip-0084.mediawiki#test-vectors
     func testKeychain84() {
         let seed = String("5eb00bbddcf069084889a8ab9155568165f5c453ccb85e70811aaed6f6da5fc19a5ac40b389cd370d086206dec8aa6c43daea6690f20ad3d8d48b2d2ce9e38e4").hexStringData()

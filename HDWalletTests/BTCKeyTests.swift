@@ -52,24 +52,6 @@ class BTCKeyTests: XCTestCase {
         XCTAssertEqual(scriptPubKey.hexString(), "a914f815b036d9bbbce5e9f2a00abd1bf3dc91e9551087")
     }
     
-    // https://github.com/bitcoin/bips/blob/master/bip-0049.mediawiki#test-vectors
-    func testBIP49testnet() { // This should be a keychain test, but keychains don't support testnet yet, so this is just an example of P2WPKH-nested-in-P2SH.
-        var privateKey = "cULrpoZGXiuC19Uhvykx7NugygA3k86b3hmdCeyvHYQZSxojGyXJ".base58CheckDecode()?.data
-        privateKey?.removeFirst()
-        privateKey?.removeLast()
-        XCTAssertEqual(privateKey?.hexString(), "c9bdb49cfbaedca21c4b1f3a7803c34636b1d7dc55a717132443fc3f4c5867e8")
-        
-        let publicKey = BTCCurve.shared.generatePublicKey(privateKey: privateKey!)
-        let keyHash = publicKey?.hash160()
-        var scriptSig = Data()
-        scriptSig += OP_0
-        scriptSig += UInt8(0x14)
-        scriptSig += keyHash!
-        let addressBytes = scriptSig.hash160()
-        let address = (BTCNetwork.test.scriptHash + addressBytes).base58CheckEncodedString
-        XCTAssertEqual(address, "2Mww8dCYPUpKHofjgcXcBCEGmniw9CoaiD2")
-    }
-    
     // https://github.com/bitcoin/bips/blob/master/bip-0173.mediawiki#examples
     func testBECH32() {
         let pubkey = "0279BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81798".hexStringData()
