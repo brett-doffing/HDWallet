@@ -18,7 +18,7 @@ class BIP47 {
         let fingerprint: UInt32 = 0x00000000
         let index: UInt32 = 0x80000000
         let xPub = ExtendedPublicKey(pubkey.data, chainCode.data, depth, fingerprint, index.bigEndian)
-        return BTCKeychain(withExtendedPublicKey: xPub)
+        return BTCKeychain(withExtendedPublicKey: xPub, type: .BIP47)
     }
     
     func paymentCode(forBIP47Keychain keychain: BTCKeychain, _ version: UInt8 = 0x01) -> String {
