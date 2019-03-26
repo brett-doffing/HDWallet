@@ -12,7 +12,7 @@ extension String {
     func hashSHA256() -> String {
 //        let messageData = self.data(using:.utf8)!
 //
-//        return messageData.hashDataSHA256().toHexString()
+//        return messageData.SHA256().hexString()
         // TODO: Make similar to Data extension
         let messageData = self.data(using:.utf8)!
         var digestData = Data(count: Int(CC_SHA256_DIGEST_LENGTH))
@@ -44,7 +44,7 @@ extension Data {
     /**
      Hashes an input from some Data (self) using SHA256, and returns the digest as Data.
      */
-    func hashDataSHA256() -> Data {
+    func SHA256() -> Data {
         var hash = [UInt8](repeating: 0,  count: Int(CC_SHA256_DIGEST_LENGTH))
         self.withUnsafeBytes { _ = CC_SHA256($0, CC_LONG(self.count), &hash) }
         
@@ -55,14 +55,14 @@ extension Data {
      Double Hashes data using SHA256, and returns the digest as a hexadecimal String.
      */
     func doubleSHA256ToString() -> String {
-        return self.hashDataSHA256().hashDataSHA256().hexString()
+        return self.SHA256().SHA256().hexString()
     }
     
     /**
      Double Hashes data using SHA256, and returns the digest as Data.
      */
     func doubleSHA256() -> Data {
-        return self.hashDataSHA256().hashDataSHA256()
+        return self.SHA256().SHA256()
     }
     
     func SHA256ChecksumHexString() -> String {
@@ -77,7 +77,7 @@ extension Data {
      Returns hexadecimal representation of a private key hashed from data input
      */
     func createPrivateKey() -> String {
-        let hashedInput = self.hashDataSHA256()
+        let hashedInput = self.SHA256()
         let hexOfHash = hashedInput.hexString()
         
         return hexOfHash

@@ -42,7 +42,7 @@ class BIP47 {
         // Remove 1 byte prefix (parity sign)
         let x = Data(secretPoint[1...])
         #warning("TODO: If the value of s is not in the secp256k1 group, sender MUST increment the index used to derive receiver's public key and try again.")
-        let s = x.hashDataSHA256()
+        let s = x.SHA256()
         let Bp = BTCCurve.shared.add(pubkeyData, s)!
         return BTCKey(withPublicKey: Bp)
     }

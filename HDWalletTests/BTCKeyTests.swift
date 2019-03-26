@@ -80,7 +80,7 @@ class BTCKeyTests: XCTestCase {
         script += UInt8(0x21)
         script += pubkey
         script += OP_CHECKSIG
-        let programData = script.hashDataSHA256()
+        let programData = script.SHA256()
         
         let mainP2WPKH = try? SegwitAddrCoder.init().encode(hrp: BTCNetwork.main.bech32, version: 0, program: keyHash)
         let testP2WPKH = try? SegwitAddrCoder.init().encode(hrp: BTCNetwork.test.bech32, version: 0, program: keyHash)

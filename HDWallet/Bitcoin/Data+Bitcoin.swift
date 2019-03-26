@@ -21,7 +21,7 @@ extension Data {
      Performs two hash functions: sha256, then ripemd160.
      */
     func hash160() -> Data {
-        let hashedPubkey = self.hashDataSHA256()
+        let hashedPubkey = self.SHA256()
         let hash160: Data = RIPEMD.digest(input: hashedPubkey)
         return hash160
     }
