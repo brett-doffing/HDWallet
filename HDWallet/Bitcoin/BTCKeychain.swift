@@ -41,7 +41,7 @@ class BTCKeychain {
     }
     
     /// Private parent key → private child key
-    func CKDpriv(kPar: Data, cPar: Data, index i: UInt32) -> (kIndex: Data, cIndex: Data){
+    private func CKDpriv(kPar: Data, cPar: Data, index i: UInt32) -> (kIndex: Data, cIndex: Data) {
         var I: Data
         // Check whether i ≥ 2^31 (whether the child is a hardened key)
         if i >= hardenedMin {
@@ -66,7 +66,7 @@ class BTCKeychain {
     }
     
     /// Public parent key → public child key
-    func CKDpub(KPar: Data, cPar: Data, index i: UInt32) -> (KIndex: Data, cIndex: Data) {
+    private func CKDpub(KPar: Data, cPar: Data, index i: UInt32) -> (KIndex: Data, cIndex: Data) {
         var I: Data = Data()
         if i >= hardenedMin { /* return error */ }
         else {
