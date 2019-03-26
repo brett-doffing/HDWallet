@@ -106,7 +106,7 @@ class BTCKeychain {
                     childChainCode = indexedKey.cIndex
                     if i == pathArray.count - 1 {
                         #warning("TODO: Determine if hashing the public key is correct.")
-                        let fingerprint = getFingerprint(forParentPrvkey: parentPublicKey!)
+                        let fingerprint = getFingerprint(forParentPubkey: parentPublicKey!)
                         let xPub = ExtendedPublicKey(childPublicKey, childChainCode, UInt8(i), fingerprint, keyIndex)
                         newKeychain = BTCKeychain(withExtendedPublicKey: xPub)
                         return newKeychain
@@ -156,6 +156,11 @@ class BTCKeychain {
     func getFingerprint(forParentPrvkey parPrvkey: Data) -> UInt32 {
         let parentPubkey = BTCCurve.shared.generatePublicKey(privateKey: parPrvkey)
         let fingerprint: UInt32 = parentPubkey!.hash160().withUnsafeBytes { $0.pointee }
+        return fingerprint
+    }
+    
+    func getFingerprint(forParentPubkey parentPubkey: Data) -> UInt32 {
+        let fingerprint: UInt32 = parentPubkey.hash160().withUnsafeBytes { $0.pointee }
         return fingerprint
     }
     
