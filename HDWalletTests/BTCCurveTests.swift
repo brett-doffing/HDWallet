@@ -6,7 +6,6 @@ import XCTest
 
 class BTCCurveTests: XCTestCase {
     
-    let secp256k1 = BTCCurve()
     let prvkeys = ["11095327A9E4921336E93834D8A93395476FC3665B59668459F9AFC9A3917461",
                    "18E14A7B6A307F426A94F8114701E7C8E774E7F9A47E2C2035DB29A206321725",
                    "04448fd1be0c9c13a5ca0b530e464b619dc091b299b98c5cab9978b32b4a1b8b",
@@ -48,7 +47,7 @@ class BTCCurveTests: XCTestCase {
     func testCompressedPublicKeys() {
         self.measure {
             for i in 0..<prvkeys.count {
-                let publicKey: String = secp256k1.pubkeyForHexPrivateKey(prvkeys[i])
+                let publicKey: String = BTCCurve.shared.pubkeyForHexPrivateKey(prvkeys[i])
                 XCTAssertEqual(publicKey, pubkeys[i])
             }
         }
@@ -57,7 +56,7 @@ class BTCCurveTests: XCTestCase {
     func testUncompressedPublicKeys() {
         self.measure {
             for i in 0..<prvkeys.count {
-                let publicKey: String = secp256k1.pubkeyForHexPrivateKey(prvkeys[i], compressed: false)
+                let publicKey: String = BTCCurve.shared.pubkeyForHexPrivateKey(prvkeys[i], compressed: false)
                 XCTAssertEqual(publicKey, uncompressedPubkeys[i])
             }
         }

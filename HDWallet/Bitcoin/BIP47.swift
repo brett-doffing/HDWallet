@@ -6,6 +6,7 @@ import Foundation
 class BIP47 {
     
     static let shared = BIP47()
+    private init() {}
     
     /// Creates a keychain from acquired payment code to derive keys and addresses for tunnels/channels.
     func keychain(forPaymentCode paymentCode: String, network: BTCNetwork = .main) -> BTCKeychain {

@@ -3,6 +3,7 @@
 import Foundation
 import secp256k1
 
+/// Singleton
 class BTCCurve {
     
     static let shared = BTCCurve()
@@ -11,7 +12,7 @@ class BTCCurve {
     let context: secp256k1_context?
     let order = BInt(hex: "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141")
     
-    /*private*/ init() {
+    private init() {
         self.context = secp256k1_context_create([SECP256K1_FLAGS.SECP256K1_CONTEXT_SIGN, SECP256K1_FLAGS.SECP256K1_CONTEXT_VERIFY])
     }
     
