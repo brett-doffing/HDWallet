@@ -97,8 +97,8 @@ class BIP47Tests: XCTestCase {
         let bob47 = bobKeychain.keychain47!
         
         for i in 0..<10 {
-            let key = BIP47.shared.getReceiveKey(forReceivingKeychain: bob47, atKeyIndex: UInt32(i), andSendingKeychain: alice47, atAccountIndex: 0)
-            XCTAssertEqual(key.address, recvAddresses[i])
+            let address = BIP47.shared.getReceiveAddress(forReceivingKeychain: bob47, atKeyIndex: UInt32(i), andSendingKeychain: alice47, atAccountIndex: 0)
+            XCTAssertEqual(address, recvAddresses[i])
         }
     }
     

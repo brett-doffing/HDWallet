@@ -22,7 +22,6 @@ class BIP47 {
     }
     
     func paymentCode(forBIP47Keychain keychain: BTCKeychain, _ version: UInt8 = 0x01) -> String {
-        // TODO: verify BIP47 keychain?
         var paymentCode = Data()
         paymentCode += UInt8(0x47)
         paymentCode += version
@@ -33,9 +32,7 @@ class BIP47 {
         return paymentCode.base58CheckEncodedString
     }
     
-    func getReceiveKey(forReceivingKeychain receiver: BTCKeychain, atKeyIndex keyIndex: UInt32, andSendingKeychain sender: BTCKeychain, atAccountIndex acctIndex: UInt32) -> BTCKey {
-        // Assumes BIP47 keychains: m/47'/0'/0'
-        
+    func getReceiveAddress(forReceivingKeychain receiver: BTCKeychain, atKeyIndex keyIndex: UInt32, andSendingKeychain sender: BTCKeychain, atAccountIndex acctIndex: UInt32) -> String {
         let senderPrvkey = sender.key(atIndex: acctIndex).privateKey!
         let pubkeyData = receiver.key(atIndex: keyIndex).publicKey!
         let receiverPubkey = BTCCurve.shared.parsePubkey(pubkeyData)!
@@ -45,12 +42,11 @@ class BIP47 {
         #warning("TODO: If the value of s is not in the secp256k1 group, sender MUST increment the index used to derive receiver's public key and try again.")
         let s = x.SHA256()
         let Bp = BTCCurve.shared.add(pubkeyData, s)!
-        return BTCKey(withPublicKey: Bp)
+        let hashedPubkey = Bp.hash160()
+        return (sender.network.publicKeyHash + hashedPubkey).base58CheckEncodedString
     }
     
     func createBlindedPaymentCode(forReceivingKeychain receiver: BTCKeychain, andSendingKeychain sender: BTCKeychain, withUTXO utxo: TxOutput, andOutpointPrvKey outpointPrvKey: Data) -> Data {
-        // Assumes BIP47 keychains: m/47'/0'/0'
-        
         let pubkeyData = receiver.key(atIndex: 0).publicKey!
         let receiverPubkey = BTCCurve.shared.parsePubkey(pubkeyData)!
         let secretPoint = BTCCurve.shared.ECDH(withPubkey: receiverPubkey, andPrivateKey: outpointPrvKey)!

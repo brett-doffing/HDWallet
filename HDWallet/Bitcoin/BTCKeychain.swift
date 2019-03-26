@@ -4,12 +4,33 @@ import Foundation
 
 class BTCKeychain {
     
-    let key: BTCKey
     let extendedPublicKey: ExtendedPublicKey
     let extendedPrivateKey: ExtendedPrivateKey?
     let network: BTCNetwork
+    let type: BTCKeychainType
     /// 2^31 = 2147483648
     let hardenedMin = UInt32(2147483648)
+    ///
+    lazy var address: String = {
+        switch self.type {
+        case .BIP49:
+            let hashedPubkey = self.extendedPublicKey.publicKey.hash160()
+            var script = Data()
+            script += OP_0
+            script += OP_NUMBYTES(hashedPubkey.count)
+            script += hashedPubkey
+            let payload = script.hash160()
+            return (self.network.scriptHash + payload).base58CheckEncodedString
+        case .BIP84:
+            let addrCoder = SegwitAddrCoder()
+            let hashedPubkey = self.extendedPublicKey.publicKey.hash160()
+            do  { return try addrCoder.encode(hrp: self.network.bech32, version: 0, program: hashedPubkey) }
+            catch { return "" }
+        default:
+            let hashedPubkey = self.extendedPublicKey.publicKey.hash160()
+            return (self.network.publicKeyHash + hashedPubkey).base58CheckEncodedString
+        }
+    }()
     /// A BIP 44 keychain derived from the master keychain.
     lazy var keychain44 = self.derivedKeychain(withPath: "m/44'/\(self.network.coinType)'/0'")
     /// A BIP 47 keychain derived from the master keychain.
@@ -23,21 +44,21 @@ class BTCKeychain {
         self.network = network
         self.extendedPrivateKey = ExtendedPrivateKey(seed: seed, network: self.network)
         self.extendedPublicKey = ExtendedPublicKey(extPrivateKey: self.extendedPrivateKey!)
-        self.key = BTCKey(withPrivateKey: self.extendedPrivateKey!.privateKey, andPublicKey: self.extendedPublicKey.publicKey, network: self.network)
+        self.type = .master
     }
     
-    init(withExtendedPrivateKey extPrvkey: ExtendedPrivateKey) {
+    init(withExtendedPrivateKey extPrvkey: ExtendedPrivateKey, type: BTCKeychainType = .master) {
         self.network = extPrvkey.network
         self.extendedPrivateKey = extPrvkey
         self.extendedPublicKey = ExtendedPublicKey(extPrivateKey: self.extendedPrivateKey!)
-        self.key = BTCKey(withPrivateKey: self.extendedPrivateKey!.privateKey, andPublicKey: self.extendedPublicKey.publicKey, network: self.network)
+        self.type = type
     }
     
-    init(withExtendedPublicKey extPubkey: ExtendedPublicKey) {
+    init(withExtendedPublicKey extPubkey: ExtendedPublicKey, type: BTCKeychainType = .master) {
         self.network = extPubkey.network
         self.extendedPrivateKey = nil
         self.extendedPublicKey = extPubkey
-        self.key = BTCKey(withPublicKey: self.extendedPublicKey.publicKey, network: self.network)
+        self.type = type
     }
     
     /// Private parent key → private child key
@@ -167,18 +188,18 @@ class BTCKeychain {
         return fingerprint
     }
     
-    func recieveKey(atIndex index: UInt32) -> BTCKey {
+    func recieveKey(atIndex index: UInt32) -> (privateKey: Data?, publicKey: Data?) {
         let receiveKeychain = derivedKeychain(withPath: "0/\(index)")
-        return receiveKeychain!.key
+        return (privateKey: receiveKeychain?.extendedPrivateKey?.privateKey, publicKey: receiveKeychain?.extendedPublicKey.publicKey)
     }
     
-    func changeKey(atIndex index: UInt32) -> BTCKey {
+    func changeKey(atIndex index: UInt32) -> (privateKey: Data?, publicKey: Data?) {
         let changeKeychain = derivedKeychain(withPath: "1/\(index)")
-        return changeKeychain!.key
+        return (privateKey: changeKeychain?.extendedPrivateKey?.privateKey, publicKey: changeKeychain?.extendedPublicKey.publicKey)
     }
     
-    func key(atIndex index: UInt32) -> BTCKey {
+    func key(atIndex index: UInt32) -> (privateKey: Data?, publicKey: Data?) {
         let keychain = derivedKeychain(withPath: "\(index)")
-        return keychain!.key
+        return (privateKey: keychain?.extendedPrivateKey?.privateKey, publicKey: keychain?.extendedPublicKey.publicKey)
     }
 }
