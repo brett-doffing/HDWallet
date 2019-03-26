@@ -4,9 +4,10 @@ import Foundation
 
 class BTCKeychain {
     
-    var key: BTCKey
-    var extendedPublicKey: ExtendedPublicKey?
-    var extendedPrivateKey: ExtendedPrivateKey?
+    let key: BTCKey
+    let extendedPublicKey: ExtendedPublicKey
+    let extendedPrivateKey: ExtendedPrivateKey?
+    let network: BTCNetwork
     /// 2^31 = 2147483648
     let hardenedMin = UInt32(2147483648)
     /// A BIP 44 keychain derived from the master keychain.
@@ -18,22 +19,25 @@ class BTCKeychain {
     /// A BIP 84 keychain derived from the master keychain.
     lazy var keychain84 = self.derivedKeychain(withPath: "m/84'/0'/0'")
     
-    init(seed: Data) {
+    init(seed: Data, network: BTCNetwork = .main) {
+        self.network = network
         self.extendedPrivateKey = ExtendedPrivateKey(seed: seed)
         self.extendedPublicKey = ExtendedPublicKey(extPrivateKey: self.extendedPrivateKey!)
-        self.key = BTCKey(withPrivateKey: self.extendedPrivateKey!.privateKey, andPublicKey: self.extendedPublicKey!.publicKey)
+        self.key = BTCKey(withPrivateKey: self.extendedPrivateKey!.privateKey, andPublicKey: self.extendedPublicKey.publicKey, network: self.network)
     }
     
     init(withExtendedPrivateKey extPrvkey: ExtendedPrivateKey) {
+        self.network = extPrvkey.network
         self.extendedPrivateKey = extPrvkey
         self.extendedPublicKey = ExtendedPublicKey(extPrivateKey: self.extendedPrivateKey!)
-        self.key = BTCKey(withPrivateKey: self.extendedPrivateKey!.privateKey, andPublicKey: self.extendedPublicKey!.publicKey)
+        self.key = BTCKey(withPrivateKey: self.extendedPrivateKey!.privateKey, andPublicKey: self.extendedPublicKey.publicKey, network: self.network)
     }
     
     init(withExtendedPublicKey extPubkey: ExtendedPublicKey) {
+        self.network = extPubkey.network
         self.extendedPrivateKey = nil
         self.extendedPublicKey = extPubkey
-        self.key = BTCKey(withPublicKey: self.extendedPublicKey!.publicKey)
+        self.key = BTCKey(withPublicKey: self.extendedPublicKey.publicKey, network: self.network)
     }
     
     /// Private parent key → private child key
@@ -85,8 +89,8 @@ class BTCKeychain {
     func derivedKeychain(withPath path: String) -> BTCKeychain? {
         if self.extendedPrivateKey == nil { // CKDpub
             let pathArray: [String] = path.components(separatedBy:"/")
-            var parentPublicKey = self.extendedPublicKey?.publicKey
-            var parentChainCode = self.extendedPublicKey?.chainCode
+            var parentPublicKey = self.extendedPublicKey.publicKey
+            var parentChainCode = self.extendedPublicKey.chainCode
             var childPublicKey: Data
             var childChainCode: Data
             var newKeychain: BTCKeychain
@@ -101,12 +105,12 @@ class BTCKeychain {
                     } else {
                         keyIndex = UInt32(pathComponent)!
                     }
-                    let indexedKey = CKDpub(KPar: parentPublicKey!, cPar: parentChainCode!, index: keyIndex)
+                    let indexedKey = CKDpub(KPar: parentPublicKey, cPar: parentChainCode, index: keyIndex)
                     childPublicKey = indexedKey.KIndex
                     childChainCode = indexedKey.cIndex
                     if i == pathArray.count - 1 {
                         #warning("TODO: Determine if hashing the public key is correct.")
-                        let fingerprint = getFingerprint(forParentPubkey: parentPublicKey!)
+                        let fingerprint = getFingerprint(forParentPubkey: parentPublicKey)
                         let xPub = ExtendedPublicKey(childPublicKey, childChainCode, UInt8(i), fingerprint, keyIndex)
                         newKeychain = BTCKeychain(withExtendedPublicKey: xPub)
                         return newKeychain

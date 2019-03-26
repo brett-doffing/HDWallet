@@ -68,7 +68,7 @@ class BIP47Tests: XCTestCase {
         let kc = BTCKeychain(withExtendedPublicKey: xPub)
         for i in 0..<bobPubkeys.count {
             let derivedKeychain = kc.derivedKeychain(withPath: "\(i)")
-            XCTAssertEqual(derivedKeychain?.extendedPublicKey?.publicKey.hexString(), bobPubkeys[i])
+            XCTAssertEqual(derivedKeychain?.extendedPublicKey.publicKey.hexString(), bobPubkeys[i])
         }
     }
     

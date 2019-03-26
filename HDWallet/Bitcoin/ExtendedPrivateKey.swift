@@ -27,7 +27,7 @@ struct ExtendedPrivateKey {
         return self.raw.base58EncodedString()
     }
     
-    init(seed: Data) {
+    init(seed: Data, network: BTCNetwork = .main) {
         let key = "Bitcoin seed".data(using: .ascii)
         let hash = HMAC_SHA512.digest(key: key!, data: seed)
         
@@ -36,7 +36,7 @@ struct ExtendedPrivateKey {
         self.depth = 0
         self.fingerprint = 0
         self.index = 0
-        self.network = BTCNetwork.main
+        self.network = network
     }
     
     init(privateKey: Data, chainCode: Data, depth: UInt8, fingerprint: UInt32, index: UInt32, network: BTCNetwork) {

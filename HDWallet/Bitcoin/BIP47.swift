@@ -27,8 +27,8 @@ class BIP47 {
         paymentCode += UInt8(0x47)
         paymentCode += version
         paymentCode += UInt8(0x00) // Features bit field. Bit 0: Bitmessage notification, Bits 1-7: reserved.
-        paymentCode += keychain.extendedPublicKey!.publicKey
-        paymentCode += keychain.extendedPublicKey!.chainCode
+        paymentCode += keychain.extendedPublicKey.publicKey
+        paymentCode += keychain.extendedPublicKey.chainCode
         paymentCode += Data(repeating: 0x00, count: 13) // Bytes 67 - 79: reserved for future expansion, zero-filled unless otherwise noted
         return paymentCode.base58CheckEncodedString
     }
@@ -60,17 +60,17 @@ class BIP47 {
         let s = HMAC_SHA512.digest(key: outpoint, data: x)
         let f32 = s[0..<32]
         let l32 = s[32..<64]
-        let senderPubkey = sender.extendedPublicKey?.publicKey
+        let senderPubkey = sender.extendedPublicKey.publicKey
         #warning("FIXME: Find out why XOR() won't play nice unless arguments are explicitly recast!?")
-        let xP = Data(senderPubkey![1...]).XOR(keyData: f32)
-        let c: Data = (sender.extendedPublicKey?.chainCode)!
+        let xP = Data(senderPubkey[1...]).XOR(keyData: f32)
+        let c: Data = (sender.extendedPublicKey.chainCode)
         let cP = Data(c).XOR(keyData: Data(l32))
         
         // Payment code payload after blinding:
         var blindedPaymentCode = Data()
         blindedPaymentCode += UInt8(0x01) // version byte
         blindedPaymentCode += UInt8(0x00) // features byte
-        blindedPaymentCode += senderPubkey![0] // pubkey sign
+        blindedPaymentCode += senderPubkey[0] // pubkey sign
         blindedPaymentCode += xP
         blindedPaymentCode += cP
         blindedPaymentCode += Data(repeating: 0x00, count: 13)
