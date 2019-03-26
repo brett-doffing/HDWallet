@@ -75,12 +75,12 @@ class BIP47Tests: XCTestCase {
     func testPaymentCodeFromKeychain() {
         let aliceSeed = String("64dca76abc9c6f0cf3d212d248c380c4622c8f93b2c425ec6a5567fd5db57e10d3e6f94a2f6af4ac2edb8998072aad92098db73558c323777abf5bd1082d970a").hexStringData()
         let aliceKeychain = BTCKeychain(seed: aliceSeed)
-        let alice47 = aliceKeychain.keychain47
+        let alice47 = aliceKeychain.derivedKeychain(withPath: "m/47'/0'/0'")
         let alicePaymentCode = BIP47.shared.paymentCode(forBIP47Keychain: alice47!)
         
         let bobSeed = String("87eaaac5a539ab028df44d9110defbef3797ddb805ca309f61a69ff96dbaa7ab5b24038cf029edec5235d933110f0aea8aeecf939ed14fc20730bba71e4b1110").hexStringData()
         let bobKeychain = BTCKeychain(seed: bobSeed)
-        let bob47 = bobKeychain.keychain47
+        let bob47 = bobKeychain.derivedKeychain(withPath: "m/47'/0'/0'")
         let bobPaymentCode = BIP47.shared.paymentCode(forBIP47Keychain: bob47!)
         
         XCTAssertEqual(alicePaymentCode, "PM8TJTLJbPRGxSbc8EJi42Wrr6QbNSaSSVJ5Y3E4pbCYiTHUskHg13935Ubb7q8tx9GVbh2UuRnBc3WSyJHhUrw8KhprKnn9eDznYGieTzFcwQRya4GA")
@@ -90,11 +90,11 @@ class BIP47Tests: XCTestCase {
     func testReceiverAddressCreation() {
         let aliceSeed = String("64dca76abc9c6f0cf3d212d248c380c4622c8f93b2c425ec6a5567fd5db57e10d3e6f94a2f6af4ac2edb8998072aad92098db73558c323777abf5bd1082d970a").hexStringData()
         let aliceKeychain = BTCKeychain(seed: aliceSeed)
-        let alice47 = aliceKeychain.keychain47!
+        let alice47 = aliceKeychain.derivedKeychain(withPath: "m/47'/0'/0'")!
         
         let bobSeed = String("87eaaac5a539ab028df44d9110defbef3797ddb805ca309f61a69ff96dbaa7ab5b24038cf029edec5235d933110f0aea8aeecf939ed14fc20730bba71e4b1110").hexStringData()
         let bobKeychain = BTCKeychain(seed: bobSeed)
-        let bob47 = bobKeychain.keychain47!
+        let bob47 = bobKeychain.derivedKeychain(withPath: "m/47'/0'/0'")!
         
         for i in 0..<10 {
             let address = BIP47.shared.getReceiveAddress(forReceivingKeychain: bob47, atKeyIndex: UInt32(i), andSendingKeychain: alice47, atAccountIndex: 0)
@@ -105,11 +105,11 @@ class BIP47Tests: XCTestCase {
     func testBlindningPaymentCode() {
         let aliceSeed = String("64dca76abc9c6f0cf3d212d248c380c4622c8f93b2c425ec6a5567fd5db57e10d3e6f94a2f6af4ac2edb8998072aad92098db73558c323777abf5bd1082d970a").hexStringData()
         let aliceKeychain = BTCKeychain(seed: aliceSeed)
-        let alice47 = aliceKeychain.keychain47!
+        let alice47 = aliceKeychain.derivedKeychain(withPath: "m/47'/0'/0'")!
         
         let bobSeed = String("87eaaac5a539ab028df44d9110defbef3797ddb805ca309f61a69ff96dbaa7ab5b24038cf029edec5235d933110f0aea8aeecf939ed14fc20730bba71e4b1110").hexStringData()
         let bobKeychain = BTCKeychain(seed: bobSeed)
-        let bob47 = bobKeychain.keychain47!
+        let bob47 = bobKeychain.derivedKeychain(withPath: "m/47'/0'/0'")!
         
         let utxo = TxOutput()
         utxo.n = 1
