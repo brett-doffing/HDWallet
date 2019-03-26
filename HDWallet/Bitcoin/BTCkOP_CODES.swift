@@ -6,7 +6,11 @@ import Foundation
 
 /// An empty array of bytes is pushed onto the stack. (This is not a no-op: an item is added to the stack.)
 let OP_0: UInt8 = 0x00; let OP_FALSE: UInt8 = 0x00
-/// The next opcode bytes (1-75, 0x01-0x4b) is data to be pushed onto the stack. *NOT AN OFFICIAL OP_CODE*
+/// The next opcode bytes (1-75, 0x01-0x4b) is data to be pushed onto the stack.
+///
+/// - Parameter numBytes: Integer
+/// - Returns: numBytes as UInt8
+/// - Warning: Not an official OP_CODE
 func OP_NUMBYTES(_ numBytes: Int) -> UInt8 { return UInt8(numBytes) }
 /// The next byte contains the number of bytes to be pushed onto the stack.
 let OP_PUSHDATA1: UInt8 = 0x4c
