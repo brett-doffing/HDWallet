@@ -31,14 +31,6 @@ class BTCKeychain {
             return (self.network.publicKeyHash + hashedPubkey).base58CheckEncodedString
         }
     }()
-    /// A BIP 44 keychain derived from the master keychain.
-    lazy var keychain44 = self.derivedKeychain(withPath: "m/44'/\(self.network.coinType)'/0'")
-    /// A BIP 47 keychain derived from the master keychain.
-    lazy var keychain47 = self.derivedKeychain(withPath: "m/47'/\(self.network.coinType)'/0'")
-    /// A BIP 49 keychain derived from the master keychain.
-    lazy var keychain49 = self.derivedKeychain(withPath: "m/49'/\(self.network.coinType)'/0'")
-    /// A BIP 84 keychain derived from the master keychain.
-    lazy var keychain84 = self.derivedKeychain(withPath: "m/84'/\(self.network.coinType)'/0'")
     
     init(seed: Data, network: BTCNetwork = .main) {
         self.network = network
@@ -107,7 +99,7 @@ class BTCKeychain {
     }
     
     /// Key Derivation
-    func derivedKeychain(withPath path: String) -> BTCKeychain? {
+    func derivedKeychain(withPath path: String, andType type: BTCKeychainType = .derived) -> BTCKeychain? {
         if self.extendedPrivateKey == nil { // CKDpub
             let pathArray: [String] = path.components(separatedBy:"/")
             var parentPublicKey = self.extendedPublicKey.publicKey
@@ -133,7 +125,7 @@ class BTCKeychain {
                         #warning("TODO: Determine if hashing the public key is correct.")
                         let fingerprint = getFingerprint(forParentPubkey: parentPublicKey)
                         let xPub = ExtendedPublicKey(childPublicKey, childChainCode, UInt8(i), fingerprint, keyIndex, self.network)
-                        newKeychain = BTCKeychain(withExtendedPublicKey: xPub)
+                        newKeychain = BTCKeychain(withExtendedPublicKey: xPub, type: type)
                         return newKeychain
                     } else {
                         parentPublicKey = childPublicKey
@@ -165,7 +157,7 @@ class BTCKeychain {
                     if i == pathArray.count - 1 {
                         let fingerprint = getFingerprint(forParentPrvkey: parentPrivateKey!)
                         let xPrv = ExtendedPrivateKey(privateKey: childPrivateKey, chainCode: childChainCode, depth: UInt8(i), fingerprint: fingerprint, index: keyIndex, network: self.network)
-                        newKeychain = BTCKeychain(withExtendedPrivateKey: xPrv)
+                        newKeychain = BTCKeychain(withExtendedPrivateKey: xPrv, type: type)
                         return newKeychain
                     } else {
                         parentPrivateKey = childPrivateKey
@@ -188,14 +180,12 @@ class BTCKeychain {
         return fingerprint
     }
     
-    func recieveKey(atIndex index: UInt32) -> (privateKey: Data?, publicKey: Data?) {
-        let receiveKeychain = derivedKeychain(withPath: "0/\(index)")
-        return (privateKey: receiveKeychain?.extendedPrivateKey?.privateKey, publicKey: receiveKeychain?.extendedPublicKey.publicKey)
+    func recieveKeychain(atIndex index: UInt32, withType type: BTCKeychainType = .derived) -> BTCKeychain? {
+        return derivedKeychain(withPath: "0/\(index)", andType: type)
     }
     
-    func changeKey(atIndex index: UInt32) -> (privateKey: Data?, publicKey: Data?) {
-        let changeKeychain = derivedKeychain(withPath: "1/\(index)")
-        return (privateKey: changeKeychain?.extendedPrivateKey?.privateKey, publicKey: changeKeychain?.extendedPublicKey.publicKey)
+    func changeKeychain(atIndex index: UInt32, withType type: BTCKeychainType = .derived) -> BTCKeychain? {
+        return derivedKeychain(withPath: "1/\(index)", andType: type)
     }
     
     func key(atIndex index: UInt32) -> (privateKey: Data?, publicKey: Data?) {
