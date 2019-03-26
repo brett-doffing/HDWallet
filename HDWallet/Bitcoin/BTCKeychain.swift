@@ -188,8 +188,7 @@ class BTCKeychain {
         return derivedKeychain(withPath: "1/\(index)", andType: type)
     }
     
-    func key(atIndex index: UInt32) -> (privateKey: Data?, publicKey: Data?) {
-        let keychain = derivedKeychain(withPath: "\(index)")
-        return (privateKey: keychain?.extendedPrivateKey?.privateKey, publicKey: keychain?.extendedPublicKey.publicKey)
+    func keychain(atIndex index: UInt32, withType type: BTCKeychainType = .derived) -> BTCKeychain? {
+        return derivedKeychain(withPath: "\(index)")
     }
 }
