@@ -155,7 +155,7 @@ class MnemonicTests: XCTestCase {
         ]
         
         for i in 0..<testVectors.count {
-            let entropy = testVectors[i][0].unhexlify().data
+            let entropy = testVectors[i][0].hexStringData()
             let mnemonic = Mnemonic.create(entropy: entropy)
             let seed = Mnemonic.createSeed(mnemonic: mnemonic, withPassphrase: "TREZOR")
             let keychain = BTCKeychain(seed: seed)

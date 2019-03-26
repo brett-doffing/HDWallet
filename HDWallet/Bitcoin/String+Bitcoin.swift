@@ -26,7 +26,6 @@ extension String {
         let alphabet = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
         // remove leading and trailing whitespaces
         let string = self.trimmingCharacters(in: CharacterSet.whitespaces)
-        
         guard !string.isEmpty else { return [] }
         
         var zerosCount = 0
@@ -50,14 +49,12 @@ extension String {
                 carry /= 256
                 i += 1
             }
-            
             assert(carry == 0)
             length = i
         }
         
         // skip leading zeros
         var zerosToRemove = 0
-        
         for b in base58 {
             if b != 0 { break }
             zerosToRemove += 1
@@ -83,31 +80,4 @@ extension String {
         if checksum != calculatedChecksum { return nil }
         return bytes
     }
-    
-    func hexToBitString() -> String {
-        var returnString = ""
-        for char in self {
-            let strChar = String(char)
-            let num = Int(strChar, radix:16)
-            var binary = String(num!, radix:2)
-            while binary.count < 4 { binary.insert("0", at: binary.startIndex) }
-            returnString.append(binary)
-        }
-        
-        return returnString
-    }
-    
-    func bitStringToByteArray() -> Array<UInt8> {
-        var returnArray: [UInt8] = []
-        var bits = self
-        while bits.count > 0 {
-            let str8bits = String(bits[..<bits.index(bits.startIndex, offsetBy: 8)])
-            let myInt = UInt8(str8bits, radix:2)
-            returnArray.append(myInt!)
-            bits = String(bits[bits.index(bits.startIndex, offsetBy: 8)...])
-        }
-        
-        return returnArray
-    }
-
 }

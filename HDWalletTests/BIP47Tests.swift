@@ -50,7 +50,7 @@ class BIP47Tests: XCTestCase {
     func testECDH() {
         for i in 0..<bobPrvkeys.count {
             let bobPubkey = BTCCurve.shared.getPubkeyForPrivateKey(bobPrvkeys[i])
-            let ecdhResult = BTCCurve.shared.ECDH(withPubkey: bobPubkey, andPrivateKey: alicePrvkey.unhexlify().data)
+            let ecdhResult = BTCCurve.shared.ECDH(withPubkey: bobPubkey, andPrivateKey: alicePrvkey.hexStringData())
             // Remove 1 byte prefix (parity sign)
             XCTAssertEqual(ecdhResult![1...].hexString(), sharedSecrets[i])
         }

@@ -72,7 +72,7 @@ class BTCKeyTests: XCTestCase {
     
     // https://github.com/bitcoin/bips/blob/master/bip-0173.mediawiki#examples
     func testBECH32() {
-        let pubkey = "0279BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81798".unhexlify().data
+        let pubkey = "0279BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81798".hexStringData()
         // For P2WPKH
         let keyHash = pubkey.hash160()
         // For P2WSH

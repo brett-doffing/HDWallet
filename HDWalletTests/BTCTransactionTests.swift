@@ -11,7 +11,7 @@ class BTCTransactionTests: XCTestCase {
         utxo.address = "mqiuzQahssG6YzDmd8t9A3oXtpi9uFAdnQ"
         utxo.n = 0
         utxo.satoshis = 919423
-        utxo.script = "76a9146ff4536d48becdc2f9cf55f4f34d7f0b268dc83f88ac".unhexlify().data
+        utxo.script = "76a9146ff4536d48becdc2f9cf55f4f34d7f0b268dc83f88ac".hexStringData()
         utxo.txid = "c291228357e8927c4c35b3211401e3a2e26b680a9ff5215eddd6aaf2310b3f32".unhexlify().bigToLittleEndian().data
         
         let utxos = [utxo]
@@ -40,13 +40,13 @@ class BTCTransactionTests: XCTestCase {
         utxo1.address = "n2KprMQm4z2vmZnPMENfbp2P1LLdAEFRjS"
         utxo1.n = 0
         utxo1.satoshis = 5000000000
-        utxo1.script = "210229688a74abd0d5ad3b06ddff36fa9cd8edd181d97b9489a6adc40431fb56e1d8ac".unhexlify().data
+        utxo1.script = "210229688a74abd0d5ad3b06ddff36fa9cd8edd181d97b9489a6adc40431fb56e1d8ac".hexStringData()
         utxo1.txid = "78203a8f6b529693759e1917a1b9f05670d036fbb129110ed26be6a36de827f3".unhexlify().bigToLittleEndian().data
         let utxo2 = TxOutput()
         utxo2.address = "muhtvdmsnbQEPFuEmxcChX58fGvXaaUoVt"
         utxo2.n = 0
         utxo2.satoshis = 4000000000
-        utxo2.script = "76a9149ba386253ea698158b6d34802bb9b550f5ce36dd88ac".unhexlify().data
+        utxo2.script = "76a9149ba386253ea698158b6d34802bb9b550f5ce36dd88ac".hexStringData()
         utxo2.txid = "263c018582731ff54dc72c7d67e858c002ae298835501d80200f05753de0edf0".unhexlify().bigToLittleEndian().data
         
         let utxos = [utxo1, utxo2]
