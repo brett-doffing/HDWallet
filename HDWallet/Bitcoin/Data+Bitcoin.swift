@@ -22,7 +22,7 @@ extension Data {
      */
     func hash160() -> Data {
         let hashedPubkey = self.SHA256()
-        let hash160: Data = RIPEMD.digest(input: hashedPubkey)
+        let hash160: Data = RIPEMD160.hash(hashedPubkey)
         return hash160
     }
     

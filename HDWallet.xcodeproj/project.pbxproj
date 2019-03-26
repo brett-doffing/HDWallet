@@ -15,11 +15,8 @@
 		BC2D65E72204FF6B001C6DA3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC2D65E52204FF6B001C6DA3 /* LaunchScreen.storyboard */; };
 		BC2D65FD2204FF6C001C6DA3 /* HDWalletUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2D65FC2204FF6C001C6DA3 /* HDWalletUITests.swift */; };
 		BC2D662E220500D5001C6DA3 /* SMP.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2D6623220500D5001C6DA3 /* SMP.swift */; };
-		BC2D6630220500D5001C6DA3 /* RIPEMD.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2D6625220500D5001C6DA3 /* RIPEMD.swift */; };
 		BC2D6631220500D5001C6DA3 /* Data+Bitcoin.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2D6626220500D5001C6DA3 /* Data+Bitcoin.swift */; };
-		BC2D6632220500D5001C6DA3 /* RIPEMD+Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2D6627220500D5001C6DA3 /* RIPEMD+Block.swift */; };
 		BC2D6634220500D5001C6DA3 /* SMP+Bitcoin.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2D6629220500D5001C6DA3 /* SMP+Bitcoin.swift */; };
-		BC2D6635220500D5001C6DA3 /* UInt32+CircularShift.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2D662A220500D5001C6DA3 /* UInt32+CircularShift.swift */; };
 		BC2D6636220500D5001C6DA3 /* SHA256.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2D662B220500D5001C6DA3 /* SHA256.swift */; };
 		BC2D6637220500D5001C6DA3 /* String+Bitcoin.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2D662C220500D5001C6DA3 /* String+Bitcoin.swift */; };
 		BC2D663922050A7D001C6DA3 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2D663822050A7D001C6DA3 /* HomeVC.swift */; };
@@ -38,6 +35,7 @@
 		BC509D2B2246EA8C009E4F31 /* Bech32.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC509D2A2246EA8C009E4F31 /* Bech32.swift */; };
 		BC509D3B2246F606009E4F31 /* PBKDF2.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC509D3A2246F606009E4F31 /* PBKDF2.swift */; };
 		BC509D3D224702E6009E4F31 /* MnemonicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC509D3C224702E6009E4F31 /* MnemonicTests.swift */; };
+		BC509D3F224A368A009E4F31 /* RIPEMD160.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC509D3E224A368A009E4F31 /* RIPEMD160.swift */; };
 		BC54B9282240466200FCE894 /* BTCScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC54B9272240466200FCE894 /* BTCScript.swift */; };
 		BC54B92C224050AC00FCE894 /* BTCkOP_CODES.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC54B92B224050AC00FCE894 /* BTCkOP_CODES.swift */; };
 		BC55824E221280B60004A40D /* PathsPageTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC55824D221280B60004A40D /* PathsPageTVC.swift */; };
@@ -105,11 +103,8 @@
 		BC2D65FC2204FF6C001C6DA3 /* HDWalletUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDWalletUITests.swift; sourceTree = "<group>"; };
 		BC2D65FE2204FF6C001C6DA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BC2D6623220500D5001C6DA3 /* SMP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMP.swift; sourceTree = "<group>"; };
-		BC2D6625220500D5001C6DA3 /* RIPEMD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RIPEMD.swift; sourceTree = "<group>"; };
 		BC2D6626220500D5001C6DA3 /* Data+Bitcoin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Bitcoin.swift"; sourceTree = "<group>"; };
-		BC2D6627220500D5001C6DA3 /* RIPEMD+Block.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RIPEMD+Block.swift"; sourceTree = "<group>"; };
 		BC2D6629220500D5001C6DA3 /* SMP+Bitcoin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SMP+Bitcoin.swift"; sourceTree = "<group>"; };
-		BC2D662A220500D5001C6DA3 /* UInt32+CircularShift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UInt32+CircularShift.swift"; sourceTree = "<group>"; };
 		BC2D662B220500D5001C6DA3 /* SHA256.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHA256.swift; sourceTree = "<group>"; };
 		BC2D662C220500D5001C6DA3 /* String+Bitcoin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Bitcoin.swift"; sourceTree = "<group>"; };
 		BC2D663822050A7D001C6DA3 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
@@ -128,6 +123,7 @@
 		BC509D2A2246EA8C009E4F31 /* Bech32.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bech32.swift; sourceTree = "<group>"; };
 		BC509D3A2246F606009E4F31 /* PBKDF2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PBKDF2.swift; sourceTree = "<group>"; };
 		BC509D3C224702E6009E4F31 /* MnemonicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MnemonicTests.swift; sourceTree = "<group>"; };
+		BC509D3E224A368A009E4F31 /* RIPEMD160.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RIPEMD160.swift; sourceTree = "<group>"; };
 		BC54B9272240466200FCE894 /* BTCScript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTCScript.swift; sourceTree = "<group>"; };
 		BC54B92B224050AC00FCE894 /* BTCkOP_CODES.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTCkOP_CODES.swift; sourceTree = "<group>"; };
 		BC55824D221280B60004A40D /* PathsPageTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathsPageTVC.swift; sourceTree = "<group>"; };
@@ -238,14 +234,12 @@
 		BC7365022232CA73009E2533 /* Bitcoin */ = {
 			isa = PBXGroup;
 			children = (
+				BC509D3E224A368A009E4F31 /* RIPEMD160.swift */,
 				BC2D6626220500D5001C6DA3 /* Data+Bitcoin.swift */,
-				BC2D6625220500D5001C6DA3 /* RIPEMD.swift */,
-				BC2D6627220500D5001C6DA3 /* RIPEMD+Block.swift */,
 				BC2D662B220500D5001C6DA3 /* SHA256.swift */,
 				BC2D6623220500D5001C6DA3 /* SMP.swift */,
 				BC2D6629220500D5001C6DA3 /* SMP+Bitcoin.swift */,
 				BC2D662C220500D5001C6DA3 /* String+Bitcoin.swift */,
-				BC2D662A220500D5001C6DA3 /* UInt32+CircularShift.swift */,
 				BC7364F6222AFD43009E2533 /* BTCCurve.swift */,
 				BC7364FC222DA4B2009E2533 /* BTCKeychain.swift */,
 				BC7364FE222DA4C3009E2533 /* BTCKey.swift */,
@@ -422,6 +416,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC509D3F224A368A009E4F31 /* RIPEMD160.swift in Sources */,
 				BC736511223471DA009E2533 /* TxOutput.swift in Sources */,
 				BC2D65DC2204FF6B001C6DA3 /* ViewController.swift in Sources */,
 				BC7364F7222AFD43009E2533 /* BTCCurve.swift in Sources */,
@@ -429,7 +424,6 @@
 				BC509D272246EA22009E4F31 /* Mnemonic.swift in Sources */,
 				BC7365092232DA77009E2533 /* BTCNetwork.swift in Sources */,
 				BC54B9282240466200FCE894 /* BTCScript.swift in Sources */,
-				BC2D6632220500D5001C6DA3 /* RIPEMD+Block.swift in Sources */,
 				BC2D6651220A9ECC001C6DA3 /* PathsPageVC.swift in Sources */,
 				BC2D662E220500D5001C6DA3 /* SMP.swift in Sources */,
 				BC73650D223442BE009E2533 /* BTCTransaction.swift in Sources */,
@@ -439,7 +433,6 @@
 				BC2D6631220500D5001C6DA3 /* Data+Bitcoin.swift in Sources */,
 				BC2D664322095D5A001C6DA3 /* WalletCreationCell.swift in Sources */,
 				BC7364FD222DA4B2009E2533 /* BTCKeychain.swift in Sources */,
-				BC2D6635220500D5001C6DA3 /* UInt32+CircularShift.swift in Sources */,
 				BC2D663922050A7D001C6DA3 /* HomeVC.swift in Sources */,
 				BC55826E2217D6E50004A40D /* BlockstreamService.swift in Sources */,
 				BC2D65DA2204FF6B001C6DA3 /* AppDelegate.swift in Sources */,
@@ -448,7 +441,6 @@
 				BC2D6634220500D5001C6DA3 /* SMP+Bitcoin.swift in Sources */,
 				BC509D232246E9D0009E4F31 /* WordList.swift in Sources */,
 				BC509D3B2246F606009E4F31 /* PBKDF2.swift in Sources */,
-				BC2D6630220500D5001C6DA3 /* RIPEMD.swift in Sources */,
 				BC7365072232CC18009E2533 /* ExtendedPrivateKey.swift in Sources */,
 				BC7364FF222DA4C3009E2533 /* BTCKey.swift in Sources */,
 				BC2D6653220A9EEA001C6DA3 /* SeedWordsPageVC.swift in Sources */,
