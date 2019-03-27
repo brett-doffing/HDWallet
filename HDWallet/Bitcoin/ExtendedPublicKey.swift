@@ -27,7 +27,7 @@ struct ExtendedPublicKey {
     }
     
     init(extPrivateKey: ExtendedPrivateKey) {
-        self.publicKey = BTCCurve.shared.generatePublicKey(privateKey: extPrivateKey.privateKey)!
+        self.publicKey = try! BTCCurve.shared.generatePublicKey(privateKey: extPrivateKey.privateKey)
         self.chainCode = extPrivateKey.chainCode
         self.depth = extPrivateKey.depth
         self.fingerprint = extPrivateKey.fingerprint

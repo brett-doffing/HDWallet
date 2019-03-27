@@ -62,8 +62,8 @@ class BTCKeychain {
             I = HMAC_SHA512.digest(key: cPar, data: (Data(repeating: 0, count: 1) + kPar + i.bigEndian))
         } else {
             // let I = HMAC-SHA512(Key = cpar, Data = serP(point(kpar)) || ser32(i)).
-            let parentPubkey = BTCCurve.shared.generatePublicKey(privateKey: kPar)
-            I = HMAC_SHA512.digest(key: cPar, data: (parentPubkey! + i.bigEndian))
+            let parentPubkey = try! BTCCurve.shared.generatePublicKey(privateKey: kPar)
+            I = HMAC_SHA512.digest(key: cPar, data: (parentPubkey + i.bigEndian))
         }
         
         // Split I into two 32-byte sequences, IL and IR.
@@ -91,11 +91,11 @@ class BTCKeychain {
         let IR = I[32..<64]
 
         // The returned child key Ki is point(parse256(IL)) + Kpar.
-        let Ki = BTCCurve.shared.add(KPar, IL)
+        let Ki = try! BTCCurve.shared.add(KPar, IL)
         // The returned chain code ci is IR.
         #warning("TODO: handle")
         // In case parse256(IL) ≥ n or Ki is the point at infinity, the resulting key is invalid, and one should proceed with the next value for i.
-        return (KIndex: Ki!, cIndex: IR)
+        return (KIndex: Ki, cIndex: IR)
     }
     
     /// Key Derivation
@@ -170,8 +170,8 @@ class BTCKeychain {
     }
     
     func getFingerprint(forParentPrvkey parPrvkey: Data) -> UInt32 {
-        let parentPubkey = BTCCurve.shared.generatePublicKey(privateKey: parPrvkey)
-        let fingerprint: UInt32 = parentPubkey!.hash160().withUnsafeBytes { $0.pointee }
+        let parentPubkey = try! BTCCurve.shared.generatePublicKey(privateKey: parPrvkey)
+        let fingerprint: UInt32 = parentPubkey.hash160().withUnsafeBytes { $0.pointee }
         return fingerprint
     }
     

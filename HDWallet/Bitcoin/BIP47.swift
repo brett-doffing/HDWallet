@@ -35,21 +35,21 @@ class BIP47 {
     func getReceiveAddress(forReceivingKeychain receiver: BTCKeychain, atKeyIndex keyIndex: UInt32, andSendingKeychain sender: BTCKeychain, atAccountIndex acctIndex: UInt32) -> String {
         let senderPrvkey = sender.keychain(atIndex: acctIndex, withType: .BIP47)?.extendedPrivateKey?.privateKey
         let pubkeyData = receiver.keychain(atIndex: keyIndex, withType: .BIP47)?.extendedPublicKey.publicKey
-        let receiverPubkey = BTCCurve.shared.parsePubkey(pubkeyData!)!
-        let secretPoint = BTCCurve.shared.ECDH(withPubkey: receiverPubkey, andPrivateKey: senderPrvkey!)!
+        let receiverPubkey = try! BTCCurve.shared.parsePubkey(pubkeyData!)
+        let secretPoint = try! BTCCurve.shared.ECDH(withPubkey: receiverPubkey, andPrivateKey: senderPrvkey!)
         // Remove 1 byte prefix (parity sign)
         let x = Data(secretPoint[1...])
         #warning("TODO: If the value of s is not in the secp256k1 group, sender MUST increment the index used to derive receiver's public key and try again.")
         let s = x.SHA256()
-        let Bp = BTCCurve.shared.add(pubkeyData!, s)!
+        let Bp = try! BTCCurve.shared.add(pubkeyData!, s)
         let hashedPubkey = Bp.hash160()
         return (sender.network.publicKeyHash + hashedPubkey).base58CheckEncodedString
     }
     
     func createBlindedPaymentCode(forReceivingKeychain receiver: BTCKeychain, andSendingKeychain sender: BTCKeychain, withUTXO utxo: TxOutput, andOutpointPrvKey outpointPrvKey: Data) -> Data {
         let pubkeyData = receiver.keychain(atIndex: 0, withType: .BIP47)?.extendedPublicKey.publicKey
-        let receiverPubkey = BTCCurve.shared.parsePubkey(pubkeyData!)!
-        let secretPoint = BTCCurve.shared.ECDH(withPubkey: receiverPubkey, andPrivateKey: outpointPrvKey)!
+        let receiverPubkey = try! BTCCurve.shared.parsePubkey(pubkeyData!)
+        let secretPoint = try! BTCCurve.shared.ECDH(withPubkey: receiverPubkey, andPrivateKey: outpointPrvKey)
         // Remove 1 byte prefix (parity sign)
         let x = Data(secretPoint[1...])
         let outpoint = Data(utxo.txid!.bytes.bigToLittleEndian().data + utxo.n!.littleEndian)

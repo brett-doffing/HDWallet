@@ -8,7 +8,6 @@ class BTCCurve {
     
     static let shared = BTCCurve()
     
-    // TODO: Make non-optional
     let context: secp256k1_context?
     let order = BInt(hex: "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141")
     
@@ -16,88 +15,80 @@ class BTCCurve {
         self.context = secp256k1_context_create([SECP256K1_FLAGS.SECP256K1_CONTEXT_SIGN, SECP256K1_FLAGS.SECP256K1_CONTEXT_VERIFY])
     }
     
-    func ECDH(withPubkey publicKey: secp256k1_pubkey?, andPrivateKey privateKey: Data) -> Data? {
-        if let ctx = context, var pubkey = publicKey {
-            if !(secp256k1_ec_pubkey_tweak_mul(ctx, &pubkey, privateKey.bytes)) { return nil }
-            var serializedPubkey = [UInt8](repeating: 0, count:33)
-            var length = UInt(33)
-            if !(secp256k1_ec_pubkey_serialize(ctx, &serializedPubkey, &length, pubkey, [SECP256K1_FLAGS.SECP256K1_EC_COMPRESSED])) { return nil }
-            return serializedPubkey.data
-        }
-        return nil
+    func ECDH(withPubkey publicKey: secp256k1_pubkey, andPrivateKey privateKey: Data) throws -> Data {
+        guard let ctx = self.context else { throw CurveError.contextError }
+        var pubkey = publicKey
+        if !(secp256k1_ec_pubkey_tweak_mul(ctx, &pubkey, privateKey.bytes)) { throw CurveError.tweakMulPubkeyError }
+        var serializedPubkey = [UInt8](repeating: 0, count:33)
+        var length = UInt(33)
+        if !(secp256k1_ec_pubkey_serialize(ctx, &serializedPubkey, &length, pubkey, [SECP256K1_FLAGS.SECP256K1_EC_COMPRESSED])) { throw CurveError.serializePubkeyError }
+        return serializedPubkey.data
     }
     
     /// Multiplies tweak by generator point and adds to public key point.
-    func add(_ publicKey: Data, _ tweak: Data) -> Data? {
-        if let ctx = context {
-            var pubkey = secp256k1_pubkey()
-            if !secp256k1_ec_pubkey_parse(ctx, &pubkey, publicKey.bytes, UInt(publicKey.count)) { return nil }
-            if !(secp256k1_ec_pubkey_tweak_add(ctx, &pubkey, tweak.bytes)) { return nil }
-            var serializedPubkey = [UInt8](repeating: 0, count:33)
-            var length = UInt(33)
-            if !(secp256k1_ec_pubkey_serialize(ctx, &serializedPubkey, &length, pubkey, [SECP256K1_FLAGS.SECP256K1_EC_COMPRESSED])) { return nil }
-            return serializedPubkey.data
-        } else { return nil }
+    func add(_ publicKey: Data, _ tweak: Data) throws -> Data {
+        guard let ctx = self.context else { throw CurveError.contextError }
+        var pubkey = secp256k1_pubkey()
+        if !secp256k1_ec_pubkey_parse(ctx, &pubkey, publicKey.bytes, UInt(publicKey.count)) { throw CurveError.parsePubkeyError }
+        if !(secp256k1_ec_pubkey_tweak_add(ctx, &pubkey, tweak.bytes)) { throw CurveError.tweakAddPubkeyError }
+        var serializedPubkey = [UInt8](repeating: 0, count:33)
+        var length = UInt(33)
+        if !(secp256k1_ec_pubkey_serialize(ctx, &serializedPubkey, &length, pubkey, [SECP256K1_FLAGS.SECP256K1_EC_COMPRESSED])) { throw CurveError.serializePubkeyError }
+        return serializedPubkey.data
     }
     
-    func parsePubkey(_ publicKey: Data) -> secp256k1_pubkey? {
-        if let ctx = context {
-            var pubkey = secp256k1_pubkey()
-            if !secp256k1_ec_pubkey_parse(ctx, &pubkey, publicKey.bytes, UInt(publicKey.count)) { return nil }
-            return pubkey
-        } else { return nil }
+    func parsePubkey(_ publicKey: Data) throws -> secp256k1_pubkey {
+        guard let ctx = self.context else { throw CurveError.contextError }
+        var pubkey = secp256k1_pubkey()
+        if !secp256k1_ec_pubkey_parse(ctx, &pubkey, publicKey.bytes, UInt(publicKey.count)) { throw CurveError.parsePubkeyError }
+        return pubkey
     }
     
-    func getPubkeyForPrivateKey(_ hexPrivateKey: String) -> secp256k1_pubkey? {
-        if let ctx = context {
-            let privateKey = hexPrivateKey.unhexlify()
-            var pubkey = secp256k1_pubkey()
-            if !(secp256k1_ec_pubkey_create(ctx, &pubkey, privateKey)) { return nil }
-            return pubkey
-        } else { return nil }
+    func getPubkeyForPrivateKey(_ hexPrivateKey: String) throws -> secp256k1_pubkey {
+        guard let ctx = self.context else { throw CurveError.contextError }
+        let privateKey = hexPrivateKey.unhexlify()
+        var pubkey = secp256k1_pubkey()
+        if !(secp256k1_ec_pubkey_create(ctx, &pubkey, privateKey)) { throw CurveError.createPubkeyError }
+        return pubkey
     }
     
-    func generatePublicKey(privateKey: Data, compressed: Bool = true) -> Data? {
-        if let ctx = context {
-            var pubkey = secp256k1_pubkey()
-//            if !(secp256k1_ec_seckey_verify(ctx, privateKey.bytes)) { return nil }
-            if !(secp256k1_ec_pubkey_create(ctx, &pubkey, privateKey.bytes)) { return nil }
-            var size: UInt = compressed ? 33 : 65
-            var serializedPubkey = [UInt8](repeating: 0, count: Int(size))
-            let flag = compressed ? SECP256K1_FLAGS.SECP256K1_EC_COMPRESSED : SECP256K1_FLAGS.SECP256K1_EC_UNCOMPRESSED
-            if !(secp256k1_ec_pubkey_serialize(ctx, &serializedPubkey, &size, pubkey, flag)) { return nil }
-            return serializedPubkey.data
-        } else { return nil }
+    func generatePublicKey(privateKey: Data, compressed: Bool = true) throws -> Data {
+        guard let ctx = self.context else { throw CurveError.contextError }
+        var pubkey = secp256k1_pubkey()
+        if !(secp256k1_ec_pubkey_create(ctx, &pubkey, privateKey.bytes)) { throw CurveError.createPubkeyError }
+        var size: UInt = compressed ? 33 : 65
+        var serializedPubkey = [UInt8](repeating: 0, count: Int(size))
+        let flag = compressed ? SECP256K1_FLAGS.SECP256K1_EC_COMPRESSED : SECP256K1_FLAGS.SECP256K1_EC_UNCOMPRESSED
+        if !(secp256k1_ec_pubkey_serialize(ctx, &serializedPubkey, &size, pubkey, flag)) { throw CurveError.serializePubkeyError }
+        return serializedPubkey.data
     }
     
-    func sign(key: [UInt8], message: [UInt8]) -> (r: Data, s: Data)? {
-        if let ctx = context {
-            var signature = secp256k1_ecdsa_signature()
-            #warning("TODO: noncefp uses secp256k1_nonce_function_default when set to nil")
-            guard secp256k1_ecdsa_sign(ctx, &signature, message, key, nil, nil) == true else { return nil }
-            let r = [UInt8](signature.data[0..<32])
-            let s = [UInt8](signature.data[32..<64])
-            return (r: r.data, s: s.data)
-        } else { return nil }
+    func sign(key: [UInt8], message: [UInt8]) throws -> (r: Data, s: Data) {
+        guard let ctx = self.context else { throw CurveError.contextError }
+        var signature = secp256k1_ecdsa_signature()
+        #warning("TODO: noncefp uses secp256k1_nonce_function_default when set to nil")
+        guard secp256k1_ecdsa_sign(ctx, &signature, message, key, nil, nil) == true else { throw CurveError.signingError }
+        let r = [UInt8](signature.data[0..<32])
+        let s = [UInt8](signature.data[32..<64])
+        return (r: r.data, s: s.data)
     }
     
-    func sign(key: [UInt8], message: [UInt8]) -> secp256k1_ecdsa_signature? {
-        if let ctx = context {
-            var signature = secp256k1_ecdsa_signature()
-            #warning("TODO: noncefp uses secp256k1_nonce_function_default when set to nil")
-            guard secp256k1_ecdsa_sign(ctx, &signature, message, key, nil, nil) == true else { return nil }
-            return signature
-        } else { return nil }
+    func sign(key: [UInt8], message: [UInt8]) throws -> secp256k1_ecdsa_signature {
+        guard let ctx = self.context else { throw CurveError.contextError }
+        var signature = secp256k1_ecdsa_signature()
+        #warning("TODO: noncefp uses secp256k1_nonce_function_default when set to nil")
+        guard secp256k1_ecdsa_sign(ctx, &signature, message, key, nil, nil) == true else { throw CurveError.signingError }
+        return signature
     }
     
-    func encodeDER(signature: secp256k1_ecdsa_signature?) -> [UInt8]? {
-        if let ctx = context, let sig = signature {
-            // add 7 bytes to account for various encoding bytes
-            var length = UInt(sig.data.count + 7)
-            var output = [UInt8](repeating: 0, count:Int(length))
-            guard secp256k1_ecdsa_signature_serialize_der(ctx, &output, &length, sig) else { return nil }
-            return output
-        } else { return nil }
+    func encodeDER(signature: secp256k1_ecdsa_signature) throws -> [UInt8] {
+        guard let ctx = self.context else { throw CurveError.contextError }
+        let sig = signature
+        // add 7 bytes to account for various encoding bytes
+        var length = UInt(sig.data.count + 7)
+        var output = [UInt8](repeating: 0, count:Int(length))
+        guard secp256k1_ecdsa_signature_serialize_der(ctx, &output, &length, sig) else { throw CurveError.derSerializationError }
+        return output
     }
     
     #warning("TODO: Decode scriptPubKey to get pubkey, and move or make private func.")
@@ -113,5 +104,18 @@ class BTCCurve {
             output += pubkey
         }
         return output
+    }
+}
+
+extension BTCCurve {
+    public enum CurveError: LocalizedError {
+        case contextError
+        case tweakMulPubkeyError
+        case tweakAddPubkeyError
+        case serializePubkeyError
+        case parsePubkeyError
+        case createPubkeyError
+        case signingError
+        case derSerializationError
     }
 }
