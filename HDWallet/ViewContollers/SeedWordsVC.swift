@@ -3,9 +3,9 @@
 import UIKit
 
 class SeedWordsVC: UIViewController, UITextFieldDelegate {
-    let userDefaults = UserDefaults.standard
+    let defaults = UserDefaults.standard
     var seedWords: [String]?
-    @IBOutlet weak var txtfld1: UITextField!
+    @IBOutlet weak var txtfld1: UITextField! // Text Field delegation set in Xib
     @IBOutlet weak var txtfld2: UITextField!
     @IBOutlet weak var txtfld3: UITextField!
     @IBOutlet weak var txtfld4: UITextField!
@@ -28,9 +28,13 @@ class SeedWordsVC: UIViewController, UITextFieldDelegate {
             for i in 0..<words.count {
                 let textField = self.view.viewWithTag(i+1) as! UITextField
                 textField.text = words[i]
+                textField.isUserInteractionEnabled = false
             }
+            self.defaults.set(words, forKey: "seedWords")
+            let alert = UIAlertController(title: "Mnemonic", message: "Please write down these words, in order, and store in a safe place.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            self.present(alert, animated: true)
         } else {
-            // Delegation set in IB
             self.txtfld1?.becomeFirstResponder()
         }
     }
@@ -50,29 +54,27 @@ class SeedWordsVC: UIViewController, UITextFieldDelegate {
     }
     
     func verifySeedWordCompletion() {
-        // Ideally check for correctness as well
-        if txtfld1.text != nil &&
-            txtfld2.text != nil &&
-            txtfld3.text != nil &&
-            txtfld4.text != nil &&
-            txtfld5.text != nil &&
-            txtfld6.text != nil &&
-            txtfld7.text != nil &&
-            txtfld8.text != nil &&
-            txtfld9.text != nil &&
-            txtfld10.text != nil &&
-            txtfld11.text != nil &&
-            txtfld12.text != nil
-        {
-            // Save and dismiss
-            let seedWords: [String] = [txtfld1.text!, txtfld2.text!, txtfld3.text!, txtfld4.text!, txtfld5.text!, txtfld6.text!, txtfld7.text!, txtfld8.text!, txtfld9.text!, txtfld10.text!, txtfld11.text!, txtfld12.text!]
-            userDefaults.set(seedWords, forKey: "seedWords")
-        } else {
-            // Alert
+        guard self.txtfld1.text != nil, self.txtfld2.text != nil, self.txtfld3.text != nil,
+            self.txtfld4.text != nil, self.txtfld5.text != nil, self.txtfld6.text != nil,
+            self.txtfld7.text != nil, self.txtfld8.text != nil, self.txtfld9.text != nil,
+            self.txtfld10.text != nil, self.txtfld11.text != nil, self.txtfld12.text != nil
+            else {
+                let alert = UIAlertController(title: "Seed Word Error", message: "This word list contains one or more invalid words. Please only use valid words", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default))
+                self.present(alert, animated: true)
+                return
         }
+        let seedWords: [String] = [self.txtfld1.text!, self.txtfld2.text!, self.txtfld3.text!, self.txtfld4.text!, self.txtfld5.text!, self.txtfld6.text!, self.txtfld7.text!, self.txtfld8.text!, self.txtfld9.text!, self.txtfld10.text!, self.txtfld11.text!, self.txtfld12.text!]
+        let englishWords = Set(WordList.english.words)
+        
+        guard Set(seedWords).isSubset(of: englishWords) else {
+            let alert = UIAlertController(title: "Seed Word Error", message: "This word list contains one or more invalid words. Please only use valid words", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            self.present(alert, animated: true)
+            return
+        }
+        // Save and dismiss
+        self.defaults.set(seedWords, forKey: "seedWords")
+        self.navigationController?.popViewController(animated: true)
     }
-    
-//    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-//        return true
-//    }
 }
