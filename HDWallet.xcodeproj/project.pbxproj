@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BC074E762257FABF00311107 /* iOSKeychainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC074E752257FABF00311107 /* iOSKeychainTests.swift */; };
+		BC074E7822580AFD00311107 /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC074E7722580AFD00311107 /* KeychainPasswordItem.swift */; };
 		BC2D65DA2204FF6B001C6DA3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2D65D92204FF6B001C6DA3 /* AppDelegate.swift */; };
 		BC2D65E22204FF6B001C6DA3 /* HDWallet.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BC2D65E02204FF6B001C6DA3 /* HDWallet.xcdatamodeld */; };
 		BC2D65E42204FF6B001C6DA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC2D65E32204FF6B001C6DA3 /* Assets.xcassets */; };
@@ -84,6 +86,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BC074E752257FABF00311107 /* iOSKeychainTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSKeychainTests.swift; sourceTree = "<group>"; };
+		BC074E7722580AFD00311107 /* KeychainPasswordItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainPasswordItem.swift; sourceTree = "<group>"; };
 		BC2D65D62204FF6B001C6DA3 /* HDWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HDWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC2D65D92204FF6B001C6DA3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BC2D65E12204FF6B001C6DA3 /* HDWallet.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HDWallet.xcdatamodel; sourceTree = "<group>"; };
@@ -192,6 +196,7 @@
 				BC2D65E52204FF6B001C6DA3 /* LaunchScreen.storyboard */,
 				BC2D65E82204FF6B001C6DA3 /* Info.plist */,
 				BC2D65E02204FF6B001C6DA3 /* HDWallet.xcdatamodeld */,
+				BC074E7722580AFD00311107 /* KeychainPasswordItem.swift */,
 			);
 			path = HDWallet;
 			sourceTree = "<group>";
@@ -206,6 +211,7 @@
 				BC73652022367702009E2533 /* BTCTransactionTests.swift */,
 				BC509CFB22433B9A009E4F31 /* BIP47Tests.swift */,
 				BC509D3C224702E6009E4F31 /* MnemonicTests.swift */,
+				BC074E752257FABF00311107 /* iOSKeychainTests.swift */,
 			);
 			path = HDWalletTests;
 			sourceTree = "<group>";
@@ -427,6 +433,7 @@
 				BC509D41224AC310009E4F31 /* BTCKeychainType.swift in Sources */,
 				BC7365052232CC03009E2533 /* ExtendedPublicKey.swift in Sources */,
 				BC2D6637220500D5001C6DA3 /* String+Bitcoin.swift in Sources */,
+				BC074E7822580AFD00311107 /* KeychainPasswordItem.swift in Sources */,
 				BC2D65E22204FF6B001C6DA3 /* HDWallet.xcdatamodeld in Sources */,
 				BC2D6636220500D5001C6DA3 /* SHA256.swift in Sources */,
 				BC509D252246E9F7009E4F31 /* SegwitAddrCoder.swift in Sources */,
@@ -443,6 +450,7 @@
 				BC73652122367702009E2533 /* BTCTransactionTests.swift in Sources */,
 				BC509D3D224702E6009E4F31 /* MnemonicTests.swift in Sources */,
 				BC509CFC22433B9A009E4F31 /* BIP47Tests.swift in Sources */,
+				BC074E762257FABF00311107 /* iOSKeychainTests.swift in Sources */,
 				BC7364F9222B549E009E2533 /* BTCCurveTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
