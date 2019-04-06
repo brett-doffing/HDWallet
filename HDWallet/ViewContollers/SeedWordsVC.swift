@@ -24,18 +24,23 @@ class SeedWordsVC: UIViewController, UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        let kcpi = KeychainPasswordItem(service: "HDWallet", account: "user")
+        guard let mnemonic = try? kcpi.readPassword() else {
+            self.txtfld1?.becomeFirstResponder()
+            return
+        }
+        
+        self.seedWords = mnemonic.components(separatedBy: " ")
+        print(self.seedWords!.joined(separator: " "))
         if let words = self.seedWords {
             for i in 0..<words.count {
                 let textField = self.view.viewWithTag(i+1) as! UITextField
                 textField.text = words[i]
                 textField.isUserInteractionEnabled = false
             }
-            self.defaults.set(words, forKey: "seedWords")
             let alert = UIAlertController(title: "Mnemonic", message: "Please write down these words, in order, and store in a safe place.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default))
             self.present(alert, animated: true)
-        } else {
-            self.txtfld1?.becomeFirstResponder()
         }
     }
     
@@ -43,7 +48,7 @@ class SeedWordsVC: UIViewController, UITextFieldDelegate {
         let tag = textField.tag
         if tag <= 11 {
             let nextTag = tag + 1
-            // Try to find next textField
+            // Find next textField
             let nextResponder = self.view.viewWithTag(nextTag) as! UITextField
             nextResponder.becomeFirstResponder()
         } else {
@@ -74,7 +79,10 @@ class SeedWordsVC: UIViewController, UITextFieldDelegate {
             return
         }
         // Save and dismiss
-        self.defaults.set(seedWords, forKey: "seedWords")
+        let kcpi = KeychainPasswordItem(service: "HDWallet", account: "user")
+        let mnemonic = seedWords.joined(separator: " ")
+        do { try kcpi.savePassword(mnemonic) }
+        catch let kcError { print("error = \(kcError)") } // TODO: Alert
         self.navigationController?.popViewController(animated: true)
     }
 }
