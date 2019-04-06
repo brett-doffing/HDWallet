@@ -31,7 +31,6 @@ class SeedWordsVC: UIViewController, UITextFieldDelegate {
         }
         
         self.seedWords = mnemonic.components(separatedBy: " ")
-        print(self.seedWords!.joined(separator: " "))
         if let words = self.seedWords {
             for i in 0..<words.count {
                 let textField = self.view.viewWithTag(i+1) as! UITextField
