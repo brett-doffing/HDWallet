@@ -1,9 +1,10 @@
 // SeedWordsVC.swift
 
 import UIKit
+import LocalAuthentication
 
 class SeedWordsVC: UIViewController, UITextFieldDelegate {
-    let defaults = UserDefaults.standard
+    let kcpi = KeychainPasswordItem(service: "HDWallet", account: "user")
     var seedWords: [String]?
     @IBOutlet weak var txtfld1: UITextField! // Text Field delegation set in Xib
     @IBOutlet weak var txtfld2: UITextField!
@@ -24,22 +25,14 @@ class SeedWordsVC: UIViewController, UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let kcpi = KeychainPasswordItem(service: "HDWallet", account: "user")
-        guard let mnemonic = try? kcpi.readPassword() else {
-            self.txtfld1?.becomeFirstResponder()
-            return
-        }
         
-        self.seedWords = mnemonic.components(separatedBy: " ")
-        if let words = self.seedWords {
-            for i in 0..<words.count {
-                let textField = self.view.viewWithTag(i+1) as! UITextField
-                textField.text = words[i]
-                textField.isUserInteractionEnabled = false
+        guard let mnemonic = try? self.kcpi.readPassword() else { DispatchQueue.main.async { self.txtfld1?.becomeFirstResponder() }; return }
+        
+        authenticateDeviceOwner { (authenticated) in
+            if authenticated {
+                self.seedWords = mnemonic.components(separatedBy: " ")
+                DispatchQueue.main.async { self.displaySeedWords() }
             }
-            let alert = UIAlertController(title: "Mnemonic", message: "Please write down these words, in order, and store in a safe place.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default))
-            self.present(alert, animated: true)
         }
     }
     
@@ -68,20 +61,43 @@ class SeedWordsVC: UIViewController, UITextFieldDelegate {
                 self.present(alert, animated: true)
                 return
         }
+        
         let seedWords: [String] = [self.txtfld1.text!, self.txtfld2.text!, self.txtfld3.text!, self.txtfld4.text!, self.txtfld5.text!, self.txtfld6.text!, self.txtfld7.text!, self.txtfld8.text!, self.txtfld9.text!, self.txtfld10.text!, self.txtfld11.text!, self.txtfld12.text!]
         let englishWords = Set(WordList.english.words)
-        
         guard Set(seedWords).isSubset(of: englishWords) else {
             let alert = UIAlertController(title: "Seed Word Error", message: "This word list contains one or more invalid words. Please only use valid words", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default))
             self.present(alert, animated: true)
             return
         }
-        // Save and dismiss
-        let kcpi = KeychainPasswordItem(service: "HDWallet", account: "user")
+        
+        // Save
         let mnemonic = seedWords.joined(separator: " ")
-        do { try kcpi.savePassword(mnemonic) }
+        do { try self.kcpi.savePassword(mnemonic) }
         catch let kcError { print("error = \(kcError)") } // TODO: Alert
-        self.navigationController?.popViewController(animated: true)
+    }
+    
+    private func authenticateDeviceOwner(authenticated: @escaping (Bool) -> ()) {
+        let authContext: LAContext = LAContext()
+        var policy: LAPolicy
+        
+        if authContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
+        { policy = .deviceOwnerAuthenticationWithBiometrics }
+        else
+        { policy = .deviceOwnerAuthentication }
+        
+        authContext.evaluatePolicy(policy, localizedReason: "Authenticate user to view or manage seed.", reply: { (wasAuthenticated, error) in
+            authenticated(wasAuthenticated)
+        })
+    }
+    
+    private func displaySeedWords() {
+        if let words = self.seedWords {
+            for i in 0..<words.count {
+                let textField = self.view.viewWithTag(i+1) as! UITextField
+                textField.text = words[i]
+                textField.isUserInteractionEnabled = false
+            }
+        }
     }
 }
