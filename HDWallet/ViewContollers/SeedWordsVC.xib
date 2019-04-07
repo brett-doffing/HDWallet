@@ -152,6 +152,16 @@
                         <outlet property="delegate" destination="-1" id="mNG-2D-FFT"/>
                     </connections>
                 </textField>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="These words should be recorded, in order, and stored in a safe place." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p0c-80-K78">
+                    <rect key="frame" x="25" y="205" width="325" height="60"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="2wk-Sb-9Fr"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
@@ -162,8 +172,10 @@
                 <constraint firstItem="40E-AJ-e5x" firstAttribute="leading" secondItem="Evw-h9-f7I" secondAttribute="trailing" constant="25" id="6Ex-LG-TGF"/>
                 <constraint firstItem="FO0-3U-eXE" firstAttribute="trailing" secondItem="gtB-Mz-8TE" secondAttribute="trailing" constant="25" id="7Fe-Z8-WEa"/>
                 <constraint firstItem="e1n-Ww-VNM" firstAttribute="width" secondItem="40E-AJ-e5x" secondAttribute="width" id="8Bm-gC-l5r"/>
+                <constraint firstItem="FO0-3U-eXE" firstAttribute="trailing" secondItem="p0c-80-K78" secondAttribute="trailing" constant="25" id="91b-MF-Sum"/>
                 <constraint firstItem="6uW-Ed-J3z" firstAttribute="height" secondItem="mq4-nY-J3f" secondAttribute="height" id="AEk-wB-X11"/>
                 <constraint firstItem="gtB-Mz-8TE" firstAttribute="centerY" secondItem="21D-Kw-BlK" secondAttribute="centerY" id="AhD-vg-JCr"/>
+                <constraint firstItem="p0c-80-K78" firstAttribute="top" secondItem="mq4-nY-J3f" secondAttribute="bottom" constant="10" id="Cvz-DQ-SDm"/>
                 <constraint firstItem="FO0-3U-eXE" firstAttribute="trailing" secondItem="e1n-Ww-VNM" secondAttribute="trailing" constant="25" id="DkW-qA-gjW"/>
                 <constraint firstItem="ExJ-d3-XXJ" firstAttribute="height" secondItem="IE6-hV-OwN" secondAttribute="height" id="HVm-le-cfa"/>
                 <constraint firstItem="ExJ-d3-XXJ" firstAttribute="centerY" secondItem="IE6-hV-OwN" secondAttribute="centerY" id="J2Y-Uq-CQL"/>
@@ -171,6 +183,7 @@
                 <constraint firstItem="dMs-mQ-Vmg" firstAttribute="height" secondItem="21D-Kw-BlK" secondAttribute="height" id="KzQ-wJ-tPh"/>
                 <constraint firstItem="FO0-3U-eXE" firstAttribute="trailing" secondItem="WA3-fu-5AT" secondAttribute="trailing" constant="25" id="LZJ-tL-8gq"/>
                 <constraint firstItem="ExJ-d3-XXJ" firstAttribute="leading" secondItem="FO0-3U-eXE" secondAttribute="leading" constant="25" id="MRF-Xc-zv7"/>
+                <constraint firstItem="p0c-80-K78" firstAttribute="leading" secondItem="FO0-3U-eXE" secondAttribute="leading" constant="25" id="MZV-yw-kQm"/>
                 <constraint firstItem="mSm-bU-Qmd" firstAttribute="leading" secondItem="mq4-nY-J3f" secondAttribute="trailing" constant="25" id="N9z-PQ-Zgp"/>
                 <constraint firstItem="mSm-bU-Qmd" firstAttribute="width" secondItem="mq4-nY-J3f" secondAttribute="width" id="Ox9-ER-XFs"/>
                 <constraint firstItem="gtB-Mz-8TE" firstAttribute="width" secondItem="21D-Kw-BlK" secondAttribute="width" id="Pe0-JD-pqj"/>
@@ -202,7 +215,7 @@
                 <constraint firstItem="e1n-Ww-VNM" firstAttribute="centerY" secondItem="40E-AJ-e5x" secondAttribute="centerY" id="vaB-pb-M3I"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="FO0-3U-eXE"/>
-            <point key="canvasLocation" x="841" y="80"/>
+            <point key="canvasLocation" x="840.79999999999995" y="79.610194902548727"/>
         </view>
     </objects>
 </document>
