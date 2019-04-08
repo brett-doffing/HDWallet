@@ -2,7 +2,6 @@
 
 import XCTest
 @testable import HDWallet
-@testable import secp256k1
 
 class BTCCurveTests: XCTestCase {
     
