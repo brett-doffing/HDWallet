@@ -75,6 +75,7 @@
 		BC744228225B9C89000E4D45 /* ecmult_gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC74420E225B9C89000E4D45 /* ecmult_gen.swift */; };
 		BC744229225B9C89000E4D45 /* scalar_8x32.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC74420F225B9C89000E4D45 /* scalar_8x32.swift */; };
 		BC74422A225B9C89000E4D45 /* gen_context.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC744210225B9C89000E4D45 /* gen_context.swift */; };
+		BC74422E225BBB66000E4D45 /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC74422D225BBB66000E4D45 /* TabBarVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -169,6 +170,7 @@
 		BC74420E225B9C89000E4D45 /* ecmult_gen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ecmult_gen.swift; sourceTree = "<group>"; };
 		BC74420F225B9C89000E4D45 /* scalar_8x32.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = scalar_8x32.swift; sourceTree = "<group>"; };
 		BC744210225B9C89000E4D45 /* gen_context.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = gen_context.swift; sourceTree = "<group>"; };
+		BC74422D225BBB66000E4D45 /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -295,6 +297,7 @@
 				BC509D4A224C8A5D009E4F31 /* RootNavigationController.xib */,
 				BC509D4C224D9373009E4F31 /* SeedWordsVC.swift */,
 				BC509D4E224D9386009E4F31 /* SeedWordsVC.xib */,
+				BC74422D225BBB66000E4D45 /* TabBarVC.swift */,
 			);
 			path = ViewContollers;
 			sourceTree = "<group>";
@@ -487,6 +490,7 @@
 				BC2D662E220500D5001C6DA3 /* SMP.swift in Sources */,
 				BC744229225B9C89000E4D45 /* scalar_8x32.swift in Sources */,
 				BC73650D223442BE009E2533 /* BTCTransaction.swift in Sources */,
+				BC74422E225BBB66000E4D45 /* TabBarVC.swift in Sources */,
 				BC74421B225B9C89000E4D45 /* eckey_impl.swift in Sources */,
 				BC509CFA22433A11009E4F31 /* BIP47.swift in Sources */,
 				BC744226225B9C89000E4D45 /* field_impl.swift in Sources */,
