@@ -12,8 +12,10 @@ class HomeVC: UIViewController {
         super.viewDidLoad()
         
         // Comment out to save seed words, otherwise this sets the saved seed words to nil.
-//        let kcpi = KeychainPasswordItem(service: "HDWallet", account: "user")
-//        try? kcpi.deleteItem()
+        let kcpi = KeychainPasswordItem(service: "HDWallet", account: "user")
+        try? kcpi.deleteItem()
+        
+        addNavBarImage()
         checkForSeed()
     }
     
@@ -53,5 +55,15 @@ class HomeVC: UIViewController {
             let seedwordsVC = SeedWordsVC()
             self?.navigationController?.pushViewController(seedwordsVC, animated: true)
         }
+    }
+    
+    private func addNavBarImage() {
+        let containerView = UIView(frame: CGRect(x: 0, y: 0, width: 153, height: 32))
+        let image = UIImage(named: "BTCLogo")
+        let imageView = UIImageView(image: image)
+        // Nav bar height is 44, image height is 32, so -6 offset to center
+        imageView.frame = CGRect(x: 0, y: -6, width: 153, height: 32)
+        containerView.addSubview(imageView)
+        navigationItem.titleView = containerView
     }
 }
