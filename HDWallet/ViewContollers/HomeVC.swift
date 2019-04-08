@@ -6,14 +6,14 @@ import LocalAuthentication
 class HomeVC: UIViewController {
     
     var hasSeed: Bool = false
-    let defaults = UserDefaults.standard
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Comment out to save seed words, otherwise this sets the saved seed words to nil.
-        let kcpi = KeychainPasswordItem(service: "HDWallet", account: "user")
-        try? kcpi.deleteItem()
+//        let kcpi = KeychainPasswordItem(service: "HDWallet", account: "user")
+//        try? kcpi.deleteItem()
         
         addNavBarImage()
         checkForSeed()
@@ -66,4 +66,44 @@ class HomeVC: UIViewController {
         containerView.addSubview(imageView)
         navigationItem.titleView = containerView
     }
+}
+
+extension HomeVC: UITableViewDelegate {
+    
+}
+
+extension HomeVC: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 4
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
+        
+        switch indexPath.row {
+        case 0:
+            cell.textLabel?.text = "P2PKH"
+            cell.detailTextLabel?.text = "address"
+        case 1:
+            cell.textLabel?.text = "Segwit (P2SH)"
+            cell.detailTextLabel?.text = "address"
+        case 2:
+            cell.textLabel?.text = "Segwit (Bech 32)"
+            cell.detailTextLabel?.text = "address"
+        case 3:
+            cell.textLabel?.text = "Payment Code"
+            cell.detailTextLabel?.text = "address"
+        default:
+            return cell
+        }
+        cell.accessoryView = UIImageView(image: UIImage(named: "copyIcon"))
+        cell.accessoryView?.tintColor = .black
+        return cell
+    }
+    
 }
