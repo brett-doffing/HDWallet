@@ -7,6 +7,14 @@ class ReceiveVC: UIViewController {
     
     var hasSeed: Bool = false
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var qrImageView: QRImageView!
+    @IBOutlet weak var addressLabel: UILabel!
+    
+    // Temp properties to be replaced by data store
+    var p2pkhAddr: String?
+    var p2shAddr: String?
+    var bech32Addr: String?
+    var payCode: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -15,8 +23,13 @@ class ReceiveVC: UIViewController {
 //        let kcpi = KeychainPasswordItem(service: "HDWallet", account: "user")
 //        try? kcpi.deleteItem()
         
-        addNavBarImage()
         checkForSeed()
+        
+        // Temp
+        if self.hasSeed { getKeychainAddresses() }
+        self.qrImageView.qrString = self.p2pkhAddr
+        self.addressLabel.text = self.p2pkhAddr
+        self.qrImageView.createQRCImage()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -57,19 +70,43 @@ class ReceiveVC: UIViewController {
         }
     }
     
-    private func addNavBarImage() {
-        let containerView = UIView(frame: CGRect(x: 0, y: 0, width: 153, height: 32))
-        let image = UIImage(named: "BTCLogo")
-        let imageView = UIImageView(image: image)
-        // Nav bar height is 44, image height is 32, so -6 offset to center
-        imageView.frame = CGRect(x: 0, y: -6, width: 153, height: 32)
-        containerView.addSubview(imageView)
-        navigationItem.titleView = containerView
+    // MARK: Temp function to be replaced by data store
+    private func getKeychainAddresses() {
+        let kcpi = KeychainPasswordItem(service: "HDWallet", account: "user")
+        guard let mnemonic = try? kcpi.readPassword() else { return }
+        let seed = Mnemonic.createSeed(mnemonic: mnemonic)
+        let masterKC = BTCKeychain(seed: seed)
+        let kc44 = masterKC.derivedKeychain(withPath: "m/44'/0'/0'/0/0", andType: .BIP44)
+        let kc47 = masterKC.derivedKeychain(withPath: "m/47'/0'/0'", andType: .BIP47)
+        let kc49 = masterKC.derivedKeychain(withPath: "m/49'/0'/0'/0/0", andType: .BIP49)
+        let kc84 = masterKC.derivedKeychain(withPath: "m/84'/0'/0'/0/0", andType: .BIP84)
+        self.p2pkhAddr = kc44?.address
+        self.p2shAddr = kc49?.address
+        self.bech32Addr = kc84?.address
+        self.payCode = BIP47.shared.paymentCode(forBIP47Keychain: kc47!)
     }
 }
 
 extension ReceiveVC: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.row {
+        case 0:
+            self.qrImageView.qrString = self.p2pkhAddr
+            self.addressLabel.text = self.p2pkhAddr
+        case 1:
+            self.qrImageView.qrString = self.p2shAddr
+            self.addressLabel.text = self.p2shAddr
+        case 2:
+            self.qrImageView.qrString = self.bech32Addr
+            self.addressLabel.text = self.bech32Addr
+        case 3:
+            self.qrImageView.qrString = self.payCode
+            self.addressLabel.text = self.payCode
+        default:
+            return
+        }
+        self.qrImageView.createQRCImage()
+    }
 }
 
 extension ReceiveVC: UITableViewDataSource {
@@ -84,20 +121,20 @@ extension ReceiveVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
-        
+        cell.textLabel?.lineBreakMode = .byTruncatingMiddle
         switch indexPath.row {
         case 0:
-            cell.textLabel?.text = "P2PKH"
-            cell.detailTextLabel?.text = "address"
+            cell.textLabel?.text = "\(self.p2pkhAddr!)"
+            cell.detailTextLabel?.text = "P2PKH"
         case 1:
-            cell.textLabel?.text = "Segwit (P2SH)"
-            cell.detailTextLabel?.text = "address"
+            cell.textLabel?.text = "\(self.p2shAddr!)"
+            cell.detailTextLabel?.text = "Segwit (P2SH)"
         case 2:
-            cell.textLabel?.text = "Segwit (Bech 32)"
-            cell.detailTextLabel?.text = "address"
+            cell.textLabel?.text = "\(self.bech32Addr!)"
+            cell.detailTextLabel?.text = "Segwit (Bech 32)"
         case 3:
-            cell.textLabel?.text = "Payment Code"
-            cell.detailTextLabel?.text = "address"
+            cell.textLabel?.text = "\(self.payCode!)"
+            cell.detailTextLabel?.text = "Payment Code"
         default:
             return cell
         }

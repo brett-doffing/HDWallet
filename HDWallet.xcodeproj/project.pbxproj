@@ -79,6 +79,7 @@
 		BC744232225BFAA6000E4D45 /* SendVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC744231225BFAA6000E4D45 /* SendVC.swift */; };
 		BC744236225C19C9000E4D45 /* QRScanningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC744235225C19C9000E4D45 /* QRScanningView.swift */; };
 		BC744238225C354A000E4D45 /* SendVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC744237225C354A000E4D45 /* SendVC.xib */; };
+		BC74423A225CF7C8000E4D45 /* QRImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC744239225CF7C8000E4D45 /* QRImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -177,6 +178,7 @@
 		BC744231225BFAA6000E4D45 /* SendVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendVC.swift; sourceTree = "<group>"; };
 		BC744235225C19C9000E4D45 /* QRScanningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScanningView.swift; sourceTree = "<group>"; };
 		BC744237225C354A000E4D45 /* SendVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendVC.xib; sourceTree = "<group>"; };
+		BC744239225CF7C8000E4D45 /* QRImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -307,6 +309,7 @@
 				BC744231225BFAA6000E4D45 /* SendVC.swift */,
 				BC744237225C354A000E4D45 /* SendVC.xib */,
 				BC744235225C19C9000E4D45 /* QRScanningView.swift */,
+				BC744239225CF7C8000E4D45 /* QRImageView.swift */,
 			);
 			path = ViewContollers;
 			sourceTree = "<group>";
@@ -513,6 +516,7 @@
 				BC744227225B9C89000E4D45 /* PBHex.swift in Sources */,
 				BC74421E225B9C89000E4D45 /* scalar_8x32_impl.swift in Sources */,
 				BC744222225B9C89000E4D45 /* hash_impl.swift in Sources */,
+				BC74423A225CF7C8000E4D45 /* QRImageView.swift in Sources */,
 				BC55826E2217D6E50004A40D /* BlockstreamService.swift in Sources */,
 				BC2D65DA2204FF6B001C6DA3 /* AppDelegate.swift in Sources */,
 				BC2D6634220500D5001C6DA3 /* SMP+Bitcoin.swift in Sources */,

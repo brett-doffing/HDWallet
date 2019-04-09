@@ -12,6 +12,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ReceiveVC" customModule="HDWallet" customModuleProvider="target">
             <connections>
+                <outlet property="addressLabel" destination="3mo-s1-ZHe" id="UFf-j9-YCm"/>
+                <outlet property="qrImageView" destination="P7g-lD-54D" id="PHw-yL-WS8"/>
                 <outlet property="tableView" destination="k8u-wR-Eny" id="59c-Wo-Ini"/>
                 <outlet property="view" destination="iN0-l3-epB" id="1tt-t4-yNN"/>
             </connections>
@@ -21,11 +23,11 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" sectionIndexMinimumDisplayRowCount="1" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="k8u-wR-Eny">
-                    <rect key="frame" x="0.0" y="204" width="320" height="300"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="grouped" sectionIndexMinimumDisplayRowCount="1" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="k8u-wR-Eny">
+                    <rect key="frame" x="0.0" y="242" width="320" height="262"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="300" id="L5y-7l-J57"/>
+                        <constraint firstAttribute="height" constant="262" id="L5y-7l-J57"/>
                     </constraints>
                     <color key="separatorColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <connections>
@@ -33,16 +35,37 @@
                         <outlet property="delegate" destination="-1" id="T59-l8-NiB"/>
                     </connections>
                 </tableView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="P7g-lD-54D" customClass="QRImageView" customModule="HDWallet" customModuleProvider="target">
+                    <rect key="frame" x="84.5" y="15" width="151" height="151"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="P7g-lD-54D" secondAttribute="height" multiplier="1:1" id="VWP-Dd-PdX"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="middleTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3mo-s1-ZHe">
+                    <rect key="frame" x="10" y="174" width="300" height="60"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="6jl-g6-zsP"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="P7g-lD-54D" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="15" id="4CH-ox-6z5"/>
+                <constraint firstItem="P7g-lD-54D" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="BWA-9V-s8J"/>
+                <constraint firstItem="3mo-s1-ZHe" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="10" id="EU4-su-3ZL"/>
                 <constraint firstItem="k8u-wR-Eny" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="MRk-N4-Jtc"/>
+                <constraint firstItem="3mo-s1-ZHe" firstAttribute="top" secondItem="P7g-lD-54D" secondAttribute="bottom" constant="8" id="Pnp-2I-pAO"/>
+                <constraint firstItem="k8u-wR-Eny" firstAttribute="top" secondItem="3mo-s1-ZHe" secondAttribute="bottom" constant="8" id="Uib-bM-HVH"/>
                 <constraint firstItem="k8u-wR-Eny" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="Wv0-vY-GW8"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="3mo-s1-ZHe" secondAttribute="trailing" constant="10" id="c2P-E4-vRj"/>
                 <constraint firstItem="k8u-wR-Eny" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="hq5-BK-eMV"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="53.600000000000001" y="48.125937031484263"/>
+            <point key="canvasLocation" x="52.5" y="47.535211267605632"/>
         </view>
     </objects>
 </document>
