@@ -13,8 +13,8 @@ class TabBarVC: UITabBarController {
         tabBar.tintColor = .white
         addNavBarImage()
         
-        let homeVC = HomeVC()
-        homeVC.tabBarItem = UITabBarItem(title: "Receive", image: UIImage(named: "receiveIcon"), tag: 0)
+        let receiveVC = ReceiveVC()
+        receiveVC.tabBarItem = UITabBarItem(title: "Receive", image: UIImage(named: "receiveIcon"), tag: 0)
         let sendVC = SendVC()
         sendVC.view.backgroundColor = .lightGray
         sendVC.tabBarItem = UITabBarItem(title: "Send", image: UIImage(named: "sendIcon"), tag: 1)
@@ -24,7 +24,7 @@ class TabBarVC: UITabBarController {
         let settingsVC = UIViewController()
         settingsVC.tabBarItem = UITabBarItem(title: "Settings", image: UIImage(named: "settingsIcon"), tag: 3)
         
-        let viewControllerList = [homeVC, sendVC, transactionsVC, settingsVC]
+        let viewControllerList = [receiveVC, sendVC, transactionsVC, settingsVC]
         self.viewControllers = viewControllerList
     }
     

@@ -1,9 +1,9 @@
-// HomeVC.swift
+// ReceiveVC.swift
 
 import UIKit
 import LocalAuthentication
 
-class HomeVC: UIViewController {
+class ReceiveVC: UIViewController {
     
     var hasSeed: Bool = false
     @IBOutlet weak var tableView: UITableView!
@@ -68,11 +68,11 @@ class HomeVC: UIViewController {
     }
 }
 
-extension HomeVC: UITableViewDelegate {
+extension ReceiveVC: UITableViewDelegate {
     
 }
 
-extension HomeVC: UITableViewDataSource {
+extension ReceiveVC: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1

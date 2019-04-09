@@ -29,9 +29,9 @@
 		BC509D3D224702E6009E4F31 /* MnemonicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC509D3C224702E6009E4F31 /* MnemonicTests.swift */; };
 		BC509D3F224A368A009E4F31 /* RIPEMD160.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC509D3E224A368A009E4F31 /* RIPEMD160.swift */; };
 		BC509D41224AC310009E4F31 /* BTCKeychainType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC509D40224AC310009E4F31 /* BTCKeychainType.swift */; };
-		BC509D43224C7EC3009E4F31 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC509D42224C7EC3009E4F31 /* HomeVC.swift */; };
+		BC509D43224C7EC3009E4F31 /* ReceiveVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC509D42224C7EC3009E4F31 /* ReceiveVC.swift */; };
 		BC509D47224C82F0009E4F31 /* RootNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC509D46224C82F0009E4F31 /* RootNavigationController.swift */; };
-		BC509D49224C851F009E4F31 /* HomeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC509D48224C851F009E4F31 /* HomeVC.xib */; };
+		BC509D49224C851F009E4F31 /* ReceiveVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC509D48224C851F009E4F31 /* ReceiveVC.xib */; };
 		BC509D4B224C8A5D009E4F31 /* RootNavigationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC509D4A224C8A5D009E4F31 /* RootNavigationController.xib */; };
 		BC509D4D224D9373009E4F31 /* SeedWordsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC509D4C224D9373009E4F31 /* SeedWordsVC.swift */; };
 		BC509D4F224D9386009E4F31 /* SeedWordsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC509D4E224D9386009E4F31 /* SeedWordsVC.xib */; };
@@ -127,9 +127,9 @@
 		BC509D3C224702E6009E4F31 /* MnemonicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MnemonicTests.swift; sourceTree = "<group>"; };
 		BC509D3E224A368A009E4F31 /* RIPEMD160.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RIPEMD160.swift; sourceTree = "<group>"; };
 		BC509D40224AC310009E4F31 /* BTCKeychainType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTCKeychainType.swift; sourceTree = "<group>"; };
-		BC509D42224C7EC3009E4F31 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
+		BC509D42224C7EC3009E4F31 /* ReceiveVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveVC.swift; sourceTree = "<group>"; };
 		BC509D46224C82F0009E4F31 /* RootNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootNavigationController.swift; sourceTree = "<group>"; };
-		BC509D48224C851F009E4F31 /* HomeVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeVC.xib; sourceTree = "<group>"; };
+		BC509D48224C851F009E4F31 /* ReceiveVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReceiveVC.xib; sourceTree = "<group>"; };
 		BC509D4A224C8A5D009E4F31 /* RootNavigationController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RootNavigationController.xib; sourceTree = "<group>"; };
 		BC509D4C224D9373009E4F31 /* SeedWordsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedWordsVC.swift; sourceTree = "<group>"; };
 		BC509D4E224D9386009E4F31 /* SeedWordsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SeedWordsVC.xib; sourceTree = "<group>"; };
@@ -297,8 +297,8 @@
 		BC7365032232CB3C009E2533 /* ViewContollers */ = {
 			isa = PBXGroup;
 			children = (
-				BC509D42224C7EC3009E4F31 /* HomeVC.swift */,
-				BC509D48224C851F009E4F31 /* HomeVC.xib */,
+				BC509D42224C7EC3009E4F31 /* ReceiveVC.swift */,
+				BC509D48224C851F009E4F31 /* ReceiveVC.xib */,
 				BC509D46224C82F0009E4F31 /* RootNavigationController.swift */,
 				BC509D4A224C8A5D009E4F31 /* RootNavigationController.xib */,
 				BC509D4C224D9373009E4F31 /* SeedWordsVC.swift */,
@@ -459,7 +459,7 @@
 				BC509D4F224D9386009E4F31 /* SeedWordsVC.xib in Resources */,
 				BC2D65E72204FF6B001C6DA3 /* LaunchScreen.storyboard in Resources */,
 				BC509D4B224C8A5D009E4F31 /* RootNavigationController.xib in Resources */,
-				BC509D49224C851F009E4F31 /* HomeVC.xib in Resources */,
+				BC509D49224C851F009E4F31 /* ReceiveVC.xib in Resources */,
 				BC744238225C354A000E4D45 /* SendVC.xib in Resources */,
 				BC2D65E42204FF6B001C6DA3 /* Assets.xcassets in Resources */,
 			);
@@ -490,7 +490,7 @@
 				BC509D4D224D9373009E4F31 /* SeedWordsVC.swift in Sources */,
 				BC736511223471DA009E2533 /* TxOutput.swift in Sources */,
 				BC509D47224C82F0009E4F31 /* RootNavigationController.swift in Sources */,
-				BC509D43224C7EC3009E4F31 /* HomeVC.swift in Sources */,
+				BC509D43224C7EC3009E4F31 /* ReceiveVC.swift in Sources */,
 				BC7364F7222AFD43009E2533 /* BTCCurve.swift in Sources */,
 				BC54B92C224050AC00FCE894 /* BTCkOP_CODES.swift in Sources */,
 				BC509D272246EA22009E4F31 /* Mnemonic.swift in Sources */,
