@@ -9,7 +9,6 @@ class SendVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         NotificationCenter.default.addObserver(self, selector: #selector(qrCodeScannedNotification(_:)), name: .scannedQRCode, object: nil)
     }
     
@@ -20,6 +19,14 @@ class SendVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         self.qrScanner?.beginScanning()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        if self.qrScanner != nil {
+            self.qrScanner?.removeFromSuperview()
+            self.qrScanner = nil
+        }
+    }
+    
     @objc func qrCodeScannedNotification(_ notification:Notification) {
         if let userInfo = notification.userInfo as? [String : String], let qrString = userInfo["qrString"] {
             print(qrString)
@@ -28,13 +35,12 @@ class SendVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
             UIView.setAnimationRepeatCount(3)
             self.qrScanner?.qrCodeFrameView?.alpha = 0
         }) { (complete) in
-            if complete {
-                UIView.animate(withDuration: 0.5, animations: {
-                    self.qrScanner?.frame.origin.y = 1000
-                }, completion: { (complete) in
-                    self.qrScanner?.removeFromSuperview()
-                })
-            }
+            UIView.animate(withDuration: 0.5, animations: {
+                self.qrScanner?.frame.origin.y = 1000
+            }, completion: { (complete) in
+                self.qrScanner?.removeFromSuperview()
+                self.qrScanner = nil
+            })
         }
     }
 }
