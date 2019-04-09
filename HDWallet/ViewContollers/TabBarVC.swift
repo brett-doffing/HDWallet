@@ -15,7 +15,7 @@ class TabBarVC: UITabBarController {
         
         let homeVC = HomeVC()
         homeVC.tabBarItem = UITabBarItem(title: "Receive", image: UIImage(named: "receiveIcon"), tag: 0)
-        let sendVC = UIViewController()
+        let sendVC = SendVC()
         sendVC.view.backgroundColor = .lightGray
         sendVC.tabBarItem = UITabBarItem(title: "Send", image: UIImage(named: "sendIcon"), tag: 1)
         let transactionsVC = UIViewController()

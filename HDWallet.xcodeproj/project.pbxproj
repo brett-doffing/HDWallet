@@ -76,6 +76,9 @@
 		BC744229225B9C89000E4D45 /* scalar_8x32.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC74420F225B9C89000E4D45 /* scalar_8x32.swift */; };
 		BC74422A225B9C89000E4D45 /* gen_context.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC744210225B9C89000E4D45 /* gen_context.swift */; };
 		BC74422E225BBB66000E4D45 /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC74422D225BBB66000E4D45 /* TabBarVC.swift */; };
+		BC744232225BFAA6000E4D45 /* SendVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC744231225BFAA6000E4D45 /* SendVC.swift */; };
+		BC744236225C19C9000E4D45 /* QRScanningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC744235225C19C9000E4D45 /* QRScanningView.swift */; };
+		BC744238225C354A000E4D45 /* SendVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC744237225C354A000E4D45 /* SendVC.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -171,6 +174,9 @@
 		BC74420F225B9C89000E4D45 /* scalar_8x32.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = scalar_8x32.swift; sourceTree = "<group>"; };
 		BC744210225B9C89000E4D45 /* gen_context.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = gen_context.swift; sourceTree = "<group>"; };
 		BC74422D225BBB66000E4D45 /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
+		BC744231225BFAA6000E4D45 /* SendVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendVC.swift; sourceTree = "<group>"; };
+		BC744235225C19C9000E4D45 /* QRScanningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScanningView.swift; sourceTree = "<group>"; };
+		BC744237225C354A000E4D45 /* SendVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendVC.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -298,6 +304,9 @@
 				BC509D4C224D9373009E4F31 /* SeedWordsVC.swift */,
 				BC509D4E224D9386009E4F31 /* SeedWordsVC.xib */,
 				BC74422D225BBB66000E4D45 /* TabBarVC.swift */,
+				BC744231225BFAA6000E4D45 /* SendVC.swift */,
+				BC744237225C354A000E4D45 /* SendVC.xib */,
+				BC744235225C19C9000E4D45 /* QRScanningView.swift */,
 			);
 			path = ViewContollers;
 			sourceTree = "<group>";
@@ -451,6 +460,7 @@
 				BC2D65E72204FF6B001C6DA3 /* LaunchScreen.storyboard in Resources */,
 				BC509D4B224C8A5D009E4F31 /* RootNavigationController.xib in Resources */,
 				BC509D49224C851F009E4F31 /* HomeVC.xib in Resources */,
+				BC744238225C354A000E4D45 /* SendVC.xib in Resources */,
 				BC2D65E42204FF6B001C6DA3 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -490,6 +500,7 @@
 				BC2D662E220500D5001C6DA3 /* SMP.swift in Sources */,
 				BC744229225B9C89000E4D45 /* scalar_8x32.swift in Sources */,
 				BC73650D223442BE009E2533 /* BTCTransaction.swift in Sources */,
+				BC744232225BFAA6000E4D45 /* SendVC.swift in Sources */,
 				BC74422E225BBB66000E4D45 /* TabBarVC.swift in Sources */,
 				BC74421B225B9C89000E4D45 /* eckey_impl.swift in Sources */,
 				BC509CFA22433A11009E4F31 /* BIP47.swift in Sources */,
@@ -515,6 +526,7 @@
 				BC744223225B9C89000E4D45 /* secp256k1.swift in Sources */,
 				BC744221225B9C89000E4D45 /* util.swift in Sources */,
 				BC7365052232CC03009E2533 /* ExtendedPublicKey.swift in Sources */,
+				BC744236225C19C9000E4D45 /* QRScanningView.swift in Sources */,
 				BC2D6637220500D5001C6DA3 /* String+Bitcoin.swift in Sources */,
 				BC744219225B9C89000E4D45 /* PBInt.swift in Sources */,
 				BC744213225B9C89000E4D45 /* recovery.swift in Sources */,
@@ -718,7 +730,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.BCD.HDWallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -740,7 +752,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.BCD.HDWallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
