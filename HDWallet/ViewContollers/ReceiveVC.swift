@@ -6,36 +6,38 @@ import LocalAuthentication
 class ReceiveVC: UIViewController {
     
     var hasSeed: Bool = false
+    let defaults = UserDefaults.standard
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var qrImageView: QRImageView!
     @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var copiedLabel: UILabel!
     
-    // Temp properties to be replaced by data store
-    var p2pkhAddr: String?
-    var p2shAddr: String?
-    var bech32Addr: String?
-    var payCode: String?
+    var p2pkhAddr = String()
+    var p2shAddr = String()
+    var bech32Addr = String()
+    var payCode = String()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Comment out to save seed words, otherwise this sets the saved seed words to nil.
-//        let kcpi = KeychainPasswordItem(service: "HDWallet", account: "user")
-//        try? kcpi.deleteItem()
+        // Comment out to keep keychain data.
+//        deleteBTCKeychainData()
         
-        checkForSeed()
-        
-        // Temp
-        if self.hasSeed { getKeychainAddresses() }
-        self.qrImageView.qrString = self.p2pkhAddr
-        self.addressLabel.text = self.p2pkhAddr
-        self.qrImageView.createQRCImage()
+        let copyLabelTap = UITapGestureRecognizer(target: self, action: #selector(copyAddressToClipboard))
+        self.addressLabel.addGestureRecognizer(copyLabelTap)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         checkForSeed()
         if !self.hasSeed { alertToCreateKeychain() }
+        else if self.addressLabel.text == "" {
+            getKeychainAddresses()
+            self.tableView.reloadData()
+            self.qrImageView.qrString = self.p2pkhAddr
+            self.addressLabel.text = self.p2pkhAddr
+            self.qrImageView.createQRCImage()
+        }
     }
     
     private func checkForSeed() {
@@ -60,7 +62,24 @@ class ReceiveVC: UIViewController {
         let mnemonic = Mnemonic.create()
         let kcpi = KeychainPasswordItem(service: "HDWallet", account: "user")
         do { try kcpi.savePassword(mnemonic) }
-        catch let kcError { print("error = \(kcError)") } // TODO: Handle
+        catch let kcError { print("error = \(kcError)"); return } // TODO: Handle
+        
+        // Save current addresses to defaults
+        let seed = Mnemonic.createSeed(mnemonic: mnemonic)
+        let masterKC = BTCKeychain(seed: seed)
+        let kc44 = masterKC.derivedKeychain(withPath: "m/44'/0'/0'/0/0", andType: .BIP44)
+        let kc47 = masterKC.derivedKeychain(withPath: "m/47'/0'/0'", andType: .BIP47)
+        let kc49 = masterKC.derivedKeychain(withPath: "m/49'/0'/0'/0/0", andType: .BIP49)
+        let kc84 = masterKC.derivedKeychain(withPath: "m/84'/0'/0'/0/0", andType: .BIP84)
+        let payCode = BIP47.shared.paymentCode(forBIP47Keychain: kc47!)
+        defaults.setValue(kc44?.address, forKey: "currentP2PKHAddress")
+        defaults.setValue(kc49?.address, forKey: "currentP2SHAddress")
+        defaults.setValue(kc84?.address, forKey: "currentBECH32Address")
+        defaults.setValue(payCode, forKey: "paymentCode")
+        self.p2pkhAddr = kc44!.address
+        self.p2shAddr = kc49!.address
+        self.bech32Addr = kc84!.address
+        self.payCode = payCode
     }
     
     private func showSeedWordsVC() {
@@ -70,20 +89,19 @@ class ReceiveVC: UIViewController {
         }
     }
     
-    // MARK: Temp function to be replaced by data store
     private func getKeychainAddresses() {
-        let kcpi = KeychainPasswordItem(service: "HDWallet", account: "user")
-        guard let mnemonic = try? kcpi.readPassword() else { return }
-        let seed = Mnemonic.createSeed(mnemonic: mnemonic)
-        let masterKC = BTCKeychain(seed: seed)
-        let kc44 = masterKC.derivedKeychain(withPath: "m/44'/0'/0'/0/0", andType: .BIP44)
-        let kc47 = masterKC.derivedKeychain(withPath: "m/47'/0'/0'", andType: .BIP47)
-        let kc49 = masterKC.derivedKeychain(withPath: "m/49'/0'/0'/0/0", andType: .BIP49)
-        let kc84 = masterKC.derivedKeychain(withPath: "m/84'/0'/0'/0/0", andType: .BIP84)
-        self.p2pkhAddr = kc44?.address
-        self.p2shAddr = kc49?.address
-        self.bech32Addr = kc84?.address
-        self.payCode = BIP47.shared.paymentCode(forBIP47Keychain: kc47!)
+        self.p2pkhAddr = defaults.value(forKey: "currentP2PKHAddress") as! String
+        self.p2shAddr = defaults.value(forKey: "currentP2SHAddress") as! String
+        self.bech32Addr = defaults.value(forKey: "currentBECH32Address") as! String
+        self.payCode = defaults.value(forKey: "paymentCode") as! String
+    }
+    
+    @objc func copyAddressToClipboard() {
+        UIPasteboard.general.string = self.addressLabel.text
+        self.copiedLabel.alpha = 1
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) { [weak self] in
+            self?.copiedLabel.alpha = 0
+        }
     }
 }
 
@@ -120,27 +138,32 @@ extension ReceiveVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
-        cell.textLabel?.lineBreakMode = .byTruncatingMiddle
+        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+
         switch indexPath.row {
         case 0:
-            cell.textLabel?.text = "\(self.p2pkhAddr!)"
-            cell.detailTextLabel?.text = "P2PKH"
+            cell.textLabel?.text = "P2PKH"
         case 1:
-            cell.textLabel?.text = "\(self.p2shAddr!)"
-            cell.detailTextLabel?.text = "Segwit (P2SH)"
+            cell.textLabel?.text = "Segwit (P2SH)"
         case 2:
-            cell.textLabel?.text = "\(self.bech32Addr!)"
-            cell.detailTextLabel?.text = "Segwit (Bech 32)"
+            cell.textLabel?.text = "Segwit (Bech 32)"
         case 3:
-            cell.textLabel?.text = "\(self.payCode!)"
-            cell.detailTextLabel?.text = "Payment Code"
+            cell.textLabel?.text = "Payment Code"
         default:
             return cell
         }
-        cell.accessoryView = UIImageView(image: UIImage(named: "copyIcon"))
-        cell.accessoryView?.tintColor = .black
         return cell
     }
     
+}
+
+extension ReceiveVC {
+    func deleteBTCKeychainData() {
+        let kcpi = KeychainPasswordItem(service: "HDWallet", account: "user")
+        try? kcpi.deleteItem()
+        defaults.setValue(nil, forKey: "currentP2PKHAddress")
+        defaults.setValue(nil, forKey: "currentP2SHAddress")
+        defaults.setValue(nil, forKey: "currentBECH32Address")
+        defaults.setValue(nil, forKey: "paymentCode")
+    }
 }
