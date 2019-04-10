@@ -17,7 +17,7 @@ class SettingsVC: UIViewController {
             self.tabBarController?.tabBar.isHidden = false
             self.defaults.set(testnetSwitch.isOn, forKey: "testnet")
         } else {
-            let alert = UIAlertController(title: "Changing Networks", message: "You will need to quit the app and close it out completely for network changes to take effect. Changing the network and not completely closing out the app could be problematic. Would you like to continue changing the nework?", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Changing Networks", message: "You will need to quit the app and close it out completely for network changes to take effect. Would you like to continue changing the nework?", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
                 testnetSwitch.isOn ? testnetSwitch.setOn(false, animated: true) : testnetSwitch.setOn(true, animated: true)
             }))
