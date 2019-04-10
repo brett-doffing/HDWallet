@@ -80,6 +80,10 @@
 		BC744236225C19C9000E4D45 /* QRScanningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC744235225C19C9000E4D45 /* QRScanningView.swift */; };
 		BC744238225C354A000E4D45 /* SendVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC744237225C354A000E4D45 /* SendVC.xib */; };
 		BC74423A225CF7C8000E4D45 /* QRImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC744239225CF7C8000E4D45 /* QRImageView.swift */; };
+		BC74423C225E34A9000E4D45 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC74423B225E34A9000E4D45 /* SettingsVC.swift */; };
+		BC74423E225E34E6000E4D45 /* SettingsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC74423D225E34E6000E4D45 /* SettingsVC.xib */; };
+		BC744240225E34FF000E4D45 /* TransactionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC74423F225E34FF000E4D45 /* TransactionsVC.swift */; };
+		BC744242225E3512000E4D45 /* TransactionsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC744241225E3512000E4D45 /* TransactionsVC.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -179,6 +183,10 @@
 		BC744235225C19C9000E4D45 /* QRScanningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScanningView.swift; sourceTree = "<group>"; };
 		BC744237225C354A000E4D45 /* SendVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendVC.xib; sourceTree = "<group>"; };
 		BC744239225CF7C8000E4D45 /* QRImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRImageView.swift; sourceTree = "<group>"; };
+		BC74423B225E34A9000E4D45 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
+		BC74423D225E34E6000E4D45 /* SettingsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsVC.xib; sourceTree = "<group>"; };
+		BC74423F225E34FF000E4D45 /* TransactionsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsVC.swift; sourceTree = "<group>"; };
+		BC744241225E3512000E4D45 /* TransactionsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionsVC.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -299,15 +307,19 @@
 		BC7365032232CB3C009E2533 /* ViewContollers */ = {
 			isa = PBXGroup;
 			children = (
-				BC509D42224C7EC3009E4F31 /* ReceiveVC.swift */,
-				BC509D48224C851F009E4F31 /* ReceiveVC.xib */,
 				BC509D46224C82F0009E4F31 /* RootNavigationController.swift */,
 				BC509D4A224C8A5D009E4F31 /* RootNavigationController.xib */,
+				BC74422D225BBB66000E4D45 /* TabBarVC.swift */,
 				BC509D4C224D9373009E4F31 /* SeedWordsVC.swift */,
 				BC509D4E224D9386009E4F31 /* SeedWordsVC.xib */,
-				BC74422D225BBB66000E4D45 /* TabBarVC.swift */,
+				BC509D42224C7EC3009E4F31 /* ReceiveVC.swift */,
+				BC509D48224C851F009E4F31 /* ReceiveVC.xib */,
 				BC744231225BFAA6000E4D45 /* SendVC.swift */,
 				BC744237225C354A000E4D45 /* SendVC.xib */,
+				BC74423B225E34A9000E4D45 /* SettingsVC.swift */,
+				BC74423D225E34E6000E4D45 /* SettingsVC.xib */,
+				BC74423F225E34FF000E4D45 /* TransactionsVC.swift */,
+				BC744241225E3512000E4D45 /* TransactionsVC.xib */,
 				BC744235225C19C9000E4D45 /* QRScanningView.swift */,
 				BC744239225CF7C8000E4D45 /* QRImageView.swift */,
 			);
@@ -463,6 +475,8 @@
 				BC2D65E72204FF6B001C6DA3 /* LaunchScreen.storyboard in Resources */,
 				BC509D4B224C8A5D009E4F31 /* RootNavigationController.xib in Resources */,
 				BC509D49224C851F009E4F31 /* ReceiveVC.xib in Resources */,
+				BC74423E225E34E6000E4D45 /* SettingsVC.xib in Resources */,
+				BC744242225E3512000E4D45 /* TransactionsVC.xib in Resources */,
 				BC744238225C354A000E4D45 /* SendVC.xib in Resources */,
 				BC2D65E42204FF6B001C6DA3 /* Assets.xcassets in Resources */,
 			);
@@ -516,8 +530,10 @@
 				BC744227225B9C89000E4D45 /* PBHex.swift in Sources */,
 				BC74421E225B9C89000E4D45 /* scalar_8x32_impl.swift in Sources */,
 				BC744222225B9C89000E4D45 /* hash_impl.swift in Sources */,
+				BC744240225E34FF000E4D45 /* TransactionsVC.swift in Sources */,
 				BC74423A225CF7C8000E4D45 /* QRImageView.swift in Sources */,
 				BC55826E2217D6E50004A40D /* BlockstreamService.swift in Sources */,
+				BC74423C225E34A9000E4D45 /* SettingsVC.swift in Sources */,
 				BC2D65DA2204FF6B001C6DA3 /* AppDelegate.swift in Sources */,
 				BC2D6634220500D5001C6DA3 /* SMP+Bitcoin.swift in Sources */,
 				BC509D232246E9D0009E4F31 /* WordList.swift in Sources */,

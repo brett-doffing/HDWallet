@@ -10,7 +10,7 @@ class TabBarVC: UITabBarController {
         
         tabBar.barStyle = .black
         tabBar.isTranslucent = false
-        tabBar.tintColor = .white
+        tabBar.tintColor = #colorLiteral(red: 0.9693624377, green: 0.5771938562, blue: 0.1013594046, alpha: 1)
         addNavBarImage()
         
         let receiveVC = ReceiveVC()
@@ -18,10 +18,10 @@ class TabBarVC: UITabBarController {
         let sendVC = SendVC()
         sendVC.view.backgroundColor = .lightGray
         sendVC.tabBarItem = UITabBarItem(title: "Send", image: UIImage(named: "sendIcon"), tag: 1)
-        let transactionsVC = UIViewController()
+        let transactionsVC = TransactionsVC()
         transactionsVC.view.backgroundColor = .darkGray
         transactionsVC.tabBarItem = UITabBarItem(title: "Transactions", image: UIImage(named: "bitcoinIcon"), tag: 2)
-        let settingsVC = UIViewController()
+        let settingsVC = SettingsVC()
         settingsVC.tabBarItem = UITabBarItem(title: "Settings", image: UIImage(named: "settingsIcon"), tag: 3)
         
         let viewControllerList = [receiveVC, sendVC, transactionsVC, settingsVC]
