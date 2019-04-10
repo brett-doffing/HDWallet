@@ -6,6 +6,7 @@ import AVFoundation
 class SendVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
     var qrScanner: QRScanningView?
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -14,9 +15,9 @@ class SendVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.qrScanner = QRScanningView(frame: view.bounds)
-        view.addSubview(self.qrScanner!)
-        self.qrScanner?.beginScanning()
+//        self.qrScanner = QRScanningView(frame: view.bounds)
+//        view.addSubview(self.qrScanner!)
+//        self.qrScanner?.beginScanning()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -43,4 +44,40 @@ class SendVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
             })
         }
     }
+}
+
+extension SendVC: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.row {
+        case 0:
+            return
+        default:
+            return
+        }
+    }
+}
+
+extension SendVC: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 4
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+        
+//        switch indexPath.row {
+//        case 0:
+//            cell.textLabel?.text = ""
+//        default:
+//            return cell
+//        }
+        cell.backgroundColor = .clear
+        return cell
+    }
+    
 }
