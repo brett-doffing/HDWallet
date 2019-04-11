@@ -101,7 +101,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
-extension Notification.Name {
-    static let scannedQRCode = Notification.Name("scannedQRCode")
-}
-

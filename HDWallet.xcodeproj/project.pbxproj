@@ -84,6 +84,7 @@
 		BC74423E225E34E6000E4D45 /* SettingsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC74423D225E34E6000E4D45 /* SettingsVC.xib */; };
 		BC744240225E34FF000E4D45 /* TransactionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC74423F225E34FF000E4D45 /* TransactionsVC.swift */; };
 		BC744242225E3512000E4D45 /* TransactionsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC744241225E3512000E4D45 /* TransactionsVC.xib */; };
+		BC744244225FE0B7000E4D45 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC744243225FE0B7000E4D45 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -187,6 +188,7 @@
 		BC74423D225E34E6000E4D45 /* SettingsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsVC.xib; sourceTree = "<group>"; };
 		BC74423F225E34FF000E4D45 /* TransactionsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsVC.swift; sourceTree = "<group>"; };
 		BC744241225E3512000E4D45 /* TransactionsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionsVC.xib; sourceTree = "<group>"; };
+		BC744243225FE0B7000E4D45 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -322,6 +324,7 @@
 				BC744241225E3512000E4D45 /* TransactionsVC.xib */,
 				BC744235225C19C9000E4D45 /* QRScanningView.swift */,
 				BC744239225CF7C8000E4D45 /* QRImageView.swift */,
+				BC744243225FE0B7000E4D45 /* Extensions.swift */,
 			);
 			path = ViewContollers;
 			sourceTree = "<group>";
@@ -522,6 +525,7 @@
 				BC74421B225B9C89000E4D45 /* eckey_impl.swift in Sources */,
 				BC509CFA22433A11009E4F31 /* BIP47.swift in Sources */,
 				BC744226225B9C89000E4D45 /* field_impl.swift in Sources */,
+				BC744244225FE0B7000E4D45 /* Extensions.swift in Sources */,
 				BC744224225B9C89000E4D45 /* field_10x26.swift in Sources */,
 				BC744220225B9C89000E4D45 /* group_impl.swift in Sources */,
 				BC2D6631220500D5001C6DA3 /* Data+Bitcoin.swift in Sources */,
