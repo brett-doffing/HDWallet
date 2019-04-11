@@ -25,6 +25,8 @@ class ReceiveVC: UIViewController {
         
         let copyLabelTap = UITapGestureRecognizer(target: self, action: #selector(copyAddressToClipboard))
         self.addressLabel.addGestureRecognizer(copyLabelTap)
+        if UserDefaults.standard.bool(forKey: "testnet") == true { self.tableView.separatorColor = .green; self.copiedLabel.backgroundColor = .green }
+        else { self.tableView.separatorColor = #colorLiteral(red: 0.9693624377, green: 0.5771938562, blue: 0.1013594046, alpha: 1); self.copiedLabel.backgroundColor = #colorLiteral(red: 0.9693624377, green: 0.5771938562, blue: 0.1013594046, alpha: 1) }
     }
     
     override func viewDidAppear(_ animated: Bool) {

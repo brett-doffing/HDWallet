@@ -10,8 +10,12 @@ class TabBarVC: UITabBarController {
         
         tabBar.barStyle = .black
         tabBar.isTranslucent = false
-        tabBar.tintColor = #colorLiteral(red: 0.9693624377, green: 0.5771938562, blue: 0.1013594046, alpha: 1)
-        addNavBarImage()
+        if UserDefaults.standard.bool(forKey: "testnet") == true {
+            tabBar.tintColor = .green
+        } else {
+            tabBar.tintColor = #colorLiteral(red: 0.9693624377, green: 0.5771938562, blue: 0.1013594046, alpha: 1)
+            addNavBarImage()
+        }
         
         let receiveVC = ReceiveVC()
         receiveVC.tabBarItem = UITabBarItem(title: "Receive", image: UIImage(named: "receiveIcon"), tag: 0)
