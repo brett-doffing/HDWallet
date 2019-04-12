@@ -76,14 +76,32 @@ class ReceiveVC: UIViewController {
         let kc49 = masterKC.derivedKeychain(withPath: "m/49'/0'/0'/0/0", andType: .BIP49)
         let kc84 = masterKC.derivedKeychain(withPath: "m/84'/0'/0'/0/0", andType: .BIP84)
         let payCode = BIP47.shared.paymentCode(forBIP47Keychain: kc47!)
+        let masterKCT = BTCKeychain(seed: seed, network: .test)
+        let kcT44 = masterKCT.derivedKeychain(withPath: "m/44'/1'/0'/0/0", andType: .BIP44)
+        let kcT47 = masterKCT.derivedKeychain(withPath: "m/47'/1'/0'", andType: .BIP47)
+        let kcT49 = masterKCT.derivedKeychain(withPath: "m/49'/1'/0'/0/0", andType: .BIP49)
+        let kcT84 = masterKCT.derivedKeychain(withPath: "m/84'/1'/0'/0/0", andType: .BIP84)
+        let payCodeT = BIP47.shared.paymentCode(forBIP47Keychain: kcT47!)
         defaults.setValue(kc44?.address, forKey: "currentP2PKHAddress")
         defaults.setValue(kc49?.address, forKey: "currentP2SHAddress")
         defaults.setValue(kc84?.address, forKey: "currentBECH32Address")
         defaults.setValue(payCode, forKey: "paymentCode")
-        self.p2pkhAddr = kc44!.address
-        self.p2shAddr = kc49!.address
-        self.bech32Addr = kc84!.address
-        self.payCode = payCode
+        defaults.setValue(kcT44?.address, forKey: "testnetP2PKHAddress")
+        defaults.setValue(kcT49?.address, forKey: "testnetP2SHAddress")
+        defaults.setValue(kcT84?.address, forKey: "testnetBECH32Address")
+        defaults.setValue(payCodeT, forKey: "testnetPaymentCode")
+        if UserDefaults.standard.bool(forKey: "testnet") == true {
+            self.p2pkhAddr = kcT44!.address
+            self.p2shAddr = kcT49!.address
+            self.bech32Addr = kcT84!.address
+            self.payCode = payCodeT
+        } else {
+            self.p2pkhAddr = kc44!.address
+            self.p2shAddr = kc49!.address
+            self.bech32Addr = kc84!.address
+            self.payCode = payCode
+        }
+        
     }
     
     private func showSeedWordsVC() {
@@ -94,10 +112,17 @@ class ReceiveVC: UIViewController {
     }
     
     private func getKeychainAddresses() {
-        self.p2pkhAddr = defaults.value(forKey: "currentP2PKHAddress") as! String
-        self.p2shAddr = defaults.value(forKey: "currentP2SHAddress") as! String
-        self.bech32Addr = defaults.value(forKey: "currentBECH32Address") as! String
-        self.payCode = defaults.value(forKey: "paymentCode") as! String
+        if UserDefaults.standard.bool(forKey: "testnet") == true {
+            self.p2pkhAddr = defaults.value(forKey: "testnetP2PKHAddress") as! String
+            self.p2shAddr = defaults.value(forKey: "testnetP2SHAddress") as! String
+            self.bech32Addr = defaults.value(forKey: "testnetBECH32Address") as! String
+            self.payCode = defaults.value(forKey: "testnetPaymentCode") as! String
+        } else {
+            self.p2pkhAddr = defaults.value(forKey: "currentP2PKHAddress") as! String
+            self.p2shAddr = defaults.value(forKey: "currentP2SHAddress") as! String
+            self.bech32Addr = defaults.value(forKey: "currentBECH32Address") as! String
+            self.payCode = defaults.value(forKey: "paymentCode") as! String
+        }
     }
     
     @objc func copyAddressToClipboard() {
@@ -169,6 +194,10 @@ extension ReceiveVC {
         defaults.setValue(nil, forKey: "currentP2SHAddress")
         defaults.setValue(nil, forKey: "currentBECH32Address")
         defaults.setValue(nil, forKey: "paymentCode")
+        defaults.setValue(nil, forKey: "testnetP2PKHAddress")
+        defaults.setValue(nil, forKey: "testnetP2SHAddress")
+        defaults.setValue(nil, forKey: "testnetBECH32Address")
+        defaults.setValue(nil, forKey: "testnetPaymentCode")
         defaults.setValue(nil, forKey: "testnet")
     }
 }
