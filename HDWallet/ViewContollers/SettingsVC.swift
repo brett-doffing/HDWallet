@@ -11,6 +11,13 @@ class SettingsVC: UIViewController {
         super.viewDidLoad()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if let indexPath = self.tableView.indexPathForSelectedRow {
+            self.tableView.deselectRow(at: indexPath, animated: true)
+        }
+    }
+    
     @objc func switchChanged(_ sender : UISwitch){
         let testnetSwitch = sender
         if self.tabBarController?.tabBar.isHidden == true {
@@ -35,6 +42,9 @@ extension SettingsVC: UITableViewDelegate {
         switch indexPath.row {
         case 0:
             return
+        case 1:
+            let seedwordsVC = SeedWordsVC()
+            self.navigationController?.pushViewController(seedwordsVC, animated: true)
         default:
             break
         }
@@ -57,16 +67,18 @@ extension SettingsVC: UITableViewDataSource {
         switch indexPath.row {
         case 0:
             cell.textLabel?.text = "Testnet"
-            cell.textLabel?.textColor = .white
             let testnetSwitch = UISwitch(frame: .zero)
             testnetSwitch.tintColor = #colorLiteral(red: 0.9693624377, green: 0.5771938562, blue: 0.1013594046, alpha: 1)
             let isTestnet = defaults.bool(forKey: "testnet")
             testnetSwitch.setOn(isTestnet, animated: true)
             testnetSwitch.addTarget(self, action: #selector(self.switchChanged(_:)), for: .valueChanged)
             cell.accessoryView = testnetSwitch
+        case 1:
+            cell.textLabel?.text = "Mnemonic"
         default:
             break
         }
+        cell.textLabel?.textColor = .white
         cell.backgroundColor = .clear
         return cell
     }
