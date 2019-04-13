@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ReceiveVC" customModule="HDWallet" customModuleProvider="target">
             <connections>
+                <outlet property="activityIndicator" destination="teV-uN-h6i" id="3gk-S4-QMM"/>
                 <outlet property="addressLabel" destination="3mo-s1-ZHe" id="UFf-j9-YCm"/>
                 <outlet property="copiedLabel" destination="KBS-cq-MzY" id="1Jb-Jq-ykO"/>
                 <outlet property="qrImageView" destination="P7g-lD-54D" id="PHw-yL-WS8"/>
@@ -63,11 +64,16 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="teV-uN-h6i">
+                    <rect key="frame" x="142" y="96" width="37" height="37"/>
+                    <color key="color" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="P7g-lD-54D" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="20" id="4CH-ox-6z5"/>
                 <constraint firstItem="KBS-cq-MzY" firstAttribute="centerX" secondItem="P7g-lD-54D" secondAttribute="centerX" id="9Lg-Ht-jvz"/>
+                <constraint firstItem="teV-uN-h6i" firstAttribute="centerX" secondItem="P7g-lD-54D" secondAttribute="centerX" id="ASP-F7-UDh"/>
                 <constraint firstItem="P7g-lD-54D" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="BWA-9V-s8J"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="P7g-lD-54D" secondAttribute="trailing" constant="20" id="D5W-kj-1hX"/>
                 <constraint firstItem="3mo-s1-ZHe" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="EU4-su-3ZL"/>
@@ -79,6 +85,7 @@
                 <constraint firstItem="k8u-wR-Eny" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="hq5-BK-eMV"/>
                 <constraint firstItem="P7g-lD-54D" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="pSi-fY-jZJ"/>
                 <constraint firstItem="KBS-cq-MzY" firstAttribute="centerY" secondItem="P7g-lD-54D" secondAttribute="centerY" id="qU3-Jd-eDR"/>
+                <constraint firstItem="teV-uN-h6i" firstAttribute="centerY" secondItem="P7g-lD-54D" secondAttribute="centerY" id="vzL-sA-6pP"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>

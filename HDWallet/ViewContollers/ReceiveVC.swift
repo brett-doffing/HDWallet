@@ -7,10 +7,12 @@ class ReceiveVC: UIViewController {
     
     var hasSeed: Bool = false
     let defaults = UserDefaults.standard
+    let service = BlockstreamService.shared
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var qrImageView: QRImageView!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var copiedLabel: UILabel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var p2pkhAddr = String()
     var p2shAddr = String()
@@ -25,8 +27,11 @@ class ReceiveVC: UIViewController {
         
         let copyLabelTap = UITapGestureRecognizer(target: self, action: #selector(copyAddressToClipboard))
         self.addressLabel.addGestureRecognizer(copyLabelTap)
-        if UserDefaults.standard.bool(forKey: "testnet") == true { self.tableView.separatorColor = .green; self.copiedLabel.backgroundColor = .green }
-        else { self.tableView.separatorColor = #colorLiteral(red: 0.9693624377, green: 0.5771938562, blue: 0.1013594046, alpha: 1); self.copiedLabel.backgroundColor = #colorLiteral(red: 0.9693624377, green: 0.5771938562, blue: 0.1013594046, alpha: 1) }
+        let refreshSwipe = UISwipeGestureRecognizer(target: self, action: #selector(refreshAddresses))
+        refreshSwipe.direction = .down
+        self.view.addGestureRecognizer(refreshSwipe)
+        if UserDefaults.standard.bool(forKey: "testnet") == true { self.tableView.separatorColor = .green; self.copiedLabel.backgroundColor = .green; self.activityIndicator.color = .green }
+        else { self.tableView.separatorColor = #colorLiteral(red: 0.9693624377, green: 0.5771938562, blue: 0.1013594046, alpha: 1); self.copiedLabel.backgroundColor = #colorLiteral(red: 0.9693624377, green: 0.5771938562, blue: 0.1013594046, alpha: 1); self.activityIndicator.color = #colorLiteral(red: 0.9693624377, green: 0.5771938562, blue: 0.1013594046, alpha: 1) }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -130,6 +135,38 @@ class ReceiveVC: UIViewController {
         self.copiedLabel.alpha = 1
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) { [weak self] in
             self?.copiedLabel.alpha = 0
+        }
+    }
+    
+    // Temp func to refresh
+    @objc func refreshAddresses() {
+        self.activityIndicator.startAnimating()
+//        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) { [weak self] in
+//            self?.activityIndicator.stopAnimating()
+//        }
+        self.service.getTransactions(forAddress: self.p2pkhAddr) { [weak self] (response, error) in
+            if error != nil {
+                print(error)
+            } else {
+                print(response)
+            }
+            self?.activityIndicator.stopAnimating()
+        }
+        self.service.getTransactions(forAddress: self.p2shAddr) { [weak self] (response, error) in
+            if error != nil {
+                print(error)
+            } else {
+                print(response)
+            }
+            self?.activityIndicator.stopAnimating()
+        }
+        self.service.getTransactions(forAddress: self.bech32Addr) { [weak self] (response, error) in
+            if error != nil {
+                print(error)
+            } else {
+                print(response)
+            }
+            self?.activityIndicator.stopAnimating()
         }
     }
 }
