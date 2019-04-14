@@ -2,50 +2,43 @@
 
 import UIKit
 
-enum RequestType: String {
-    case transaction = "tx/"
-}
-
 class BlockstreamService {
     static let shared = BlockstreamService()
     
-    let baseURL: String = "https://blockstream.info/testnet/api/"
+    let baseURL: String
     let defaults = UserDefaults.standard
-    let isTestnet: Bool = UserDefaults.standard.bool(forKey: "testnet")
     
     private init() {
-        
+        if self.defaults.bool(forKey: "testnet") == true { self.baseURL = "https://blockstream.info/testnet/api/" }
+        else { self.baseURL = "https://blockstream.info/api/" }
     }
     
-    func getTransaction(withTXID txid: String) {
+    func getTransaction(withTXID txid: String, completionHandler: @escaping ([String:Any?]?, Error?) -> ()) {
         let urlString = baseURL + "tx/" + txid
         guard let url = URL(string: urlString) else { return }
-//        getRequest(withURL: url) { (response, error) in
-//            completionHandler(response, error)
-//        }
-    }
-    
-    func getTransactions(forAddress address: String, completionHandler: @escaping (Any?, Error?) -> ()) {
-        let urlString = baseURL + "address/" + address + "/txs"
-        guard let url = URL(string: urlString) else { return }
-        getRequest(withURL: url) { (response, error) in
-            completionHandler(response, error)
+        getRequest(withURL: url) { (responseData, error) in
+            completionHandler(responseData, error)
         }
     }
     
-    private func getRequest(withURL url: URL, completionHandler: @escaping (Any?, Error?) -> ()) {
+    func getTransactions(forAddress address: String, completionHandler: @escaping ([String:Any?]?, Error?) -> ()) {
+        let urlString = baseURL + "address/" + address + "/txs"
+        guard let url = URL(string: urlString) else { return }
+        getRequest(withURL: url) { (responseData, error) in
+            completionHandler(responseData, error)
+        }
+    }
+    
+    private func getRequest(withURL url: URL, completionHandler: @escaping ([String:Any?]?, Error?) -> ()) {
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             if error != nil { completionHandler(nil, error) }
-            
-            guard let data = data else { return }
-            
-            //Implement JSON decoding and parsing
+            guard let data = data else { completionHandler(nil, error); return }
             do {
-                let jsonResponse = try JSONSerialization.jsonObject(with:data, options: .allowFragments)
-                
-                //Get back to the main queue?
-                DispatchQueue.main.async { completionHandler(jsonResponse, nil) }
-            } catch let jsonError { completionHandler(nil, jsonError) }
+                let jsonWithRootArray = try JSONSerialization.jsonObject(with:data, options: []) as! [[String:Any?]]
+                completionHandler(jsonWithRootArray[0], nil)
+            } catch let jsonError {
+                completionHandler(nil, jsonError)
+            }
         }.resume()
     }
 }
