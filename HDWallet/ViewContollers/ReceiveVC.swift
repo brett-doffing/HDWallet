@@ -30,8 +30,16 @@ class ReceiveVC: UIViewController {
         let refreshSwipe = UISwipeGestureRecognizer(target: self, action: #selector(refreshAddresses))
         refreshSwipe.direction = .down
         self.view.addGestureRecognizer(refreshSwipe)
-        if UserDefaults.standard.bool(forKey: "testnet") == true { self.tableView.separatorColor = .green; self.copiedLabel.backgroundColor = .green; self.activityIndicator.color = .green }
-        else { self.tableView.separatorColor = #colorLiteral(red: 0.9693624377, green: 0.5771938562, blue: 0.1013594046, alpha: 1); self.copiedLabel.backgroundColor = #colorLiteral(red: 0.9693624377, green: 0.5771938562, blue: 0.1013594046, alpha: 1); self.activityIndicator.color = #colorLiteral(red: 0.9693624377, green: 0.5771938562, blue: 0.1013594046, alpha: 1) }
+        
+        if self.defaults.bool(forKey: "testnet") == true {
+            self.tableView.separatorColor = .green
+            self.copiedLabel.backgroundColor = .green
+            self.activityIndicator.color = .green
+        } else {
+            self.tableView.separatorColor = #colorLiteral(red: 0.9693624377, green: 0.5771938562, blue: 0.1013594046, alpha: 1)
+            self.copiedLabel.backgroundColor = #colorLiteral(red: 0.9693624377, green: 0.5771938562, blue: 0.1013594046, alpha: 1)
+            self.activityIndicator.color = #colorLiteral(red: 0.9693624377, green: 0.5771938562, blue: 0.1013594046, alpha: 1)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -141,32 +149,36 @@ class ReceiveVC: UIViewController {
     // Temp func to refresh
     @objc func refreshAddresses() {
         self.activityIndicator.startAnimating()
-//        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) { [weak self] in
-//            self?.activityIndicator.stopAnimating()
-//        }
-        self.service.getTransactions(forAddress: self.p2pkhAddr) { [weak self] (response, error) in
+        let dispatchGroup = DispatchGroup()
+        dispatchGroup.enter()
+        self.service.getTransactions(forAddress: self.p2pkhAddr) { (responseData, error) in
             if error != nil {
-                print(error)
+                print(error.debugDescription)
             } else {
-                print(response)
+                print(responseData!)
             }
-            self?.activityIndicator.stopAnimating()
+            dispatchGroup.leave()
         }
-        self.service.getTransactions(forAddress: self.p2shAddr) { [weak self] (response, error) in
+        dispatchGroup.enter()
+        self.service.getTransactions(forAddress: self.p2shAddr) { (responseData, error) in
             if error != nil {
-                print(error)
+                print(error.debugDescription)
             } else {
-                print(response)
+                print(responseData!)
             }
-            self?.activityIndicator.stopAnimating()
+            dispatchGroup.leave()
         }
-        self.service.getTransactions(forAddress: self.bech32Addr) { [weak self] (response, error) in
+        dispatchGroup.enter()
+        self.service.getTransactions(forAddress: self.bech32Addr) { (responseData, error) in
             if error != nil {
-                print(error)
+                print(error.debugDescription)
             } else {
-                print(response)
+                print(responseData!)
             }
-            self?.activityIndicator.stopAnimating()
+            dispatchGroup.leave()
+        }
+        dispatchGroup.notify(queue: .main) {
+            self.activityIndicator.stopAnimating()
         }
     }
 }
