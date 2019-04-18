@@ -40,5 +40,33 @@ class TabBarVC: UITabBarController {
         imageView.frame = CGRect(x: 0, y: -6, width: 153, height: 32)
         containerView.addSubview(imageView)
         navigationItem.titleView = containerView
+        
+        // add hamburger
+        // TODO: Find out how to manage nav bar items stack view
+//        let hamburger = UIBarButtonItem(image: UIImage(named: "hamburgerIcon"), style: .plain, target: self, action: nil)
+//        hamburger.tintColor = .white
+//        hamburger.imageInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: -50)
+//        navigationItem.rightBarButtonItem = hamburger
+        
+//        for navView in navigationController!.navigationBar.subviews {
+//            if navView.isKind(of: UIBarButtonItem.self) || navView.isKind(of: UIView.self) {
+//                for ctr in navView.constraints {
+//                    if(ctr.firstAttribute == .leading || ctr.secondAttribute == .leading) {
+//                        ctr.constant = 0;
+//                    } else if(ctr.firstAttribute == .trailing || ctr.secondAttribute == .trailing) {
+//                        ctr.constant = 0;
+//                    }
+//                }
+//                for navSubView in navView.subviews {
+//                    if navSubView.isKind(of: UIStackView.self) {
+//                        for ctr in navSubView.constraints {
+//                            if(ctr.firstAttribute == .width || ctr.secondAttribute == .width) {
+//                                ctr.constant = 0;
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
     }
 }
