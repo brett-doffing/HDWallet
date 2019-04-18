@@ -32,11 +32,11 @@ class ReceiveVC: UIViewController {
         self.view.addGestureRecognizer(refreshSwipe)
         
         if self.defaults.bool(forKey: "testnet") == true {
-            self.tableView.separatorColor = .green
+//            self.tableView.separatorColor = .green
             self.copiedLabel.backgroundColor = .green
             self.activityIndicator.color = .green
         } else {
-            self.tableView.separatorColor = #colorLiteral(red: 0.9693624377, green: 0.5771938562, blue: 0.1013594046, alpha: 1)
+//            self.tableView.separatorColor = #colorLiteral(red: 0.9693624377, green: 0.5771938562, blue: 0.1013594046, alpha: 1)
             self.copiedLabel.backgroundColor = #colorLiteral(red: 0.9693624377, green: 0.5771938562, blue: 0.1013594046, alpha: 1)
             self.activityIndicator.color = #colorLiteral(red: 0.9693624377, green: 0.5771938562, blue: 0.1013594046, alpha: 1)
         }
@@ -48,7 +48,7 @@ class ReceiveVC: UIViewController {
         if !self.hasSeed { alertToCreateKeychain() }
         else if self.addressLabel.text == "" {
             getKeychainAddresses()
-            self.tableView.reloadData()
+//            self.tableView.reloadData()
             self.qrImageView.qrString = self.p2pkhAddr
             self.addressLabel.text = self.p2pkhAddr
             self.qrImageView.createQRCImage()

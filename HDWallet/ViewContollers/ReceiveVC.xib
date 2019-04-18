@@ -16,7 +16,6 @@
                 <outlet property="addressLabel" destination="3mo-s1-ZHe" id="UFf-j9-YCm"/>
                 <outlet property="copiedLabel" destination="KBS-cq-MzY" id="1Jb-Jq-ykO"/>
                 <outlet property="qrImageView" destination="P7g-lD-54D" id="PHw-yL-WS8"/>
-                <outlet property="tableView" destination="k8u-wR-Eny" id="59c-Wo-Ini"/>
                 <outlet property="view" destination="iN0-l3-epB" id="1tt-t4-yNN"/>
             </connections>
         </placeholder>
@@ -25,36 +24,24 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" sectionIndexMinimumDisplayRowCount="1" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="k8u-wR-Eny">
-                    <rect key="frame" x="0.0" y="328" width="320" height="176"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="176" id="L5y-7l-J57"/>
-                    </constraints>
-                    <color key="separatorColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <connections>
-                        <outlet property="dataSource" destination="-1" id="BgG-DR-M0f"/>
-                        <outlet property="delegate" destination="-1" id="T59-l8-NiB"/>
-                    </connections>
-                </tableView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="P7g-lD-54D" customClass="QRImageView" customModule="HDWallet" customModuleProvider="target">
-                    <rect key="frame" x="66" y="20" width="188" height="188"/>
+                    <rect key="frame" x="25" y="25" width="270" height="270"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="P7g-lD-54D" secondAttribute="height" multiplier="1:1" id="VWP-Dd-PdX"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="middleTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3mo-s1-ZHe">
-                    <rect key="frame" x="0.0" y="228" width="320" height="100"/>
+                    <rect key="frame" x="0.0" y="315" width="320" height="75"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="100" id="6jl-g6-zsP"/>
+                        <constraint firstAttribute="height" constant="75" id="6jl-g6-zsP"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copied to Clipboard" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KBS-cq-MzY">
-                    <rect key="frame" x="72.5" y="99" width="175" height="30"/>
+                    <rect key="frame" x="72.5" y="145" width="175" height="30"/>
                     <color key="backgroundColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="175" id="Poj-tt-Cnf"/>
@@ -65,25 +52,21 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="teV-uN-h6i">
-                    <rect key="frame" x="142" y="96" width="37" height="37"/>
+                    <rect key="frame" x="141.5" y="141.5" width="37" height="37"/>
                     <color key="color" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="P7g-lD-54D" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="20" id="4CH-ox-6z5"/>
-                <constraint firstItem="KBS-cq-MzY" firstAttribute="centerX" secondItem="P7g-lD-54D" secondAttribute="centerX" id="9Lg-Ht-jvz"/>
+                <constraint firstItem="P7g-lD-54D" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="25" id="4CH-ox-6z5"/>
                 <constraint firstItem="teV-uN-h6i" firstAttribute="centerX" secondItem="P7g-lD-54D" secondAttribute="centerX" id="ASP-F7-UDh"/>
                 <constraint firstItem="P7g-lD-54D" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="BWA-9V-s8J"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="P7g-lD-54D" secondAttribute="trailing" constant="20" id="D5W-kj-1hX"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="P7g-lD-54D" secondAttribute="trailing" constant="25" id="D5W-kj-1hX"/>
                 <constraint firstItem="3mo-s1-ZHe" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="EU4-su-3ZL"/>
-                <constraint firstItem="k8u-wR-Eny" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="MRk-N4-Jtc"/>
                 <constraint firstItem="3mo-s1-ZHe" firstAttribute="top" secondItem="P7g-lD-54D" secondAttribute="bottom" constant="20" id="Pnp-2I-pAO"/>
-                <constraint firstItem="k8u-wR-Eny" firstAttribute="top" secondItem="3mo-s1-ZHe" secondAttribute="bottom" id="Uib-bM-HVH"/>
-                <constraint firstItem="k8u-wR-Eny" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="Wv0-vY-GW8"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="3mo-s1-ZHe" secondAttribute="trailing" id="c2P-E4-vRj"/>
-                <constraint firstItem="k8u-wR-Eny" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="hq5-BK-eMV"/>
-                <constraint firstItem="P7g-lD-54D" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="pSi-fY-jZJ"/>
+                <constraint firstItem="KBS-cq-MzY" firstAttribute="centerX" secondItem="P7g-lD-54D" secondAttribute="centerX" id="d53-sa-Jwx"/>
+                <constraint firstItem="P7g-lD-54D" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="25" id="pSi-fY-jZJ"/>
                 <constraint firstItem="KBS-cq-MzY" firstAttribute="centerY" secondItem="P7g-lD-54D" secondAttribute="centerY" id="qU3-Jd-eDR"/>
                 <constraint firstItem="teV-uN-h6i" firstAttribute="centerY" secondItem="P7g-lD-54D" secondAttribute="centerY" id="vzL-sA-6pP"/>
             </constraints>
