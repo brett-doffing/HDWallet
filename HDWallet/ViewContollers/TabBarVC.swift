@@ -43,6 +43,8 @@ class TabBarVC: UITabBarController {
         
         // add hamburger
         // TODO: Find out how to manage nav bar items stack view
+        // https://www.matrixprojects.net/p/uibarbuttonitem-ios11/
+        // https://stackoverflow.com/a/46549639/1848601
 //        let hamburger = UIBarButtonItem(image: UIImage(named: "hamburgerIcon"), style: .plain, target: self, action: nil)
 //        hamburger.tintColor = .white
 //        hamburger.imageInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: -50)
