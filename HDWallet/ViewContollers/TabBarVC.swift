@@ -10,6 +10,8 @@ class TabBarVC: UITabBarController {
         
         tabBar.barStyle = .black
         tabBar.isTranslucent = false
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont.bitcoinFontWith(size: 10)], for: .normal)
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont.bitcoinFontWith(size: 10)], for: .selected)
         if UserDefaults.standard.bool(forKey: "testnet") == true {
             tabBar.tintColor = .green
         } else {

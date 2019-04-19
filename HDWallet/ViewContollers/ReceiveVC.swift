@@ -49,8 +49,8 @@ class ReceiveVC: UIViewController {
         else if self.addressLabel.text == "" {
             getKeychainAddresses()
 //            self.tableView.reloadData()
-            self.qrImageView.qrString = self.p2pkhAddr
-            self.addressLabel.text = self.p2pkhAddr
+            self.qrImageView.qrString = self.bech32Addr
+            self.addressLabel.text = self.bech32Addr
             self.qrImageView.createQRCImage()
         }
     }

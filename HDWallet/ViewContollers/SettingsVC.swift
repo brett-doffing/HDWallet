@@ -78,6 +78,7 @@ extension SettingsVC: UITableViewDataSource {
         default:
             break
         }
+        cell.textLabel?.font = UIFont.bitcoinFontWith(size: 17)
         cell.textLabel?.textColor = .white
         cell.backgroundColor = .clear
         return cell
