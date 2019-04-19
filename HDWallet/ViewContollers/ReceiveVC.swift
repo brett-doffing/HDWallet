@@ -129,6 +129,7 @@ class ReceiveVC: UIViewController {
             self.bech32Addr = defaults.value(forKey: "testnetBECH32Address") as! String
             self.payCode = defaults.value(forKey: "testnetPaymentCode") as! String
         } else {
+            // FIXME: Bug where app was deleted, keeps the seed, new app installed, consequently with a seed, and there is no address in defaults.
             self.p2pkhAddr = defaults.value(forKey: "currentP2PKHAddress") as! String
             self.p2shAddr = defaults.value(forKey: "currentP2SHAddress") as! String
             self.bech32Addr = defaults.value(forKey: "currentBECH32Address") as! String
