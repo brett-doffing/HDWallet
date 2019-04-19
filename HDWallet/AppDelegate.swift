@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         // Default to testnet
-        if UserDefaults.standard.value(forKey: "testnet") as? Bool != false { UserDefaults.standard.set(true, forKey: "testnet") }
+        if UserDefaults.standard.value(forKey: "testnet") == nil { UserDefaults.standard.set(true, forKey: "testnet") }
         
         let tabBarVC = TabBarVC()
         let navigationController = RootNavigationContoller()
