@@ -30,6 +30,14 @@ class TabBarVC: UITabBarController {
     }
     
     private func setUpNavAndTabBars() {
+        let hamburgerButton = UIButton(type: .system)
+        hamburgerButton.setImage(UIImage(named: "hamburgerIcon"), for: .normal)
+        hamburgerButton.widthAnchor.constraint(equalToConstant: 32.0).isActive = true
+        hamburgerButton.heightAnchor.constraint(equalToConstant: 32.0).isActive = true
+        hamburgerButton.contentMode = .scaleAspectFit
+        hamburgerButton.addTarget(self, action: #selector(self.toggleLeftSidePanel), for: .touchUpInside)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: hamburgerButton)
+        
         if UserDefaults.standard.bool(forKey: "testnet") == true {
             tabBar.tintColor = .green
             navigationItem.title = "testnet"
@@ -37,12 +45,9 @@ class TabBarVC: UITabBarController {
             tabBar.tintColor = #colorLiteral(red: 0.9693624377, green: 0.5771938562, blue: 0.1013594046, alpha: 1)
             navigationItem.title = "bitcoin"
         }
-        
-        let hamburgerButton = UIButton(type: .system)
-        hamburgerButton.setImage(UIImage(named: "hamburgerIcon"), for: .normal)
-        hamburgerButton.widthAnchor.constraint(equalToConstant: 32.0).isActive = true
-        hamburgerButton.heightAnchor.constraint(equalToConstant: 32.0).isActive = true
-        hamburgerButton.contentMode = .scaleAspectFit
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: hamburgerButton)
+    }
+    
+    @objc func toggleLeftSidePanel() {
+        NotificationCenter.default.post(name: .toggleLeftSidePanel, object: nil)
     }
 }

@@ -16,11 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Default to testnet
         if UserDefaults.standard.value(forKey: "testnet") == nil { UserDefaults.standard.set(true, forKey: "testnet") }
         
-        let tabBarVC = TabBarVC()
-        let navigationController = RootNavigationContoller()
-        navigationController.viewControllers = [tabBarVC]
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window?.rootViewController = navigationController
+        let rootContainerViewController = RootContainerViewController()
+        self.window?.rootViewController = rootContainerViewController
         self.window?.makeKeyAndVisible()
         return true
     }

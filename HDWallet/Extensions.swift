@@ -4,6 +4,7 @@ import UIKit
 
 extension Notification.Name {
     static let scannedQRCode = Notification.Name("scannedQRCode")
+    static let toggleLeftSidePanel = Notification.Name("toggleLeftSidePanel")
 }
 
 extension UIFont {
