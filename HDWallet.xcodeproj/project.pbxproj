@@ -249,6 +249,7 @@
 				BC2D65E82204FF6B001C6DA3 /* Info.plist */,
 				BC2D65E02204FF6B001C6DA3 /* HDWallet.xcdatamodeld */,
 				BC074E7722580AFD00311107 /* KeychainPasswordItem.swift */,
+				BC744243225FE0B7000E4D45 /* Extensions.swift */,
 			);
 			path = HDWallet;
 			sourceTree = "<group>";
@@ -324,7 +325,6 @@
 				BC744241225E3512000E4D45 /* TransactionsVC.xib */,
 				BC744235225C19C9000E4D45 /* QRScanningView.swift */,
 				BC744239225CF7C8000E4D45 /* QRImageView.swift */,
-				BC744243225FE0B7000E4D45 /* Extensions.swift */,
 			);
 			path = ViewContollers;
 			sourceTree = "<group>";
