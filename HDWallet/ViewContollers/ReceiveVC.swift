@@ -64,12 +64,10 @@ class ReceiveVC: UIViewController {
     private func alertToCreateKeychain() {
         let alert = UIAlertController(title: "You have not created a wallet.", message: "Would you like to randomly create one, or create one from seed words?", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Randomly Generate", style: .default, handler: { [weak self] action in
-            self?.defaults.set(false, forKey: "testnet") // TODO: change default to testnet
             self?.randomlyGenerateSeed()
             self?.showSeedWordsVC()
         }))
         alert.addAction(UIAlertAction(title: "Enter Seed Words", style: .default, handler: { [weak self] action in
-            self?.defaults.set(false, forKey: "testnet") // TODO: change default to testnet
             self?.showSeedWordsVC()
         }))
         self.present(alert, animated: true)

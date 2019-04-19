@@ -12,6 +12,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // Default to testnet
+        if UserDefaults.standard.value(forKey: "testnet") as? Bool != false { UserDefaults.standard.set(true, forKey: "testnet") }
+        
         let tabBarVC = TabBarVC()
         let navigationController = RootNavigationContoller()
         navigationController.viewControllers = [tabBarVC]
