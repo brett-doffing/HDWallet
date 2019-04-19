@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		BC074E762257FABF00311107 /* iOSKeychainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC074E752257FABF00311107 /* iOSKeychainTests.swift */; };
 		BC074E7822580AFD00311107 /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC074E7722580AFD00311107 /* KeychainPasswordItem.swift */; };
+		BC08F8E6226A378E008D09FB /* Ubuntu-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BC08F8E5226A378E008D09FB /* Ubuntu-BoldItalic.ttf */; };
 		BC2D65DA2204FF6B001C6DA3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2D65D92204FF6B001C6DA3 /* AppDelegate.swift */; };
 		BC2D65E22204FF6B001C6DA3 /* HDWallet.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BC2D65E02204FF6B001C6DA3 /* HDWallet.xcdatamodeld */; };
 		BC2D65E42204FF6B001C6DA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC2D65E32204FF6B001C6DA3 /* Assets.xcassets */; };
@@ -107,6 +108,7 @@
 /* Begin PBXFileReference section */
 		BC074E752257FABF00311107 /* iOSKeychainTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSKeychainTests.swift; sourceTree = "<group>"; };
 		BC074E7722580AFD00311107 /* KeychainPasswordItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainPasswordItem.swift; sourceTree = "<group>"; };
+		BC08F8E5226A378E008D09FB /* Ubuntu-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-BoldItalic.ttf"; sourceTree = "<group>"; };
 		BC2D65D62204FF6B001C6DA3 /* HDWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HDWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC2D65D92204FF6B001C6DA3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BC2D65E12204FF6B001C6DA3 /* HDWallet.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HDWallet.xcdatamodel; sourceTree = "<group>"; };
@@ -250,6 +252,7 @@
 				BC2D65E02204FF6B001C6DA3 /* HDWallet.xcdatamodeld */,
 				BC074E7722580AFD00311107 /* KeychainPasswordItem.swift */,
 				BC744243225FE0B7000E4D45 /* Extensions.swift */,
+				BC08F8E5226A378E008D09FB /* Ubuntu-BoldItalic.ttf */,
 			);
 			path = HDWallet;
 			sourceTree = "<group>";
@@ -476,6 +479,7 @@
 			files = (
 				BC509D4F224D9386009E4F31 /* SeedWordsVC.xib in Resources */,
 				BC2D65E72204FF6B001C6DA3 /* LaunchScreen.storyboard in Resources */,
+				BC08F8E6226A378E008D09FB /* Ubuntu-BoldItalic.ttf in Resources */,
 				BC509D4B224C8A5D009E4F31 /* RootNavigationController.xib in Resources */,
 				BC509D49224C851F009E4F31 /* ReceiveVC.xib in Resources */,
 				BC74423E225E34E6000E4D45 /* SettingsVC.xib in Resources */,
