@@ -22,10 +22,10 @@ class TabBarVC: UITabBarController {
         let transactionsVC = TransactionsVC()
         transactionsVC.view.backgroundColor = .darkGray
         transactionsVC.tabBarItem = UITabBarItem(title: "Transactions", image: UIImage(named: "bitcoinIcon"), tag: 2)
-        let settingsVC = SettingsVC()
-        settingsVC.tabBarItem = UITabBarItem(title: "Settings", image: UIImage(named: "settingsIcon"), tag: 3)
+//        let settingsVC = SettingsVC()
+//        settingsVC.tabBarItem = UITabBarItem(title: "Settings", image: UIImage(named: "settingsIcon"), tag: 3)
         
-        let viewControllerList = [receiveVC, sendVC, transactionsVC, settingsVC]
+        let viewControllerList = [receiveVC, sendVC, transactionsVC]
         self.viewControllers = viewControllerList
     }
     
