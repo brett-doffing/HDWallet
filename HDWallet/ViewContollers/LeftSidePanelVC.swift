@@ -2,26 +2,27 @@
 
 import UIKit
 
-class LeftSidePanelVC: UIViewController {
-    @IBOutlet weak var tableView: UITableView!
+class LeftSidePanelVC: UITableViewController {
     weak var rootContainerVC: RootContainerViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.tableView = UITableView(frame: self.tableView.frame, style: .grouped)
+        self.tableView.backgroundColor = .black
+        self.tableView.separatorColor = .white
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if let indexPath = self.tableView.indexPathForSelectedRow {
+        if let indexPath = tableView.indexPathForSelectedRow {
             self.tableView.deselectRow(at: indexPath, animated: true)
         }
     }
-}
-
-
-extension LeftSidePanelVC: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        print(UIApplication.shared.keyWindow?.rootViewController?.value(forKey: "_printHierarchy"))
+    
+    // MARK: Delegate
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //        print(UIApplication.shared.keyWindow?.rootViewController?.value(forKey: "_printHierarchy"))
         guard let rootNav = self.rootContainerVC?.rootNavigationController else { return }
         switch indexPath.row {
         case 0:
@@ -34,19 +35,17 @@ extension LeftSidePanelVC: UITableViewDelegate {
             return
         }
     }
-}
-
-extension LeftSidePanelVC: UITableViewDataSource {
     
-    func numberOfSections(in tableView: UITableView) -> Int {
+    // MARK: Data Source
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 4
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
         
         cell.textLabel?.font = UIFont.bitcoinFontWith(size: 17)
@@ -55,9 +54,13 @@ extension LeftSidePanelVC: UITableViewDataSource {
         
         switch indexPath.row {
         case 0:
-            cell.textLabel?.text = "Main"
+            cell.textLabel?.text = "Wallets"
         case 1:
-            cell.textLabel?.text = "Test"
+            cell.textLabel?.text = "Peers"
+        case 2:
+            cell.textLabel?.text = "Mix"
+        case 3:
+            cell.textLabel?.text = "Settings"
         default:
             return cell
         }
