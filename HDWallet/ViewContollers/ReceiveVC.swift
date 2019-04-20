@@ -180,6 +180,10 @@ class ReceiveVC: UIViewController {
             self.activityIndicator.stopAnimating()
         }
     }
+    
+    deinit {
+        print("deinitializing Receive VC")
+    }
 }
 
 extension ReceiveVC: UITableViewDelegate {

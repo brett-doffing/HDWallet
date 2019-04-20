@@ -100,4 +100,8 @@ class SeedWordsVC: UIViewController, UITextFieldDelegate {
             }
         }
     }
+    
+    deinit {
+        print("deinitializing SeedWords VC")
+    }
 }

@@ -44,6 +44,10 @@ class SendVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
             })
         }
     }
+    
+    deinit {
+        print("deinitializing Send VC")
+    }
 }
 
 extension SendVC: UITableViewDelegate {

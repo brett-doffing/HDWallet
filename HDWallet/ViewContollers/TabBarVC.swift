@@ -50,4 +50,8 @@ class TabBarVC: UITabBarController {
     @objc func toggleLeftSidePanel() {
         NotificationCenter.default.post(name: .toggleLeftSidePanel, object: nil)
     }
+    
+    deinit {
+        print("deinitializing TabBar VC")
+    }
 }

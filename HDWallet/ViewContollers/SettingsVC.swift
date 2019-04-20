@@ -35,6 +35,10 @@ class SettingsVC: UIViewController {
             self.present(alert, animated: true)
         }
     }
+    
+    deinit {
+        print("deinitializing Settings VC")
+    }
 }
 
 extension SettingsVC: UITableViewDelegate {

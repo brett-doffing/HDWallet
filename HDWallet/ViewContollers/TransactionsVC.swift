@@ -5,6 +5,9 @@ import UIKit
 class TransactionsVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
+    deinit {
+        print("deinitializing Transactions VC")
+    }
 }
 
 extension TransactionsVC: UITableViewDelegate {
