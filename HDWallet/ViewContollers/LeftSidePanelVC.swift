@@ -28,8 +28,9 @@ class LeftSidePanelVC: UITableViewController {
         case 0:
             rootNav.viewControllers = [TabBarVC()]
             return
-        case 1:
-            rootNav.viewControllers = [TestVC()]
+        case 3:
+            rootNav.viewControllers = [SettingsVC()]
+            NotificationCenter.default.post(name: .toggleLeftSidePanel, object: nil)
             return
         default:
             return
@@ -51,6 +52,7 @@ class LeftSidePanelVC: UITableViewController {
         cell.textLabel?.font = UIFont.bitcoinFontWith(size: 17)
         cell.textLabel?.textColor = .white
         cell.backgroundColor = .clear
+        cell.selectionStyle = .none
         
         switch indexPath.row {
         case 0:

@@ -9,6 +9,7 @@ class SettingsVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setUpNavBar()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -18,19 +19,38 @@ class SettingsVC: UIViewController {
         }
     }
     
+    private func setUpNavBar() {
+        self.setupHamburgerButton()
+        navigationItem.title = "settings"
+    }
+    
+    private func setupHamburgerButton() {
+        let hamburgerButton = UIButton(type: .system)
+        hamburgerButton.setImage(UIImage(named: "hamburgerIcon"), for: .normal)
+        hamburgerButton.widthAnchor.constraint(equalToConstant: 32.0).isActive = true
+        hamburgerButton.heightAnchor.constraint(equalToConstant: 32.0).isActive = true
+        hamburgerButton.contentMode = .scaleAspectFit
+        hamburgerButton.addTarget(self, action: #selector(self.toggleLeftSidePanel), for: .touchUpInside)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: hamburgerButton)
+    }
+    
+    @objc func toggleLeftSidePanel() {
+        NotificationCenter.default.post(name: .toggleLeftSidePanel, object: nil)
+    }
+    
     @objc func switchChanged(_ sender : UISwitch){
         let testnetSwitch = sender
-        if self.tabBarController?.tabBar.isHidden == true {
-            self.tabBarController?.tabBar.isHidden = false
+        if self.navigationItem.leftBarButtonItem == nil {
             self.defaults.set(testnetSwitch.isOn, forKey: "testnet")
+            self.setupHamburgerButton()
         } else {
             let alert = UIAlertController(title: "Changing Networks", message: "You will need to quit the app and close it out completely for network changes to take effect. Would you like to continue changing the network?", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
                 testnetSwitch.isOn ? testnetSwitch.setOn(false, animated: true) : testnetSwitch.setOn(true, animated: true)
             }))
             alert.addAction(UIAlertAction(title: "Continue", style: .default, handler: { [weak self] (action) in
-                self?.tabBarController?.tabBar.isHidden = true
                 self?.defaults.set(testnetSwitch.isOn, forKey: "testnet")
+                self?.navigationItem.leftBarButtonItem = nil
             }))
             self.present(alert, animated: true)
         }
