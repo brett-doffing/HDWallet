@@ -2,13 +2,16 @@
 
 import UIKit
 
-class SettingsVC: UIViewController {
+class SettingsVC: UITableViewController {
     
     let defaults = UserDefaults.standard
-    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.tableView = UITableView(frame: self.tableView.frame, style: .grouped)
+        self.tableView.backgroundColor = .black
+        self.tableView.separatorColor = .white
         self.setUpNavBar()
     }
     
@@ -56,13 +59,8 @@ class SettingsVC: UIViewController {
         }
     }
     
-    deinit {
-        print("deinitializing Settings VC")
-    }
-}
-
-extension SettingsVC: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    // MARK: Delegate
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
             return
@@ -73,19 +71,17 @@ extension SettingsVC: UITableViewDelegate {
             break
         }
     }
-}
-
-extension SettingsVC: UITableViewDataSource {
     
-    func numberOfSections(in tableView: UITableView) -> Int {
+    // MARK: Data Source
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 4
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
         
         switch indexPath.row {
@@ -108,4 +104,7 @@ extension SettingsVC: UITableViewDataSource {
         return cell
     }
     
+    deinit {
+        print("deinitializing Settings VC")
+    }
 }

@@ -12,7 +12,6 @@
 		BC08F8E6226A378E008D09FB /* Ubuntu-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BC08F8E5226A378E008D09FB /* Ubuntu-BoldItalic.ttf */; };
 		BC08F8E8226A582E008D09FB /* RootContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC08F8E7226A582E008D09FB /* RootContainerVC.swift */; };
 		BC08F8EA226A5C95008D09FB /* LeftSidePanelVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC08F8E9226A5C95008D09FB /* LeftSidePanelVC.swift */; };
-		BC08F8F2226A6FF7008D09FB /* LeftSidePanelVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC08F8F1226A6FF7008D09FB /* LeftSidePanelVC.xib */; };
 		BC2D65DA2204FF6B001C6DA3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2D65D92204FF6B001C6DA3 /* AppDelegate.swift */; };
 		BC2D65E22204FF6B001C6DA3 /* HDWallet.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BC2D65E02204FF6B001C6DA3 /* HDWallet.xcdatamodeld */; };
 		BC2D65E42204FF6B001C6DA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC2D65E32204FF6B001C6DA3 /* Assets.xcassets */; };
@@ -85,7 +84,6 @@
 		BC744238225C354A000E4D45 /* SendVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC744237225C354A000E4D45 /* SendVC.xib */; };
 		BC74423A225CF7C8000E4D45 /* QRImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC744239225CF7C8000E4D45 /* QRImageView.swift */; };
 		BC74423C225E34A9000E4D45 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC74423B225E34A9000E4D45 /* SettingsVC.swift */; };
-		BC74423E225E34E6000E4D45 /* SettingsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC74423D225E34E6000E4D45 /* SettingsVC.xib */; };
 		BC744240225E34FF000E4D45 /* TransactionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC74423F225E34FF000E4D45 /* TransactionsVC.swift */; };
 		BC744242225E3512000E4D45 /* TransactionsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC744241225E3512000E4D45 /* TransactionsVC.xib */; };
 		BC744244225FE0B7000E4D45 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC744243225FE0B7000E4D45 /* Extensions.swift */; };
@@ -114,7 +112,6 @@
 		BC08F8E5226A378E008D09FB /* Ubuntu-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-BoldItalic.ttf"; sourceTree = "<group>"; };
 		BC08F8E7226A582E008D09FB /* RootContainerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootContainerVC.swift; sourceTree = "<group>"; };
 		BC08F8E9226A5C95008D09FB /* LeftSidePanelVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftSidePanelVC.swift; sourceTree = "<group>"; };
-		BC08F8F1226A6FF7008D09FB /* LeftSidePanelVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LeftSidePanelVC.xib; sourceTree = "<group>"; };
 		BC2D65D62204FF6B001C6DA3 /* HDWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HDWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC2D65D92204FF6B001C6DA3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BC2D65E12204FF6B001C6DA3 /* HDWallet.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HDWallet.xcdatamodel; sourceTree = "<group>"; };
@@ -193,7 +190,6 @@
 		BC744237225C354A000E4D45 /* SendVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendVC.xib; sourceTree = "<group>"; };
 		BC744239225CF7C8000E4D45 /* QRImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRImageView.swift; sourceTree = "<group>"; };
 		BC74423B225E34A9000E4D45 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
-		BC74423D225E34E6000E4D45 /* SettingsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsVC.xib; sourceTree = "<group>"; };
 		BC74423F225E34FF000E4D45 /* TransactionsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsVC.swift; sourceTree = "<group>"; };
 		BC744241225E3512000E4D45 /* TransactionsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionsVC.xib; sourceTree = "<group>"; };
 		BC744243225FE0B7000E4D45 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -319,6 +315,7 @@
 		BC7365032232CB3C009E2533 /* ViewContollers */ = {
 			isa = PBXGroup;
 			children = (
+				BC08F8E7226A582E008D09FB /* RootContainerVC.swift */,
 				BC509D46224C82F0009E4F31 /* RootNavigationController.swift */,
 				BC509D4A224C8A5D009E4F31 /* RootNavigationController.xib */,
 				BC74422D225BBB66000E4D45 /* TabBarVC.swift */,
@@ -329,14 +326,11 @@
 				BC744231225BFAA6000E4D45 /* SendVC.swift */,
 				BC744237225C354A000E4D45 /* SendVC.xib */,
 				BC74423B225E34A9000E4D45 /* SettingsVC.swift */,
-				BC74423D225E34E6000E4D45 /* SettingsVC.xib */,
 				BC74423F225E34FF000E4D45 /* TransactionsVC.swift */,
 				BC744241225E3512000E4D45 /* TransactionsVC.xib */,
 				BC744235225C19C9000E4D45 /* QRScanningView.swift */,
 				BC744239225CF7C8000E4D45 /* QRImageView.swift */,
-				BC08F8E7226A582E008D09FB /* RootContainerVC.swift */,
 				BC08F8E9226A5C95008D09FB /* LeftSidePanelVC.swift */,
-				BC08F8F1226A6FF7008D09FB /* LeftSidePanelVC.xib */,
 			);
 			path = ViewContollers;
 			sourceTree = "<group>";
@@ -491,11 +485,9 @@
 				BC08F8E6226A378E008D09FB /* Ubuntu-BoldItalic.ttf in Resources */,
 				BC509D4B224C8A5D009E4F31 /* RootNavigationController.xib in Resources */,
 				BC509D49224C851F009E4F31 /* ReceiveVC.xib in Resources */,
-				BC74423E225E34E6000E4D45 /* SettingsVC.xib in Resources */,
 				BC744242225E3512000E4D45 /* TransactionsVC.xib in Resources */,
 				BC744238225C354A000E4D45 /* SendVC.xib in Resources */,
 				BC2D65E42204FF6B001C6DA3 /* Assets.xcassets in Resources */,
-				BC08F8F2226A6FF7008D09FB /* LeftSidePanelVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
