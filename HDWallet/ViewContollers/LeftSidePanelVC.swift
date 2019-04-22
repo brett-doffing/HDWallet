@@ -9,7 +9,7 @@ class LeftSidePanelVC: UITableViewController {
         super.viewDidLoad()
         
         self.tableView = UITableView(frame: self.tableView.frame, style: .grouped)
-        self.tableView.backgroundColor = .black
+        self.tableView.backgroundColor = .darkGray
         self.tableView.separatorColor = .white
     }
     
@@ -27,14 +27,12 @@ class LeftSidePanelVC: UITableViewController {
         switch indexPath.row {
         case 0:
             rootNav.viewControllers = [TabBarVC()]
-            return
         case 3:
             rootNav.viewControllers = [SettingsVC()]
-            NotificationCenter.default.post(name: .toggleLeftSidePanel, object: nil)
-            return
         default:
             return
         }
+        NotificationCenter.default.post(name: .toggleLeftSidePanel, object: nil)
     }
     
     // MARK: Data Source
@@ -58,9 +56,9 @@ class LeftSidePanelVC: UITableViewController {
         case 0:
             cell.textLabel?.text = "Wallets"
         case 1:
-            cell.textLabel?.text = "Peers"
+            cell.textLabel?.text = "Watch-Only"
         case 2:
-            cell.textLabel?.text = "Mix"
+            cell.textLabel?.text = "Node(s)"
         case 3:
             cell.textLabel?.text = "Settings"
         default:
