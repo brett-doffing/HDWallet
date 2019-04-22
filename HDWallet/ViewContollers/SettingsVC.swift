@@ -43,20 +43,7 @@ class SettingsVC: UITableViewController {
     
     @objc func switchChanged(_ sender : UISwitch){
         let testnetSwitch = sender
-        if self.navigationItem.leftBarButtonItem == nil {
-            self.defaults.set(testnetSwitch.isOn, forKey: "testnet")
-            self.setupHamburgerButton()
-        } else {
-            let alert = UIAlertController(title: "Changing Networks", message: "You will need to quit the app and close it out completely for network changes to take effect. Would you like to continue changing the network?", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
-                testnetSwitch.isOn ? testnetSwitch.setOn(false, animated: true) : testnetSwitch.setOn(true, animated: true)
-            }))
-            alert.addAction(UIAlertAction(title: "Continue", style: .default, handler: { [weak self] (action) in
-                self?.defaults.set(testnetSwitch.isOn, forKey: "testnet")
-                self?.navigationItem.leftBarButtonItem = nil
-            }))
-            self.present(alert, animated: true)
-        }
+        self.defaults.set(testnetSwitch.isOn, forKey: "testnet")
     }
     
     // MARK: Delegate
