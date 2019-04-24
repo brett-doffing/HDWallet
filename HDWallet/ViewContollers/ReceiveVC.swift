@@ -32,11 +32,9 @@ class ReceiveVC: UIViewController {
         self.view.addGestureRecognizer(refreshSwipe)
         
         if self.defaults.bool(forKey: "testnet") == true {
-//            self.tableView.separatorColor = .green
             self.copiedLabel.backgroundColor = .green
             self.activityIndicator.color = .green
         } else {
-//            self.tableView.separatorColor = #colorLiteral(red: 0.9693624377, green: 0.5771938562, blue: 0.1013594046, alpha: 1)
             self.copiedLabel.backgroundColor = #colorLiteral(red: 0.9693624377, green: 0.5771938562, blue: 0.1013594046, alpha: 1)
             self.activityIndicator.color = #colorLiteral(red: 0.9693624377, green: 0.5771938562, blue: 0.1013594046, alpha: 1)
         }
@@ -44,14 +42,30 @@ class ReceiveVC: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+//        defaults.setValue(nil, forKey: "currentWalletType")
         checkForSeed()
         if !self.hasSeed { alertToCreateKeychain() }
         else if self.addressLabel.text == "" {
             getKeychainAddresses()
-//            self.tableView.reloadData()
-            self.qrImageView.qrString = self.bech32Addr
-            self.addressLabel.text = self.bech32Addr
-            self.qrImageView.createQRCImage()
+            if let walletType = self.defaults.value(forKey: "currentWalletType") as? String {
+                switch walletType {
+                case "P2PKH":
+                    self.qrImageView.qrString = self.p2pkhAddr
+                    self.addressLabel.text = self.p2pkhAddr
+                case "P2SH":
+                    self.qrImageView.qrString = self.p2shAddr
+                    self.addressLabel.text = self.p2shAddr
+                case "Bech32":
+                    self.qrImageView.qrString = self.bech32Addr
+                    self.addressLabel.text = self.bech32Addr
+                case "PayNym":
+                    self.qrImageView.qrString = self.payCode
+                    self.addressLabel.text = self.payCode
+                default:
+                    return
+                }
+                self.qrImageView.createQRCImage()
+            }
         }
     }
     
@@ -101,7 +115,9 @@ class ReceiveVC: UIViewController {
         defaults.setValue(kcT49?.address, forKey: "testnetP2SHAddress")
         defaults.setValue(kcT84?.address, forKey: "testnetBECH32Address")
         defaults.setValue(payCodeT, forKey: "testnetPaymentCode")
-        if UserDefaults.standard.bool(forKey: "testnet") == true {
+        defaults.set("P2PKH", forKey: "currentWalletType")
+        // FIXME: should default to testnet, but make sure true or set here.
+        if defaults.bool(forKey: "testnet") == true {
             self.p2pkhAddr = kcT44!.address
             self.p2shAddr = kcT49!.address
             self.bech32Addr = kcT84!.address
@@ -185,59 +201,7 @@ class ReceiveVC: UIViewController {
         print("deinitializing Receive VC")
     }
 }
-
-extension ReceiveVC: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.row {
-        case 0:
-            self.qrImageView.qrString = self.p2pkhAddr
-            self.addressLabel.text = self.p2pkhAddr
-        case 1:
-            self.qrImageView.qrString = self.p2shAddr
-            self.addressLabel.text = self.p2shAddr
-        case 2:
-            self.qrImageView.qrString = self.bech32Addr
-            self.addressLabel.text = self.bech32Addr
-        case 3:
-            self.qrImageView.qrString = self.payCode
-            self.addressLabel.text = self.payCode
-        default:
-            return
-        }
-        self.qrImageView.createQRCImage()
-    }
-}
-
-extension ReceiveVC: UITableViewDataSource {
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-
-        switch indexPath.row {
-        case 0:
-            cell.textLabel?.text = "P2PKH"
-        case 1:
-            cell.textLabel?.text = "Segwit (P2SH)"
-        case 2:
-            cell.textLabel?.text = "Segwit (Bech 32)"
-        case 3:
-            cell.textLabel?.text = "Payment Code"
-        default:
-            return cell
-        }
-        return cell
-    }
-    
-}
-
 extension ReceiveVC {
     func deleteBTCKeychainData() {
         let kcpi = KeychainPasswordItem(service: "HDWallet", account: "user")
@@ -251,5 +215,6 @@ extension ReceiveVC {
         defaults.setValue(nil, forKey: "testnetBECH32Address")
         defaults.setValue(nil, forKey: "testnetPaymentCode")
         defaults.setValue(nil, forKey: "testnet")
+        defaults.setValue(nil, forKey: "currentWalletType")
     }
 }

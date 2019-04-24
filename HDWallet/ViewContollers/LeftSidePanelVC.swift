@@ -6,7 +6,7 @@ class LeftSidePanelVC: UITableViewController {
     
     weak var rootContainerVC: RootContainerViewController?
     var walletCellExpanded = false
-    let walletCellData = ["P2PKH","P2SH (Segwit)","Bech32 (Segwit)","PayNms"]
+    let walletCellData = ["P2PKH","P2SH (Segwit)","Bech32 (Segwit)","PayNyms"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,11 +29,16 @@ class LeftSidePanelVC: UITableViewController {
         guard let rootNav = self.rootContainerVC?.rootNavigationController else { return }
         switch indexPath.section {
         case 0:
-            if indexPath.row == 0 {
-                rootNav.viewControllers = [WalletVC()]
-            } else if indexPath.row == 1 {
-                
+            if indexPath.row == 1 {
+                UserDefaults.standard.set("P2PKH", forKey: "currentWalletType")
+            } else if indexPath.row == 2 {
+                UserDefaults.standard.set("P2SH", forKey: "currentWalletType")
+            } else if indexPath.row == 3 {
+                UserDefaults.standard.set("Bech32", forKey: "currentWalletType")
+            } else if indexPath.row == 4 {
+                UserDefaults.standard.set("PayNym", forKey: "currentWalletType")
             }
+            rootNav.viewControllers = [WalletVC()]
         case 3:
             rootNav.viewControllers = [SettingsVC()]
         default:
