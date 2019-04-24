@@ -1,9 +1,9 @@
-// TabBarVC.swift
+// WalletVC.swift
 
 import UIKit
 import SpriteKit
 
-class TabBarVC: UITabBarController {
+class WalletVC: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()

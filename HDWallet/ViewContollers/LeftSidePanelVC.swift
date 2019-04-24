@@ -30,7 +30,7 @@ class LeftSidePanelVC: UITableViewController {
         switch indexPath.section {
         case 0:
             if indexPath.row == 0 {
-                rootNav.viewControllers = [TabBarVC()]
+                rootNav.viewControllers = [WalletVC()]
             } else if indexPath.row == 1 {
                 
             }

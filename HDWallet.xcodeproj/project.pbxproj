@@ -78,7 +78,7 @@
 		BC744228225B9C89000E4D45 /* ecmult_gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC74420E225B9C89000E4D45 /* ecmult_gen.swift */; };
 		BC744229225B9C89000E4D45 /* scalar_8x32.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC74420F225B9C89000E4D45 /* scalar_8x32.swift */; };
 		BC74422A225B9C89000E4D45 /* gen_context.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC744210225B9C89000E4D45 /* gen_context.swift */; };
-		BC74422E225BBB66000E4D45 /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC74422D225BBB66000E4D45 /* TabBarVC.swift */; };
+		BC74422E225BBB66000E4D45 /* WalletVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC74422D225BBB66000E4D45 /* WalletVC.swift */; };
 		BC744232225BFAA6000E4D45 /* SendVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC744231225BFAA6000E4D45 /* SendVC.swift */; };
 		BC744236225C19C9000E4D45 /* QRScanningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC744235225C19C9000E4D45 /* QRScanningView.swift */; };
 		BC744238225C354A000E4D45 /* SendVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC744237225C354A000E4D45 /* SendVC.xib */; };
@@ -184,7 +184,7 @@
 		BC74420E225B9C89000E4D45 /* ecmult_gen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ecmult_gen.swift; sourceTree = "<group>"; };
 		BC74420F225B9C89000E4D45 /* scalar_8x32.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = scalar_8x32.swift; sourceTree = "<group>"; };
 		BC744210225B9C89000E4D45 /* gen_context.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = gen_context.swift; sourceTree = "<group>"; };
-		BC74422D225BBB66000E4D45 /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
+		BC74422D225BBB66000E4D45 /* WalletVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletVC.swift; sourceTree = "<group>"; };
 		BC744231225BFAA6000E4D45 /* SendVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendVC.swift; sourceTree = "<group>"; };
 		BC744235225C19C9000E4D45 /* QRScanningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScanningView.swift; sourceTree = "<group>"; };
 		BC744237225C354A000E4D45 /* SendVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendVC.xib; sourceTree = "<group>"; };
@@ -318,7 +318,7 @@
 				BC08F8E7226A582E008D09FB /* RootContainerVC.swift */,
 				BC509D46224C82F0009E4F31 /* RootNavigationController.swift */,
 				BC509D4A224C8A5D009E4F31 /* RootNavigationController.xib */,
-				BC74422D225BBB66000E4D45 /* TabBarVC.swift */,
+				BC74422D225BBB66000E4D45 /* WalletVC.swift */,
 				BC509D4C224D9373009E4F31 /* SeedWordsVC.swift */,
 				BC509D4E224D9386009E4F31 /* SeedWordsVC.xib */,
 				BC509D42224C7EC3009E4F31 /* ReceiveVC.swift */,
@@ -527,7 +527,7 @@
 				BC744229225B9C89000E4D45 /* scalar_8x32.swift in Sources */,
 				BC73650D223442BE009E2533 /* BTCTransaction.swift in Sources */,
 				BC744232225BFAA6000E4D45 /* SendVC.swift in Sources */,
-				BC74422E225BBB66000E4D45 /* TabBarVC.swift in Sources */,
+				BC74422E225BBB66000E4D45 /* WalletVC.swift in Sources */,
 				BC74421B225B9C89000E4D45 /* eckey_impl.swift in Sources */,
 				BC509CFA22433A11009E4F31 /* BIP47.swift in Sources */,
 				BC744226225B9C89000E4D45 /* field_impl.swift in Sources */,

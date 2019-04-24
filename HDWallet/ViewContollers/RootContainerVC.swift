@@ -14,8 +14,8 @@ class RootContainerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let tabBarVC = TabBarVC()
-        self.rootNavigationController.viewControllers = [tabBarVC]
+        let walletVC = WalletVC()
+        self.rootNavigationController.viewControllers = [walletVC]
         view.addSubview(self.rootNavigationController.view)
         addChild(self.rootNavigationController)
         self.rootNavigationController.didMove(toParent: self)
