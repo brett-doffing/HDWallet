@@ -34,8 +34,6 @@
 		BC509D41224AC310009E4F31 /* BTCKeychainType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC509D40224AC310009E4F31 /* BTCKeychainType.swift */; };
 		BC509D43224C7EC3009E4F31 /* ReceiveVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC509D42224C7EC3009E4F31 /* ReceiveVC.swift */; };
 		BC509D47224C82F0009E4F31 /* RootNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC509D46224C82F0009E4F31 /* RootNavigationController.swift */; };
-		BC509D49224C851F009E4F31 /* ReceiveVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC509D48224C851F009E4F31 /* ReceiveVC.xib */; };
-		BC509D4B224C8A5D009E4F31 /* RootNavigationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC509D4A224C8A5D009E4F31 /* RootNavigationController.xib */; };
 		BC509D4D224D9373009E4F31 /* SeedWordsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC509D4C224D9373009E4F31 /* SeedWordsVC.swift */; };
 		BC509D4F224D9386009E4F31 /* SeedWordsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC509D4E224D9386009E4F31 /* SeedWordsVC.xib */; };
 		BC54B9282240466200FCE894 /* BTCScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC54B9272240466200FCE894 /* BTCScript.swift */; };
@@ -81,11 +79,9 @@
 		BC74422E225BBB66000E4D45 /* WalletVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC74422D225BBB66000E4D45 /* WalletVC.swift */; };
 		BC744232225BFAA6000E4D45 /* SendVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC744231225BFAA6000E4D45 /* SendVC.swift */; };
 		BC744236225C19C9000E4D45 /* QRScanningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC744235225C19C9000E4D45 /* QRScanningView.swift */; };
-		BC744238225C354A000E4D45 /* SendVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC744237225C354A000E4D45 /* SendVC.xib */; };
 		BC74423A225CF7C8000E4D45 /* QRImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC744239225CF7C8000E4D45 /* QRImageView.swift */; };
 		BC74423C225E34A9000E4D45 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC74423B225E34A9000E4D45 /* SettingsVC.swift */; };
 		BC744240225E34FF000E4D45 /* TransactionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC74423F225E34FF000E4D45 /* TransactionsVC.swift */; };
-		BC744242225E3512000E4D45 /* TransactionsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC744241225E3512000E4D45 /* TransactionsVC.xib */; };
 		BC744244225FE0B7000E4D45 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC744243225FE0B7000E4D45 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
@@ -140,8 +136,6 @@
 		BC509D40224AC310009E4F31 /* BTCKeychainType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTCKeychainType.swift; sourceTree = "<group>"; };
 		BC509D42224C7EC3009E4F31 /* ReceiveVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveVC.swift; sourceTree = "<group>"; };
 		BC509D46224C82F0009E4F31 /* RootNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootNavigationController.swift; sourceTree = "<group>"; };
-		BC509D48224C851F009E4F31 /* ReceiveVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReceiveVC.xib; sourceTree = "<group>"; };
-		BC509D4A224C8A5D009E4F31 /* RootNavigationController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RootNavigationController.xib; sourceTree = "<group>"; };
 		BC509D4C224D9373009E4F31 /* SeedWordsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedWordsVC.swift; sourceTree = "<group>"; };
 		BC509D4E224D9386009E4F31 /* SeedWordsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SeedWordsVC.xib; sourceTree = "<group>"; };
 		BC54B9272240466200FCE894 /* BTCScript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTCScript.swift; sourceTree = "<group>"; };
@@ -187,11 +181,9 @@
 		BC74422D225BBB66000E4D45 /* WalletVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletVC.swift; sourceTree = "<group>"; };
 		BC744231225BFAA6000E4D45 /* SendVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendVC.swift; sourceTree = "<group>"; };
 		BC744235225C19C9000E4D45 /* QRScanningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScanningView.swift; sourceTree = "<group>"; };
-		BC744237225C354A000E4D45 /* SendVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendVC.xib; sourceTree = "<group>"; };
 		BC744239225CF7C8000E4D45 /* QRImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRImageView.swift; sourceTree = "<group>"; };
 		BC74423B225E34A9000E4D45 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		BC74423F225E34FF000E4D45 /* TransactionsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsVC.swift; sourceTree = "<group>"; };
-		BC744241225E3512000E4D45 /* TransactionsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionsVC.xib; sourceTree = "<group>"; };
 		BC744243225FE0B7000E4D45 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -317,17 +309,13 @@
 			children = (
 				BC08F8E7226A582E008D09FB /* RootContainerVC.swift */,
 				BC509D46224C82F0009E4F31 /* RootNavigationController.swift */,
-				BC509D4A224C8A5D009E4F31 /* RootNavigationController.xib */,
 				BC74422D225BBB66000E4D45 /* WalletVC.swift */,
 				BC509D4C224D9373009E4F31 /* SeedWordsVC.swift */,
 				BC509D4E224D9386009E4F31 /* SeedWordsVC.xib */,
 				BC509D42224C7EC3009E4F31 /* ReceiveVC.swift */,
-				BC509D48224C851F009E4F31 /* ReceiveVC.xib */,
 				BC744231225BFAA6000E4D45 /* SendVC.swift */,
-				BC744237225C354A000E4D45 /* SendVC.xib */,
 				BC74423B225E34A9000E4D45 /* SettingsVC.swift */,
 				BC74423F225E34FF000E4D45 /* TransactionsVC.swift */,
-				BC744241225E3512000E4D45 /* TransactionsVC.xib */,
 				BC744235225C19C9000E4D45 /* QRScanningView.swift */,
 				BC744239225CF7C8000E4D45 /* QRImageView.swift */,
 				BC08F8E9226A5C95008D09FB /* LeftSidePanelVC.swift */,
@@ -483,10 +471,6 @@
 				BC509D4F224D9386009E4F31 /* SeedWordsVC.xib in Resources */,
 				BC2D65E72204FF6B001C6DA3 /* LaunchScreen.storyboard in Resources */,
 				BC08F8E6226A378E008D09FB /* Ubuntu-BoldItalic.ttf in Resources */,
-				BC509D4B224C8A5D009E4F31 /* RootNavigationController.xib in Resources */,
-				BC509D49224C851F009E4F31 /* ReceiveVC.xib in Resources */,
-				BC744242225E3512000E4D45 /* TransactionsVC.xib in Resources */,
-				BC744238225C354A000E4D45 /* SendVC.xib in Resources */,
 				BC2D65E42204FF6B001C6DA3 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

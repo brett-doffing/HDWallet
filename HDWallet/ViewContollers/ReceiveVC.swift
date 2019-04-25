@@ -8,11 +8,10 @@ class ReceiveVC: UIViewController {
     var hasSeed: Bool = false
     let defaults = UserDefaults.standard
     let service = BlockstreamService.shared
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var qrImageView: QRImageView!
-    @IBOutlet weak var addressLabel: UILabel!
-    @IBOutlet weak var copiedLabel: UILabel!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    var qrImageView = QRImageView(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
+    var addressLabel = UILabel()
+    var copiedLabel = UILabel()
+    var activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
     
     var p2pkhAddr = String()
     var p2shAddr = String()
@@ -25,11 +24,45 @@ class ReceiveVC: UIViewController {
         // Comment out to keep keychain data.
 //        deleteBTCKeychainData()
         
-        let copyLabelTap = UITapGestureRecognizer(target: self, action: #selector(copyAddressToClipboard))
-        self.addressLabel.addGestureRecognizer(copyLabelTap)
-        let refreshSwipe = UISwipeGestureRecognizer(target: self, action: #selector(refreshAddresses))
-        refreshSwipe.direction = .down
-        self.view.addGestureRecognizer(refreshSwipe)
+        self.view.backgroundColor = .white
+        
+        self.addressLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(self.addressLabel)
+        self.addressLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        self.addressLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        self.addressLabel.heightAnchor.constraint(equalToConstant: 75).isActive = true
+        self.addressLabel.topAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+        self.addressLabel.textColor = .white
+        self.addressLabel.backgroundColor = .black
+        self.addressLabel.font = UIFont.bitcoinFontWith(size: 17)
+        self.addressLabel.textAlignment = .center
+        self.addressLabel.text = ""
+        self.addressLabel.isUserInteractionEnabled = true
+        
+        self.qrImageView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(self.qrImageView)
+        self.qrImageView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 25).isActive = true
+        self.qrImageView.bottomAnchor.constraint(equalTo: self.view.centerYAnchor, constant: -25).isActive = true
+        self.qrImageView.heightAnchor.constraint(equalTo: self.qrImageView.widthAnchor, multiplier: 1.0, constant: 0).isActive = true // Aspect ratio 1:1
+        self.qrImageView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        
+        self.copiedLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(self.copiedLabel)
+        self.copiedLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        self.copiedLabel.widthAnchor.constraint(equalToConstant: 175).isActive = true
+        self.copiedLabel.centerYAnchor.constraint(equalTo: self.qrImageView.centerYAnchor).isActive = true
+        self.copiedLabel.centerXAnchor.constraint(equalTo: self.qrImageView.centerXAnchor).isActive = true
+        self.copiedLabel.alpha = 0
+        self.copiedLabel.text = "Copied to Clipboard"
+        self.copiedLabel.textColor = .white
+        self.copiedLabel.font = UIFont.bitcoinFontWith(size: 17)
+        self.copiedLabel.textAlignment = .center
+        
+        
+        self.activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(self.activityIndicator)
+        self.activityIndicator.centerYAnchor.constraint(equalTo: self.qrImageView.centerYAnchor).isActive = true
+        self.activityIndicator.centerXAnchor.constraint(equalTo: self.qrImageView.centerXAnchor).isActive = true
         
         if self.defaults.bool(forKey: "testnet") == true {
             self.copiedLabel.backgroundColor = .green
@@ -38,6 +71,12 @@ class ReceiveVC: UIViewController {
             self.copiedLabel.backgroundColor = #colorLiteral(red: 0.9693624377, green: 0.5771938562, blue: 0.1013594046, alpha: 1)
             self.activityIndicator.color = #colorLiteral(red: 0.9693624377, green: 0.5771938562, blue: 0.1013594046, alpha: 1)
         }
+        
+        let copyLabelTap = UITapGestureRecognizer(target: self, action: #selector(copyAddressToClipboard))
+        self.addressLabel.addGestureRecognizer(copyLabelTap)
+        let refreshSwipe = UISwipeGestureRecognizer(target: self, action: #selector(refreshAddresses))
+        refreshSwipe.direction = .down
+        self.view.addGestureRecognizer(refreshSwipe)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -52,18 +91,23 @@ class ReceiveVC: UIViewController {
                 case "P2PKH":
                     self.qrImageView.qrString = self.p2pkhAddr
                     self.addressLabel.text = self.p2pkhAddr
+                    self.addressLabel.numberOfLines = 1
                 case "P2SH":
                     self.qrImageView.qrString = self.p2shAddr
                     self.addressLabel.text = self.p2shAddr
+                    self.addressLabel.numberOfLines = 1
                 case "Bech32":
                     self.qrImageView.qrString = self.bech32Addr
                     self.addressLabel.text = self.bech32Addr
+                    self.addressLabel.numberOfLines = 1
                 case "PayNym":
                     self.qrImageView.qrString = self.payCode
                     self.addressLabel.text = self.payCode
+                    self.addressLabel.numberOfLines = 3
                 default:
                     return
                 }
+                self.addressLabel.adjustsFontSizeToFitWidth = true
                 self.qrImageView.createQRCImage()
             }
         }
