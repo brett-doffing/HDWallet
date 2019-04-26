@@ -210,29 +210,35 @@ class ReceiveVC: UIViewController {
         self.activityIndicator.startAnimating()
         let dispatchGroup = DispatchGroup()
         dispatchGroup.enter()
-        self.service.getTransactions(forAddress: self.p2pkhAddr) { (responseData, error) in
+        self.service.getTransactions(forAddress: self.p2pkhAddr) { (bro, error) in
             if error != nil {
                 print(error.debugDescription)
             } else {
-                print(responseData!)
+                for property in bro!.properties() {
+                    print(property)
+                }
             }
             dispatchGroup.leave()
         }
         dispatchGroup.enter()
-        self.service.getTransactions(forAddress: self.p2shAddr) { (responseData, error) in
+        self.service.getTransactions(forAddress: self.p2shAddr) { (bro, error) in
             if error != nil {
                 print(error.debugDescription)
             } else {
-                print(responseData!)
+                for property in bro!.properties() {
+                    print(property)
+                }
             }
             dispatchGroup.leave()
         }
         dispatchGroup.enter()
-        self.service.getTransactions(forAddress: self.bech32Addr) { (responseData, error) in
+        self.service.getTransactions(forAddress: self.bech32Addr) { (bro, error) in
             if error != nil {
                 print(error.debugDescription)
             } else {
-                print(responseData!)
+                for property in bro!.properties() {
+                    print(property)
+                }
             }
             dispatchGroup.leave()
         }
