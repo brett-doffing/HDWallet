@@ -1,35 +1,49 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18D42" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Address" representedClassName="Address" syncable="YES" codeGenerationType="class">
-        <attribute name="format" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="index" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="isChangeAddr" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="string" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="keys" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Keys" inverseName="address" inverseEntity="Keys" syncable="YES"/>
-        <relationship name="wallet" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Wallet" inverseName="addresses" inverseEntity="Wallet" syncable="YES"/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18E226" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Block" representedClassName="Block" syncable="YES" codeGenerationType="class">
+        <attribute name="blockHash" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="height" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="time" optional="YES" attributeType="Binary" syncable="YES"/>
+        <relationship name="transaction" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Transaction" inverseName="block" inverseEntity="Transaction" syncable="YES"/>
     </entity>
-    <entity name="Keys" representedClassName="Keys" syncable="YES" codeGenerationType="class">
-        <attribute name="prvKey" optional="YES" attributeType="Binary" syncable="YES"/>
-        <attribute name="pubKey" optional="YES" attributeType="Binary" syncable="YES"/>
-        <relationship name="address" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Address" inverseName="keys" inverseEntity="Address" syncable="YES"/>
+    <entity name="Keychain" representedClassName="Keychain" syncable="YES" codeGenerationType="class">
+        <attribute name="network" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="txos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TXO" inverseName="keychain" inverseEntity="TXO" syncable="YES"/>
+    </entity>
+    <entity name="PayNym" representedClassName="PayNym" syncable="YES" codeGenerationType="class">
+        <attribute name="index" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="paymentCode" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="version" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
+    <entity name="Transaction" representedClassName="Transaction" syncable="YES" codeGenerationType="class">
+        <attribute name="size" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="timelock" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="txid" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="version" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="vsize" optional="YES" attributeType="Binary" syncable="YES"/>
+        <relationship name="block" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Block" inverseName="transaction" inverseEntity="Block" syncable="YES"/>
+        <relationship name="txos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TXO" inverseName="transaction" inverseEntity="TXO" syncable="YES"/>
     </entity>
     <entity name="TXO" representedClassName="TXO" syncable="YES" codeGenerationType="class">
-        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
-    </entity>
-    <entity name="Wallet" representedClassName="Wallet" syncable="YES" codeGenerationType="class">
-        <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="hasPassword" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="numSeedWords" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="password" optional="YES" attributeType="Transformable" syncable="YES"/>
-        <attribute name="path" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="seedWords" optional="YES" attributeType="Transformable" syncable="YES"/>
-        <relationship name="addresses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Address" inverseName="wallet" inverseEntity="Address" syncable="YES"/>
+        <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="satoshis" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="scriptPubKey" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="sequence" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="sig" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="txid" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="unspent" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="vout" optional="YES" attributeType="Binary" syncable="YES"/>
+        <relationship name="keychain" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Keychain" inverseName="txos" inverseEntity="Keychain" syncable="YES"/>
+        <relationship name="transaction" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Transaction" inverseName="txos" inverseEntity="Transaction" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Address" positionX="-523.44921875" positionY="-70.90234375" width="128" height="133"/>
-        <element name="Keys" positionX="-250.29296875" positionY="-76.5078125" width="128" height="88"/>
-        <element name="Wallet" positionX="-707.3203125" positionY="-101.4453125" width="128" height="163"/>
-        <element name="TXO" positionX="-450" positionY="18" width="128" height="60"/>
+        <element name="Block" positionX="-864.14453125" positionY="-306.58984375" width="128" height="103"/>
+        <element name="Keychain" positionX="-714.9453125" positionY="-398.83203125" width="128" height="88"/>
+        <element name="PayNym" positionX="-1004.0546875" positionY="-483.546875" width="128" height="105"/>
+        <element name="Transaction" positionX="-1047.078125" positionY="-261.87890625" width="128" height="148"/>
+        <element name="TXO" positionX="-407.3203125" positionY="-211.05078125" width="128" height="208"/>
     </elements>
 </model>
