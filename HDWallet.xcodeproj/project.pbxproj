@@ -12,6 +12,7 @@
 		BC08F8E6226A378E008D09FB /* Ubuntu-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BC08F8E5226A378E008D09FB /* Ubuntu-BoldItalic.ttf */; };
 		BC08F8E8226A582E008D09FB /* RootContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC08F8E7226A582E008D09FB /* RootContainerVC.swift */; };
 		BC08F8EA226A5C95008D09FB /* LeftSidePanelVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC08F8E9226A5C95008D09FB /* LeftSidePanelVC.swift */; };
+		BC08F8F82273A6E0008D09FB /* BlockstreamResponseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC08F8F72273A6E0008D09FB /* BlockstreamResponseObject.swift */; };
 		BC2D65DA2204FF6B001C6DA3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2D65D92204FF6B001C6DA3 /* AppDelegate.swift */; };
 		BC2D65E22204FF6B001C6DA3 /* HDWallet.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BC2D65E02204FF6B001C6DA3 /* HDWallet.xcdatamodeld */; };
 		BC2D65E42204FF6B001C6DA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC2D65E32204FF6B001C6DA3 /* Assets.xcassets */; };
@@ -108,6 +109,7 @@
 		BC08F8E5226A378E008D09FB /* Ubuntu-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-BoldItalic.ttf"; sourceTree = "<group>"; };
 		BC08F8E7226A582E008D09FB /* RootContainerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootContainerVC.swift; sourceTree = "<group>"; };
 		BC08F8E9226A5C95008D09FB /* LeftSidePanelVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftSidePanelVC.swift; sourceTree = "<group>"; };
+		BC08F8F72273A6E0008D09FB /* BlockstreamResponseObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockstreamResponseObject.swift; sourceTree = "<group>"; };
 		BC2D65D62204FF6B001C6DA3 /* HDWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HDWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC2D65D92204FF6B001C6DA3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BC2D65E12204FF6B001C6DA3 /* HDWallet.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HDWallet.xcdatamodel; sourceTree = "<group>"; };
@@ -327,6 +329,7 @@
 			isa = PBXGroup;
 			children = (
 				BC55826D2217D6E50004A40D /* BlockstreamService.swift */,
+				BC08F8F72273A6E0008D09FB /* BlockstreamResponseObject.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -537,6 +540,7 @@
 				BC74421A225B9C89000E4D45 /* ecdsa_impl.swift in Sources */,
 				BC7365072232CC18009E2533 /* ExtendedPrivateKey.swift in Sources */,
 				BC509D41224AC310009E4F31 /* BTCKeychainType.swift in Sources */,
+				BC08F8F82273A6E0008D09FB /* BlockstreamResponseObject.swift in Sources */,
 				BC74421F225B9C89000E4D45 /* group.swift in Sources */,
 				BC744223225B9C89000E4D45 /* secp256k1.swift in Sources */,
 				BC744221225B9C89000E4D45 /* util.swift in Sources */,
