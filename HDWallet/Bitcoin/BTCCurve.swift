@@ -10,6 +10,8 @@ class BTCCurve {
     let order = BInt(hex: "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141")
     
     private init() {
+        // TODO: Randomize context...
+        // https://bitcoin.stackexchange.com/questions/52254/c-secp256k1-what-is-the-purpose-of-secp256k1-context-randomize
         self.context = secp256k1_context_create([SECP256K1_FLAGS.SECP256K1_CONTEXT_SIGN, SECP256K1_FLAGS.SECP256K1_CONTEXT_VERIFY])
     }
     
