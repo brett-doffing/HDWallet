@@ -71,11 +71,11 @@ class LeftSidePanelVC: UITableViewController {
         case 0:
             if indexPath.row == 0 {
                 cell.textLabel?.text = "Wallet"
-                let walletAccessory = UIButton(frame: CGRect(x: cell.frame.size.width - 100, y: 5, width: 50, height: cell.frame.size.height - 10))
-                walletAccessory.setTitle("Type", for: .normal)
-                walletAccessory.setTitleColor(.lightGray, for: .normal)
-                walletAccessory.addTarget(self, action: #selector(self.expandWallets), for: .touchUpInside)
-                cell.addSubview(walletAccessory)
+//                let walletAccessory = UIButton(frame: CGRect(x: cell.frame.size.width - 100, y: 5, width: 50, height: cell.frame.size.height - 10))
+//                walletAccessory.setTitle("Type", for: .normal)
+//                walletAccessory.setTitleColor(.lightGray, for: .normal)
+//                walletAccessory.addTarget(self, action: #selector(self.expandWallets), for: .touchUpInside)
+//                cell.addSubview(walletAccessory)
             } else {
                 cell.textLabel?.text = self.walletCellData[indexPath.row - 1]
             }
