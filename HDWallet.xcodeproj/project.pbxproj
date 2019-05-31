@@ -14,7 +14,6 @@
 		BC08F8EA226A5C95008D09FB /* LeftSidePanelVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC08F8E9226A5C95008D09FB /* LeftSidePanelVC.swift */; };
 		BC08F8F82273A6E0008D09FB /* BlockstreamResponseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC08F8F72273A6E0008D09FB /* BlockstreamResponseObject.swift */; };
 		BC2D65DA2204FF6B001C6DA3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2D65D92204FF6B001C6DA3 /* AppDelegate.swift */; };
-		BC2D65E22204FF6B001C6DA3 /* HDWallet.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BC2D65E02204FF6B001C6DA3 /* HDWallet.xcdatamodeld */; };
 		BC2D65E42204FF6B001C6DA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC2D65E32204FF6B001C6DA3 /* Assets.xcassets */; };
 		BC2D65E72204FF6B001C6DA3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC2D65E52204FF6B001C6DA3 /* LaunchScreen.storyboard */; };
 		BC2D65FD2204FF6C001C6DA3 /* HDWalletUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2D65FC2204FF6C001C6DA3 /* HDWalletUITests.swift */; };
@@ -84,6 +83,7 @@
 		BC74423C225E34A9000E4D45 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC74423B225E34A9000E4D45 /* SettingsVC.swift */; };
 		BC744240225E34FF000E4D45 /* TransactionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC74423F225E34FF000E4D45 /* TransactionsVC.swift */; };
 		BC744244225FE0B7000E4D45 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC744243225FE0B7000E4D45 /* Extensions.swift */; };
+		BC7B59B622A0F1C4003F9D05 /* HDModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BC7B59B422A0F1C4003F9D05 /* HDModel.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,7 +112,6 @@
 		BC08F8F72273A6E0008D09FB /* BlockstreamResponseObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockstreamResponseObject.swift; sourceTree = "<group>"; };
 		BC2D65D62204FF6B001C6DA3 /* HDWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HDWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC2D65D92204FF6B001C6DA3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		BC2D65E12204FF6B001C6DA3 /* HDWallet.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HDWallet.xcdatamodel; sourceTree = "<group>"; };
 		BC2D65E32204FF6B001C6DA3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BC2D65E62204FF6B001C6DA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BC2D65E82204FF6B001C6DA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -187,6 +186,7 @@
 		BC74423B225E34A9000E4D45 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		BC74423F225E34FF000E4D45 /* TransactionsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsVC.swift; sourceTree = "<group>"; };
 		BC744243225FE0B7000E4D45 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		BC7B59B522A0F1C4003F9D05 /* HDModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HDModel.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -245,10 +245,10 @@
 				BC2D65E32204FF6B001C6DA3 /* Assets.xcassets */,
 				BC2D65E52204FF6B001C6DA3 /* LaunchScreen.storyboard */,
 				BC2D65E82204FF6B001C6DA3 /* Info.plist */,
-				BC2D65E02204FF6B001C6DA3 /* HDWallet.xcdatamodeld */,
 				BC074E7722580AFD00311107 /* KeychainPasswordItem.swift */,
 				BC744243225FE0B7000E4D45 /* Extensions.swift */,
 				BC08F8E5226A378E008D09FB /* Ubuntu-BoldItalic.ttf */,
+				BC7B59B422A0F1C4003F9D05 /* HDModel.xcdatamodeld */,
 			);
 			path = HDWallet;
 			sourceTree = "<group>";
@@ -535,6 +535,7 @@
 				BC2D65DA2204FF6B001C6DA3 /* AppDelegate.swift in Sources */,
 				BC2D6634220500D5001C6DA3 /* SMP+Bitcoin.swift in Sources */,
 				BC509D232246E9D0009E4F31 /* WordList.swift in Sources */,
+				BC7B59B622A0F1C4003F9D05 /* HDModel.xcdatamodeld in Sources */,
 				BC509D3B2246F606009E4F31 /* PBKDF2.swift in Sources */,
 				BC744225225B9C89000E4D45 /* ecmult.swift in Sources */,
 				BC74421A225B9C89000E4D45 /* ecdsa_impl.swift in Sources */,
@@ -555,7 +556,6 @@
 				BC74422A225B9C89000E4D45 /* gen_context.swift in Sources */,
 				BC744228225B9C89000E4D45 /* ecmult_gen.swift in Sources */,
 				BC744214225B9C89000E4D45 /* lax_der_parsing.swift in Sources */,
-				BC2D65E22204FF6B001C6DA3 /* HDWallet.xcdatamodeld in Sources */,
 				BC74421D225B9C89000E4D45 /* ecmult_const_impl.swift in Sources */,
 				BC744215225B9C89000E4D45 /* ecmult_gen_impl.swift in Sources */,
 				BC08F8EA226A5C95008D09FB /* LeftSidePanelVC.swift in Sources */,
@@ -904,13 +904,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		BC2D65E02204FF6B001C6DA3 /* HDWallet.xcdatamodeld */ = {
+		BC7B59B422A0F1C4003F9D05 /* HDModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				BC2D65E12204FF6B001C6DA3 /* HDWallet.xcdatamodel */,
+				BC7B59B522A0F1C4003F9D05 /* HDModel.xcdatamodel */,
 			);
-			currentVersion = BC2D65E12204FF6B001C6DA3 /* HDWallet.xcdatamodel */;
-			path = HDWallet.xcdatamodeld;
+			currentVersion = BC7B59B522A0F1C4003F9D05 /* HDModel.xcdatamodel */;
+			path = HDModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

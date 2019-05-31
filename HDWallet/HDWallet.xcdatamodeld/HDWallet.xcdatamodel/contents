@@ -6,23 +6,20 @@
         <attribute name="time" optional="YES" attributeType="Binary" syncable="YES"/>
         <relationship name="transaction" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Transaction" inverseName="block" inverseEntity="Transaction" syncable="YES"/>
     </entity>
-    <entity name="Keychain" representedClassName="Keychain" syncable="YES" codeGenerationType="class">
-        <attribute name="network" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="txos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TXO" inverseName="keychain" inverseEntity="TXO" syncable="YES"/>
-    </entity>
     <entity name="PayNym" representedClassName="PayNym" syncable="YES" codeGenerationType="class">
         <attribute name="index" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="paymentCode" optional="YES" attributeType="Binary" syncable="YES"/>
-        <attribute name="version" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="version" optional="YES" attributeType="Integer 16" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="txos" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TXO" inverseName="paynym" inverseEntity="TXO" syncable="YES"/>
     </entity>
     <entity name="Transaction" representedClassName="Transaction" syncable="YES" codeGenerationType="class">
-        <attribute name="size" optional="YES" attributeType="Binary" syncable="YES"/>
-        <attribute name="timelock" optional="YES" attributeType="Binary" syncable="YES"/>
-        <attribute name="txid" optional="YES" attributeType="Binary" syncable="YES"/>
-        <attribute name="version" optional="YES" attributeType="Binary" syncable="YES"/>
-        <attribute name="vsize" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="fee" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="size" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="timelock" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="version" optional="YES" attributeType="Integer 16" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="weight" optional="YES" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="block" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Block" inverseName="transaction" inverseEntity="Block" syncable="YES"/>
         <relationship name="txos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TXO" inverseName="transaction" inverseEntity="TXO" syncable="YES"/>
     </entity>
@@ -32,18 +29,24 @@
         <attribute name="scriptPubKey" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="sequence" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="sig" optional="YES" attributeType="Binary" syncable="YES"/>
-        <attribute name="txid" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="unspent" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="vout" optional="YES" attributeType="Binary" syncable="YES"/>
-        <relationship name="keychain" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Keychain" inverseName="txos" inverseEntity="Keychain" syncable="YES"/>
+        <relationship name="paynym" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PayNym" inverseName="txos" inverseEntity="PayNym" syncable="YES"/>
         <relationship name="transaction" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Transaction" inverseName="txos" inverseEntity="Transaction" syncable="YES"/>
+        <relationship name="wallet" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Wallet" inverseName="txos" inverseEntity="Wallet" syncable="YES"/>
+    </entity>
+    <entity name="Wallet" representedClassName="Wallet" syncable="YES" codeGenerationType="class">
+        <attribute name="index" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="network" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="Integer 16" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="txos" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TXO" inverseName="wallet" inverseEntity="TXO" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Block" positionX="-864.14453125" positionY="-306.58984375" width="128" height="103"/>
-        <element name="Keychain" positionX="-714.9453125" positionY="-398.83203125" width="128" height="88"/>
-        <element name="PayNym" positionX="-1004.0546875" positionY="-483.546875" width="128" height="105"/>
-        <element name="Transaction" positionX="-1047.078125" positionY="-261.87890625" width="128" height="148"/>
-        <element name="TXO" positionX="-407.3203125" positionY="-211.05078125" width="128" height="208"/>
+        <element name="Block" positionX="-874.79296875" positionY="-315.0625" width="128" height="103"/>
+        <element name="Wallet" positionX="-875.72265625" positionY="11.5" width="128" height="103"/>
+        <element name="PayNym" positionX="-885.8828125" positionY="-503.74609375" width="128" height="118"/>
+        <element name="Transaction" positionX="-1079.28515625" positionY="-172.203125" width="128" height="163"/>
+        <element name="TXO" positionX="-660.54296875" positionY="-302.14453125" width="128" height="208"/>
     </elements>
 </model>
