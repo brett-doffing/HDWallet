@@ -84,6 +84,14 @@
 		BC744240225E34FF000E4D45 /* TransactionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC74423F225E34FF000E4D45 /* TransactionsVC.swift */; };
 		BC744244225FE0B7000E4D45 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC744243225FE0B7000E4D45 /* Extensions.swift */; };
 		BC7B59B622A0F1C4003F9D05 /* HDModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BC7B59B422A0F1C4003F9D05 /* HDModel.xcdatamodeld */; };
+		BC7B59C022A1F3E5003F9D05 /* Transaction+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7B59B822A1F3E5003F9D05 /* Transaction+CoreDataClass.swift */; };
+		BC7B59C122A1F3E5003F9D05 /* Transaction+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7B59B922A1F3E5003F9D05 /* Transaction+CoreDataProperties.swift */; };
+		BC7B59C222A1F3E5003F9D05 /* Vout+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7B59BA22A1F3E5003F9D05 /* Vout+CoreDataClass.swift */; };
+		BC7B59C322A1F3E5003F9D05 /* Vout+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7B59BB22A1F3E5003F9D05 /* Vout+CoreDataProperties.swift */; };
+		BC7B59C422A1F3E5003F9D05 /* Vin+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7B59BC22A1F3E5003F9D05 /* Vin+CoreDataClass.swift */; };
+		BC7B59C522A1F3E5003F9D05 /* Vin+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7B59BD22A1F3E5003F9D05 /* Vin+CoreDataProperties.swift */; };
+		BC7B59C622A1F3E5003F9D05 /* Block+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7B59BE22A1F3E5003F9D05 /* Block+CoreDataClass.swift */; };
+		BC7B59C722A1F3E5003F9D05 /* Block+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7B59BF22A1F3E5003F9D05 /* Block+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -187,6 +195,14 @@
 		BC74423F225E34FF000E4D45 /* TransactionsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsVC.swift; sourceTree = "<group>"; };
 		BC744243225FE0B7000E4D45 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		BC7B59B522A0F1C4003F9D05 /* HDModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HDModel.xcdatamodel; sourceTree = "<group>"; };
+		BC7B59B822A1F3E5003F9D05 /* Transaction+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Transaction+CoreDataClass.swift"; sourceTree = "<group>"; };
+		BC7B59B922A1F3E5003F9D05 /* Transaction+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Transaction+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		BC7B59BA22A1F3E5003F9D05 /* Vout+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Vout+CoreDataClass.swift"; sourceTree = "<group>"; };
+		BC7B59BB22A1F3E5003F9D05 /* Vout+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Vout+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		BC7B59BC22A1F3E5003F9D05 /* Vin+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Vin+CoreDataClass.swift"; sourceTree = "<group>"; };
+		BC7B59BD22A1F3E5003F9D05 /* Vin+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Vin+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		BC7B59BE22A1F3E5003F9D05 /* Block+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Block+CoreDataClass.swift"; sourceTree = "<group>"; };
+		BC7B59BF22A1F3E5003F9D05 /* Block+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Block+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -237,6 +253,7 @@
 		BC2D65D82204FF6B001C6DA3 /* HDWallet */ = {
 			isa = PBXGroup;
 			children = (
+				BC7B59B722A1F3CC003F9D05 /* CoreData */,
 				BC7441F6225B9C45000E4D45 /* secp256k1 */,
 				BC7365222236D7DC009E2533 /* Networking */,
 				BC7365032232CB3C009E2533 /* ViewContollers */,
@@ -365,6 +382,21 @@
 				BC744207225B9C88000E4D45 /* util.swift */,
 			);
 			path = secp256k1;
+			sourceTree = "<group>";
+		};
+		BC7B59B722A1F3CC003F9D05 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				BC7B59B822A1F3E5003F9D05 /* Transaction+CoreDataClass.swift */,
+				BC7B59B922A1F3E5003F9D05 /* Transaction+CoreDataProperties.swift */,
+				BC7B59BA22A1F3E5003F9D05 /* Vout+CoreDataClass.swift */,
+				BC7B59BB22A1F3E5003F9D05 /* Vout+CoreDataProperties.swift */,
+				BC7B59BC22A1F3E5003F9D05 /* Vin+CoreDataClass.swift */,
+				BC7B59BD22A1F3E5003F9D05 /* Vin+CoreDataProperties.swift */,
+				BC7B59BE22A1F3E5003F9D05 /* Block+CoreDataClass.swift */,
+				BC7B59BF22A1F3E5003F9D05 /* Block+CoreDataProperties.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -500,6 +532,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC509D3F224A368A009E4F31 /* RIPEMD160.swift in Sources */,
+				BC7B59C222A1F3E5003F9D05 /* Vout+CoreDataClass.swift in Sources */,
 				BC509D4D224D9373009E4F31 /* SeedWordsVC.swift in Sources */,
 				BC736511223471DA009E2533 /* TxOutput.swift in Sources */,
 				BC509D47224C82F0009E4F31 /* RootNavigationController.swift in Sources */,
@@ -509,6 +542,7 @@
 				BC509D272246EA22009E4F31 /* Mnemonic.swift in Sources */,
 				BC7365092232DA77009E2533 /* BTCNetwork.swift in Sources */,
 				BC54B9282240466200FCE894 /* BTCScript.swift in Sources */,
+				BC7B59C622A1F3E5003F9D05 /* Block+CoreDataClass.swift in Sources */,
 				BC744218225B9C89000E4D45 /* scalar_impl.swift in Sources */,
 				BC2D662E220500D5001C6DA3 /* SMP.swift in Sources */,
 				BC744229225B9C89000E4D45 /* scalar_8x32.swift in Sources */,
@@ -518,7 +552,9 @@
 				BC74421B225B9C89000E4D45 /* eckey_impl.swift in Sources */,
 				BC509CFA22433A11009E4F31 /* BIP47.swift in Sources */,
 				BC744226225B9C89000E4D45 /* field_impl.swift in Sources */,
+				BC7B59C522A1F3E5003F9D05 /* Vin+CoreDataProperties.swift in Sources */,
 				BC744244225FE0B7000E4D45 /* Extensions.swift in Sources */,
+				BC7B59C422A1F3E5003F9D05 /* Vin+CoreDataClass.swift in Sources */,
 				BC744224225B9C89000E4D45 /* field_10x26.swift in Sources */,
 				BC744220225B9C89000E4D45 /* group_impl.swift in Sources */,
 				BC2D6631220500D5001C6DA3 /* Data+Bitcoin.swift in Sources */,
@@ -529,6 +565,8 @@
 				BC744222225B9C89000E4D45 /* hash_impl.swift in Sources */,
 				BC744240225E34FF000E4D45 /* TransactionsVC.swift in Sources */,
 				BC74423A225CF7C8000E4D45 /* QRImageView.swift in Sources */,
+				BC7B59C722A1F3E5003F9D05 /* Block+CoreDataProperties.swift in Sources */,
+				BC7B59C322A1F3E5003F9D05 /* Vout+CoreDataProperties.swift in Sources */,
 				BC55826E2217D6E50004A40D /* BlockstreamService.swift in Sources */,
 				BC08F8E8226A582E008D09FB /* RootContainerVC.swift in Sources */,
 				BC74423C225E34A9000E4D45 /* SettingsVC.swift in Sources */,
@@ -545,6 +583,7 @@
 				BC74421F225B9C89000E4D45 /* group.swift in Sources */,
 				BC744223225B9C89000E4D45 /* secp256k1.swift in Sources */,
 				BC744221225B9C89000E4D45 /* util.swift in Sources */,
+				BC7B59C022A1F3E5003F9D05 /* Transaction+CoreDataClass.swift in Sources */,
 				BC7365052232CC03009E2533 /* ExtendedPublicKey.swift in Sources */,
 				BC744236225C19C9000E4D45 /* QRScanningView.swift in Sources */,
 				BC2D6637220500D5001C6DA3 /* String+Bitcoin.swift in Sources */,
@@ -555,6 +594,7 @@
 				BC744211225B9C89000E4D45 /* ecmult_impl.swift in Sources */,
 				BC74422A225B9C89000E4D45 /* gen_context.swift in Sources */,
 				BC744228225B9C89000E4D45 /* ecmult_gen.swift in Sources */,
+				BC7B59C122A1F3E5003F9D05 /* Transaction+CoreDataProperties.swift in Sources */,
 				BC744214225B9C89000E4D45 /* lax_der_parsing.swift in Sources */,
 				BC74421D225B9C89000E4D45 /* ecmult_const_impl.swift in Sources */,
 				BC744215225B9C89000E4D45 /* ecmult_gen_impl.swift in Sources */,

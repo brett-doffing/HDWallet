@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.99" systemVersion="18F203" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Block" representedClassName="Block" syncable="YES" codeGenerationType="category">
+    <entity name="Block" representedClassName="Block" syncable="YES">
         <attribute name="blockHash" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="blockHeight" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="blockTime" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="confirmed" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="transaction" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Transaction" inverseName="block" inverseEntity="Transaction" syncable="YES"/>
     </entity>
-    <entity name="Transaction" representedClassName="Transaction" syncable="YES" codeGenerationType="category">
+    <entity name="Transaction" representedClassName="Transaction" syncable="YES">
         <attribute name="fee" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="locktime" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="size" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="version" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="weight" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="block" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Block" syncable="YES"/>
-        <relationship name="vin" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Vin" syncable="YES"/>
-        <relationship name="vout" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Vout" syncable="YES"/>
+        <relationship name="block" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Block" inverseName="transaction" inverseEntity="Block" syncable="YES"/>
+        <relationship name="vin" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Vin" inverseName="transaction" inverseEntity="Vin" syncable="YES"/>
+        <relationship name="vout" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Vout" inverseName="transaction" inverseEntity="Vout" syncable="YES"/>
     </entity>
-    <entity name="Vin" representedClassName="Vin" syncable="YES" codeGenerationType="category">
+    <entity name="Vin" representedClassName="Vin" syncable="YES">
         <attribute name="isCoinbase" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="scriptSig" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="scriptSig_asm" optional="YES" attributeType="String" syncable="YES"/>
@@ -25,19 +26,22 @@
         <attribute name="txid" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="vout" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="witness" optional="YES" attributeType="Transformable" syncable="YES"/>
-        <relationship name="previousOut" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Vout" syncable="YES"/>
+        <relationship name="previousOut" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Vout" inverseName="vin" inverseEntity="Vout" syncable="YES"/>
+        <relationship name="transaction" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Transaction" inverseName="vin" inverseEntity="Transaction" syncable="YES"/>
     </entity>
-    <entity name="Vout" representedClassName="Vout" syncable="YES" codeGenerationType="category">
+    <entity name="Vout" representedClassName="Vout" syncable="YES">
         <attribute name="scriptPubKey" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="scriptPubKey_address" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="scriptPubKey_asm" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="scriptPubKey_type" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="value" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="transaction" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Transaction" inverseName="vout" inverseEntity="Transaction" syncable="YES"/>
+        <relationship name="vin" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Vin" inverseName="previousOut" inverseEntity="Vin" syncable="YES"/>
     </entity>
     <elements>
         <element name="Transaction" positionX="2.96875" positionY="-112.53125" width="128" height="178"/>
-        <element name="Vout" positionX="-28.234375" positionY="307.61328125" width="128" height="118"/>
-        <element name="Vin" positionX="371.875" positionY="3.84765625" width="128" height="163"/>
-        <element name="Block" positionX="199.93359375" positionY="-229.93359375" width="128" height="103"/>
+        <element name="Vout" positionX="-28.234375" positionY="307.61328125" width="128" height="148"/>
+        <element name="Vin" positionX="371.875" positionY="3.84765625" width="128" height="178"/>
+        <element name="Block" positionX="199.93359375" positionY="-229.93359375" width="128" height="118"/>
     </elements>
 </model>

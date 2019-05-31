@@ -113,6 +113,10 @@ class ReceiveVC: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+    }
+    
     private func checkForSeed() {
         let kcpi = KeychainPasswordItem(service: "HDWallet", account: "user")
         guard let _ = try? kcpi.readPassword() else { return }
