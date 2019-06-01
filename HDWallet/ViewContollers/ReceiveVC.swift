@@ -74,18 +74,14 @@ class ReceiveVC: UIViewController {
         
         let copyLabelTap = UITapGestureRecognizer(target: self, action: #selector(copyAddressToClipboard))
         self.addressLabel.addGestureRecognizer(copyLabelTap)
-        let refreshSwipe = UISwipeGestureRecognizer(target: self, action: #selector(refreshAddresses))
-        refreshSwipe.direction = .down
-        self.view.addGestureRecognizer(refreshSwipe)
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 //        defaults.setValue(nil, forKey: "currentWalletType")
-        checkForSeed()
         if !self.hasSeed { alertToCreateKeychain() }
         else if self.addressLabel.text == "" {
-            getKeychainAddresses()
             if let walletType = self.defaults.value(forKey: "currentWalletType") as? String {
                 switch walletType {
                 case "P2PKH":
@@ -114,7 +110,13 @@ class ReceiveVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
+        checkForSeed()
+        if self.hasSeed {
+            self.getKeychainAddresses()
+            // TODO: create a timer to reduce calls
+            self.lookupCurrentReceiveAddress()
+            
+        }
     }
     
     private func checkForSeed() {
@@ -209,45 +211,15 @@ class ReceiveVC: UIViewController {
         }
     }
     
-    // Temp func to refresh
-    @objc func refreshAddresses() {
-        self.activityIndicator.startAnimating()
-        let dispatchGroup = DispatchGroup()
-        dispatchGroup.enter()
+    private func lookupCurrentReceiveAddress() {
         self.service.getTransactions(forAddress: self.p2pkhAddr) { (bro, error) in
             if error != nil {
                 print(error.debugDescription)
-            } else {
+            } else if bro != nil {
                 for property in bro!.properties() {
                     print(property)
                 }
-            }
-            dispatchGroup.leave()
-        }
-        dispatchGroup.enter()
-        self.service.getTransactions(forAddress: self.p2shAddr) { (bro, error) in
-            if error != nil {
-                print(error.debugDescription)
-            } else {
-                for property in bro!.properties() {
-                    print(property)
-                }
-            }
-            dispatchGroup.leave()
-        }
-        dispatchGroup.enter()
-        self.service.getTransactions(forAddress: self.bech32Addr) { (bro, error) in
-            if error != nil {
-                print(error.debugDescription)
-            } else {
-                for property in bro!.properties() {
-                    print(property)
-                }
-            }
-            dispatchGroup.leave()
-        }
-        dispatchGroup.notify(queue: .main) {
-            self.activityIndicator.stopAnimating()
+            } else { /* No transaction */ }
         }
     }
     
