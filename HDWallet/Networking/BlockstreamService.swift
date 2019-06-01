@@ -45,8 +45,8 @@ class BlockstreamService {
             guard let data = data else { completionHandler(nil, error); return }
             do {
                 let jsonWithRootArray = try JSONSerialization.jsonObject(with:data, options: [.allowFragments]) as! [[String:Any?]]
-                //                print(jsonWithRootArray[0])
-                completionHandler(jsonWithRootArray[0], nil)
+//                print(jsonWithRootArray.first)
+                completionHandler(jsonWithRootArray.first, nil)
             } catch let jsonError {
                 completionHandler(nil, jsonError)
             }
