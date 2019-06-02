@@ -2,6 +2,7 @@
 
 import UIKit
 import LocalAuthentication
+import CoreData
 
 class ReceiveVC: UIViewController {
     
@@ -114,7 +115,7 @@ class ReceiveVC: UIViewController {
         if self.hasSeed {
             self.getKeychainAddresses()
             // TODO: create a timer to reduce calls
-            self.lookupCurrentReceiveAddress()
+//            self.lookupCurrentReceiveAddress()
             
         }
     }
@@ -212,14 +213,68 @@ class ReceiveVC: UIViewController {
     }
     
     private func lookupCurrentReceiveAddress() {
+        // TODO: Account for multiple transactions with address.
         self.service.getTransactions(forAddress: self.p2pkhAddr) { (bro, error) in
             if error != nil {
                 print(error.debugDescription)
-            } else if bro != nil {
-                for property in bro!.properties() {
-                    print(property)
+            } else {
+                DispatchQueue.main.async {
+                    guard let responseObject = bro else { return }
+                    let tx = Transaction(context: AppDelegate.viewContext)
+                    tx.fee = Int64(responseObject.fee!)
+                    tx.id = responseObject.txid!
+                    tx.locktime = Int64(responseObject.locktime!)
+                    tx.size = Int64(responseObject.size!)
+                    tx.version = Int64(responseObject.version!)
+                    tx.weight = Int64(responseObject.weight!)
+                    
+                    guard let blockInfo = responseObject.blockInfo else { return }
+                    let block = Block(context: AppDelegate.viewContext)
+                    block.blockHash = blockInfo.blockHash
+                    block.blockHeight = Int64(blockInfo.blockHeight!)
+                    block.blockTime = Int64(blockInfo.blockTime!)
+                    block.confirmed = blockInfo.confirmed
+                    block.transaction = tx
+                    
+                    for item in responseObject.voutArray {
+                        let vout = Vout(context: AppDelegate.viewContext)
+                        vout.scriptPubKey = item.scriptPubKey
+                        vout.scriptPubKey_asm = item.scriptPubKey_asm
+                        vout.scriptPubKey_address = item.scriptPubKey_address
+                        vout.scriptPubKey_type = item.scriptPubKey_type
+                        vout.value = Int64(item.value!)
+                        vout.transaction = tx
+                    }
+                    
+                    for item in responseObject.vinArray {
+                        let vin = Vin(context: AppDelegate.viewContext)
+                        vin.scriptSig = item.scriptSig
+                        vin.scriptSig_asm = item.scriptSig_asm
+                        vin.sequence = Int64(item.sequence!)
+                        vin.txid = item.txid
+                        vin.vout = Int64(item.vout!)
+                        vin.witness = item.witness
+                        let prevout = Vout(context: AppDelegate.viewContext)
+                        prevout.scriptPubKey = item.prevout?.scriptPubKey
+                        prevout.scriptPubKey_asm = item.prevout?.scriptPubKey_asm
+                        prevout.scriptPubKey_address = item.prevout?.scriptPubKey_address
+                        prevout.scriptPubKey_type = item.prevout?.scriptPubKey_type
+                        prevout.value = Int64(item.prevout!.value!)
+                        vin.previousOut = prevout
+                        vin.transaction = tx
+                    }
+                    
+                    do {
+                        try AppDelegate.viewContext.save()
+                    } catch {
+                        print(error)
+                    }
+                    
+                    for property in responseObject.properties() {
+                        print(property)
+                    }
                 }
-            } else { /* No transaction */ }
+            }
         }
     }
     

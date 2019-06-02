@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.99" systemVersion="18F203" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Block" representedClassName="Block" syncable="YES">
+    <entity name="Block" representedClassName="Block" syncable="YES" codeGenerationType="class">
         <attribute name="blockHash" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="blockHeight" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="blockTime" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="confirmed" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="transaction" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Transaction" inverseName="block" inverseEntity="Transaction" syncable="YES"/>
     </entity>
-    <entity name="Transaction" representedClassName="Transaction" syncable="YES">
+    <entity name="Transaction" representedClassName="Transaction" syncable="YES" codeGenerationType="class">
         <attribute name="fee" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="locktime" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -18,18 +18,18 @@
         <relationship name="vin" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Vin" inverseName="transaction" inverseEntity="Vin" syncable="YES"/>
         <relationship name="vout" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Vout" inverseName="transaction" inverseEntity="Vout" syncable="YES"/>
     </entity>
-    <entity name="Vin" representedClassName="Vin" syncable="YES">
+    <entity name="Vin" representedClassName="Vin" syncable="YES" codeGenerationType="class">
         <attribute name="isCoinbase" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="scriptSig" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="scriptSig_asm" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sequence" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="txid" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="vout" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="witness" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="witness" optional="YES" attributeType="Transformable" customClassName="[String]" syncable="YES"/>
         <relationship name="previousOut" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Vout" inverseName="vin" inverseEntity="Vout" syncable="YES"/>
         <relationship name="transaction" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Transaction" inverseName="vin" inverseEntity="Transaction" syncable="YES"/>
     </entity>
-    <entity name="Vout" representedClassName="Vout" syncable="YES">
+    <entity name="Vout" representedClassName="Vout" syncable="YES" codeGenerationType="class">
         <attribute name="scriptPubKey" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="scriptPubKey_address" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="scriptPubKey_asm" optional="YES" attributeType="String" syncable="YES"/>
