@@ -10,19 +10,19 @@ class BlockstreamResponseObject {
     var version: Int?
     var fee: Int?
     var blockInfo: BlockInfo?
-    var vinArray: [Vin] = []
-    var voutArray: [Vout] = []
+    var vinArray: [V_in] = []
+    var voutArray: [V_out] = []
     
-    struct Vout {
+    struct V_out {
         var scriptPubKey: String?
         var scriptPubKey_asm: String?
         var scriptPubKey_address: String?
         var scriptPubKey_type: String?
         var value: Int?
     }
-    struct Vin {
+    struct V_in {
         var isCoinbase: Bool = false
-        var prevout: Vout?
+        var prevout: V_out?
         var scriptSig: String?
         var scriptSig_asm: String?
         var sequence: Int?

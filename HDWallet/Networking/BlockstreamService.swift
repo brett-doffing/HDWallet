@@ -81,7 +81,7 @@ class BlockstreamService {
             case "vin":
                 if let vinArray = value as? [[String:Any]] {
                     for indexed_vin in vinArray {
-                        var vin = BlockstreamResponseObject.Vin()
+                        var vin = BlockstreamResponseObject.V_in()
                         if let isCoinbase = indexed_vin["is_coinbase"] as? Bool {vin.isCoinbase = isCoinbase}
                         if let scriptSig = indexed_vin["scriptsig"] as? String {vin.scriptSig = scriptSig}
                         if let scriptSig_asm = indexed_vin["scriptsig_asm"] as? String {vin.scriptSig_asm = scriptSig_asm}
@@ -90,7 +90,7 @@ class BlockstreamService {
                         if let vout = indexed_vin["vout"] as? Int {vin.vout = vout}
                         if let witness = indexed_vin["witness"] as? [String] {vin.witness = witness}
                         if let prevout = indexed_vin["prevout"] as? [String:Any] {
-                            var previousOutput = BlockstreamResponseObject.Vout()
+                            var previousOutput = BlockstreamResponseObject.V_out()
                             if let scriptPubKey = prevout["scriptpubkey"] as? String {previousOutput.scriptPubKey = scriptPubKey}
                             if let scriptPubKey_asm = prevout["scriptpubkey_asm"] as? String {previousOutput.scriptPubKey_asm = scriptPubKey_asm}
                             if let scriptPubKey_address = prevout["scriptpubkey_address"] as? String {previousOutput.scriptPubKey_address = scriptPubKey_address}
@@ -104,7 +104,7 @@ class BlockstreamService {
             case "vout":
                 if let voutArray = value as? [[String:Any]] {
                     for indexed_vout in voutArray {
-                        var vout = BlockstreamResponseObject.Vout()
+                        var vout = BlockstreamResponseObject.V_out()
                         if let scriptPubKey = indexed_vout["scriptpubkey"] as? String {vout.scriptPubKey = scriptPubKey}
                         if let scriptPubKey_asm = indexed_vout["scriptpubkey_asm"] as? String {vout.scriptPubKey_asm = scriptPubKey_asm}
                         if let scriptPubKey_address = indexed_vout["scriptpubkey_address"] as? String {vout.scriptPubKey_address = scriptPubKey_address}
