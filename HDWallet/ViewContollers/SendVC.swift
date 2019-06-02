@@ -12,17 +12,6 @@ class SendVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(qrCodeScannedNotification(_:)), name: .scannedQRCode, object: nil)
-        
-        var transactions: [Transaction] = []
-        let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Transaction")
-        
-        do {
-            transactions = try AppDelegate.viewContext.fetch(fetch) as! [Transaction]
-            print(transactions)
-        } catch {
-            print(error)
-        }
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
