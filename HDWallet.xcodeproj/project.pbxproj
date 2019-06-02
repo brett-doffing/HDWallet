@@ -237,7 +237,6 @@
 		BC2D65D82204FF6B001C6DA3 /* HDWallet */ = {
 			isa = PBXGroup;
 			children = (
-				BC7B59B722A1F3CC003F9D05 /* CoreData */,
 				BC7441F6225B9C45000E4D45 /* secp256k1 */,
 				BC7365222236D7DC009E2533 /* Networking */,
 				BC7365032232CB3C009E2533 /* ViewContollers */,
@@ -366,13 +365,6 @@
 				BC744207225B9C88000E4D45 /* util.swift */,
 			);
 			path = secp256k1;
-			sourceTree = "<group>";
-		};
-		BC7B59B722A1F3CC003F9D05 /* CoreData */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
