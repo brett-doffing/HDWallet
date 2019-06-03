@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.99" systemVersion="18F203" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Address" representedClassName="Address" syncable="YES" codeGenerationType="class">
+        <attribute name="isTestnet" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="str" attributeType="String" syncable="YES"/>
+        <attribute name="walletIndex" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="ouputs" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Vout" inverseName="walletAddress" inverseEntity="Vout" syncable="YES"/>
+    </entity>
     <entity name="Block" representedClassName="Block" syncable="YES" codeGenerationType="class">
         <attribute name="blockHash" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="blockHeight" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -14,6 +20,7 @@
         <attribute name="size" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="version" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="weight" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="addresses" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Address" syncable="YES"/>
         <relationship name="block" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Block" inverseName="transaction" inverseEntity="Block" syncable="YES"/>
         <relationship name="vin" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Vin" inverseName="transaction" inverseEntity="Vin" syncable="YES"/>
         <relationship name="vout" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Vout" inverseName="transaction" inverseEntity="Vout" syncable="YES"/>
@@ -34,14 +41,16 @@
         <attribute name="scriptPubKey_address" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="scriptPubKey_asm" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="scriptPubKey_type" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="value" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="value" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="transaction" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Transaction" inverseName="vout" inverseEntity="Transaction" syncable="YES"/>
         <relationship name="vin" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Vin" inverseName="previousOut" inverseEntity="Vin" syncable="YES"/>
+        <relationship name="walletAddress" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Address" inverseName="ouputs" inverseEntity="Address" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Transaction" positionX="2.96875" positionY="-112.53125" width="128" height="178"/>
-        <element name="Vout" positionX="-28.234375" positionY="307.61328125" width="128" height="148"/>
-        <element name="Vin" positionX="371.875" positionY="3.84765625" width="128" height="178"/>
-        <element name="Block" positionX="199.93359375" positionY="-229.93359375" width="128" height="118"/>
+        <element name="Block" positionX="-184.40625" positionY="-402.609375" width="128" height="118"/>
+        <element name="Transaction" positionX="-197.6796875" positionY="-105.44921875" width="128" height="193"/>
+        <element name="Vin" positionX="234.3359375" positionY="-43.20703125" width="128" height="178"/>
+        <element name="Vout" positionX="-180.66015625" positionY="225.26171875" width="128" height="163"/>
+        <element name="Address" positionX="-549.05859375" positionY="-47.1015625" width="128" height="103"/>
     </elements>
 </model>
