@@ -13,6 +13,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+//        deleteAllCoreData()
+        
         // Default to testnet
         if UserDefaults.standard.value(forKey: "testnet") == nil { UserDefaults.standard.set(true, forKey: "testnet") }
         
@@ -102,17 +104,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    func deleteAllData(forEntity entity:String) {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
-        fetchRequest.returnsObjectsAsFaults = false
-        do {
-            let results = try persistentContainer.viewContext.fetch(fetchRequest)
-            for object in results {
-                guard let objectData = object as? NSManagedObject else {continue}
-                persistentContainer.viewContext.delete(objectData)
+    func deleteAllCoreData() {
+        let entities = ["Address", "Block", "Transaction", "Vin", "Vout"]
+        for entity in entities {
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
+            fetchRequest.returnsObjectsAsFaults = false
+            do {
+                let results = try persistentContainer.viewContext.fetch(fetchRequest)
+                for object in results {
+                    guard let objectData = object as? NSManagedObject else {continue}
+                    persistentContainer.viewContext.delete(objectData)
+                }
+            } catch let error {
+                print("Delete all Core Data for \(entity) error :", error)
             }
-        } catch let error {
-            print("Delete all Core Data for \(entity) error :", error)
         }
     }
 }
