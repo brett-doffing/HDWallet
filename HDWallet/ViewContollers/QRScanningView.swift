@@ -66,7 +66,7 @@ class QRScanningView: UIView, AVCaptureMetadataOutputObjectsDelegate {
         
         // Initialize QR Code Frame to highlight the QR code
         self.qrCodeFrameView = UIView()
-        self.qrCodeFrameView?.layer.borderColor = #colorLiteral(red: 0.9693624377, green: 0.5771938562, blue: 0.1013594046, alpha: 1).cgColor
+        self.qrCodeFrameView?.layer.borderColor = UserDefaults.standard.bool(forKey: "testnet") ? UIColor.green.cgColor : #colorLiteral(red: 0.9693624377, green: 0.5771938562, blue: 0.1013594046, alpha: 1).cgColor
         self.qrCodeFrameView?.layer.borderWidth = 5
         self.addSubview(self.qrCodeFrameView!)
         self.bringSubviewToFront(self.qrCodeFrameView!)
