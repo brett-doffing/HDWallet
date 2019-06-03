@@ -84,6 +84,7 @@
 		BC744240225E34FF000E4D45 /* TransactionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC74423F225E34FF000E4D45 /* TransactionsVC.swift */; };
 		BC744244225FE0B7000E4D45 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC744243225FE0B7000E4D45 /* Extensions.swift */; };
 		BC7B59B622A0F1C4003F9D05 /* HDModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BC7B59B422A0F1C4003F9D05 /* HDModel.xcdatamodeld */; };
+		BCA9778F22A4BCE40067499C /* SendVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BCA9778E22A4BCE40067499C /* SendVC.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -187,6 +188,7 @@
 		BC74423F225E34FF000E4D45 /* TransactionsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsVC.swift; sourceTree = "<group>"; };
 		BC744243225FE0B7000E4D45 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		BC7B59B522A0F1C4003F9D05 /* HDModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HDModel.xcdatamodel; sourceTree = "<group>"; };
+		BCA9778E22A4BCE40067499C /* SendVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendVC.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -316,6 +318,7 @@
 				BC509D4E224D9386009E4F31 /* SeedWordsVC.xib */,
 				BC509D42224C7EC3009E4F31 /* ReceiveVC.swift */,
 				BC744231225BFAA6000E4D45 /* SendVC.swift */,
+				BCA9778E22A4BCE40067499C /* SendVC.xib */,
 				BC74423B225E34A9000E4D45 /* SettingsVC.swift */,
 				BC74423F225E34FF000E4D45 /* TransactionsVC.swift */,
 				BC744235225C19C9000E4D45 /* QRScanningView.swift */,
@@ -473,6 +476,7 @@
 			files = (
 				BC509D4F224D9386009E4F31 /* SeedWordsVC.xib in Resources */,
 				BC2D65E72204FF6B001C6DA3 /* LaunchScreen.storyboard in Resources */,
+				BCA9778F22A4BCE40067499C /* SendVC.xib in Resources */,
 				BC08F8E6226A378E008D09FB /* Ubuntu-BoldItalic.ttf in Resources */,
 				BC2D65E42204FF6B001C6DA3 /* Assets.xcassets in Resources */,
 			);
