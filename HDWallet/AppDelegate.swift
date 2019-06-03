@@ -13,7 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-//        deleteAllCoreData()
+        deleteAllCoreData()
         
         // Default to testnet
         if UserDefaults.standard.value(forKey: "testnet") == nil { UserDefaults.standard.set(true, forKey: "testnet") }
@@ -105,6 +105,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func deleteAllCoreData() {
+        UserDefaults.standard.set(0, forKey: "testnetWalletIndex")
         let entities = ["Address", "Block", "Transaction", "Vin", "Vout"]
         for entity in entities {
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
