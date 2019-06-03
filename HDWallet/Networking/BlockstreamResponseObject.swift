@@ -18,7 +18,7 @@ class BlockstreamResponseObject {
         var scriptPubKey_asm: String?
         var scriptPubKey_address: String?
         var scriptPubKey_type: String?
-        var value: Int?
+        var value: Double?
     }
     struct V_in {
         var isCoinbase: Bool = false
