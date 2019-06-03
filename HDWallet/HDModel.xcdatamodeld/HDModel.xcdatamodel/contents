@@ -37,6 +37,7 @@
         <relationship name="transaction" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Transaction" inverseName="vin" inverseEntity="Transaction" syncable="YES"/>
     </entity>
     <entity name="Vout" representedClassName="Vout" syncable="YES" codeGenerationType="class">
+        <attribute name="n" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="scriptPubKey" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="scriptPubKey_address" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="scriptPubKey_asm" optional="YES" attributeType="String" syncable="YES"/>
@@ -47,10 +48,10 @@
         <relationship name="walletAddress" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Address" inverseName="ouputs" inverseEntity="Address" syncable="YES"/>
     </entity>
     <elements>
+        <element name="Address" positionX="-549.05859375" positionY="-47.1015625" width="128" height="103"/>
         <element name="Block" positionX="-184.40625" positionY="-402.609375" width="128" height="118"/>
         <element name="Transaction" positionX="-197.6796875" positionY="-105.44921875" width="128" height="193"/>
         <element name="Vin" positionX="234.3359375" positionY="-43.20703125" width="128" height="178"/>
-        <element name="Vout" positionX="-180.66015625" positionY="225.26171875" width="128" height="163"/>
-        <element name="Address" positionX="-549.05859375" positionY="-47.1015625" width="128" height="103"/>
+        <element name="Vout" positionX="-180.66015625" positionY="225.26171875" width="128" height="180"/>
     </elements>
 </model>
