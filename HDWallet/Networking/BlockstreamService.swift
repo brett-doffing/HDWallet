@@ -103,6 +103,7 @@ class BlockstreamService {
                 }
             case "vout":
                 if let voutArray = value as? [[String:Any]] {
+                    var index = 0
                     for indexed_vout in voutArray {
                         var vout = BlockstreamResponseObject.V_out()
                         if let scriptPubKey = indexed_vout["scriptpubkey"] as? String {vout.scriptPubKey = scriptPubKey}
@@ -110,6 +111,8 @@ class BlockstreamService {
                         if let scriptPubKey_address = indexed_vout["scriptpubkey_address"] as? String {vout.scriptPubKey_address = scriptPubKey_address}
                         if let scriptPubKey_type = indexed_vout["scriptpubkey_type"] as? String {vout.scriptPubKey_type = scriptPubKey_type}
                         if let value = indexed_vout["value"] as? Double {vout.value = value/100000000}
+                        vout.n = index
+                        index += 1
                         bro.voutArray.append(vout)
                     }
                 }
