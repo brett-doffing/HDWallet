@@ -114,6 +114,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 for object in results {
                     guard let objectData = object as? NSManagedObject else {continue}
                     persistentContainer.viewContext.delete(objectData)
+                    saveContext()
                 }
             } catch let error {
                 print("Delete all Core Data for \(entity) error :", error)
