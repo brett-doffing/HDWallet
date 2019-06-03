@@ -13,7 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        deleteAllCoreData()
+//        deleteAllCoreData()
         
         // Default to testnet
         if UserDefaults.standard.value(forKey: "testnet") == nil { UserDefaults.standard.set(true, forKey: "testnet") }
