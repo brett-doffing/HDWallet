@@ -95,7 +95,7 @@ class BlockstreamService {
                             if let scriptPubKey_asm = prevout["scriptpubkey_asm"] as? String {previousOutput.scriptPubKey_asm = scriptPubKey_asm}
                             if let scriptPubKey_address = prevout["scriptpubkey_address"] as? String {previousOutput.scriptPubKey_address = scriptPubKey_address}
                             if let scriptPubKey_type = prevout["scriptpubkey_type"] as? String {previousOutput.scriptPubKey_type = scriptPubKey_type}
-                            if let value = prevout["value"] as? Int {previousOutput.value = value}
+                            if let value = prevout["value"] as? Double {previousOutput.value = value/100000000}
                             vin.prevout = previousOutput
                         }
                         bro.vinArray.append(vin)
@@ -109,7 +109,7 @@ class BlockstreamService {
                         if let scriptPubKey_asm = indexed_vout["scriptpubkey_asm"] as? String {vout.scriptPubKey_asm = scriptPubKey_asm}
                         if let scriptPubKey_address = indexed_vout["scriptpubkey_address"] as? String {vout.scriptPubKey_address = scriptPubKey_address}
                         if let scriptPubKey_type = indexed_vout["scriptpubkey_type"] as? String {vout.scriptPubKey_type = scriptPubKey_type}
-                        if let value = indexed_vout["value"] as? Int {vout.value = value}
+                        if let value = indexed_vout["value"] as? Double {vout.value = value/100000000}
                         bro.voutArray.append(vout)
                     }
                 }
