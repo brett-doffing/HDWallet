@@ -113,9 +113,9 @@ class ReceiveVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         checkForSeed()
         if self.hasSeed {
-            self.getKeychainAddresses()
+            self.setCurrentAddress()
             // TODO: create a timer to reduce calls
-//            self.lookupCurrentReceiveAddress()
+            self.lookupCurrentReceiveAddress()
             
         }
     }
@@ -220,6 +220,15 @@ class ReceiveVC: UIViewController {
             } else {
                 DispatchQueue.main.async {
                     guard let responseObject = bro else { return }
+                    let address = Address(context: AppDelegate.viewContext)
+                    address.isTestnet = self.defaults.bool(forKey: "testnet")
+                    // FIXME: Account for mainnet indicies
+                    let walletIndex = self.defaults.integer(forKey: "testnetWalletIndex")
+                    address.walletIndex = Int32(walletIndex)
+                    address.str = self.p2pkhAddr
+                    self.defaults.set(walletIndex + 1, forKey: "testnetWalletIndex")
+                    self.setCurrentAddress()
+                    
                     let tx = Transaction(context: AppDelegate.viewContext)
                     tx.fee = Int64(responseObject.fee!)
                     tx.id = responseObject.txid!
@@ -228,6 +237,7 @@ class ReceiveVC: UIViewController {
                     tx.version = Int64(responseObject.version!)
                     tx.weight = Int64(responseObject.weight!)
                     
+                    // FIXME: Need to account for updating the Block when it is not actually in one via being unconfirmed.
                     guard let blockInfo = responseObject.blockInfo else { return }
                     let block = Block(context: AppDelegate.viewContext)
                     block.blockHash = blockInfo.blockHash
@@ -241,9 +251,13 @@ class ReceiveVC: UIViewController {
                         vout.scriptPubKey = item.scriptPubKey
                         vout.scriptPubKey_asm = item.scriptPubKey_asm
                         vout.scriptPubKey_address = item.scriptPubKey_address
+                        if item.scriptPubKey_address == self.p2pkhAddr {
+                            vout.walletAddress = address
+                        }
                         vout.scriptPubKey_type = item.scriptPubKey_type
-                        vout.value = Int64(item.value!)
+                        vout.value = item.value!
                         vout.transaction = tx
+                        vout.n = Int64(item.n)
                     }
                     
                     for item in responseObject.vinArray {
@@ -259,7 +273,7 @@ class ReceiveVC: UIViewController {
                         prevout.scriptPubKey_asm = item.prevout?.scriptPubKey_asm
                         prevout.scriptPubKey_address = item.prevout?.scriptPubKey_address
                         prevout.scriptPubKey_type = item.prevout?.scriptPubKey_type
-                        prevout.value = Int64(item.prevout!.value!)
+                        prevout.value = item.prevout!.value!
                         vin.previousOut = prevout
                         vin.transaction = tx
                     }
@@ -276,6 +290,20 @@ class ReceiveVC: UIViewController {
                 }
             }
         }
+    }
+    
+    private func setCurrentAddress() { // FIXME: currently testnet only
+        let walletIndex = self.defaults.integer(forKey: "testnetWalletIndex")
+        let kcpi = KeychainPasswordItem(service: "HDWallet", account: "user")
+        guard let mnemonic = try? kcpi.readPassword() else { return }
+        let seed = Mnemonic.createSeed(mnemonic: mnemonic)
+        let masterKC = BTCKeychain(seed: seed, network: .test)
+        let kc44 = masterKC.derivedKeychain(withPath: "m/44'/1'/0'/0/\(walletIndex)", andType: .BIP44)
+        defaults.setValue(kc44?.address, forKey: "testnetP2PKHAddress")
+        self.getKeychainAddresses()
+        self.qrImageView.qrString = self.p2pkhAddr
+        self.addressLabel.text = self.p2pkhAddr
+        self.qrImageView.createQRCImage()
     }
     
     deinit {
