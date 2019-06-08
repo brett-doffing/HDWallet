@@ -27,55 +27,10 @@ class ReceiveVC: UIViewController {
         
         self.view.backgroundColor = .white
         
-        self.addressLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(self.addressLabel)
-        self.addressLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-        self.addressLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-        self.addressLabel.heightAnchor.constraint(equalToConstant: 75).isActive = true
-        self.addressLabel.topAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
-        self.addressLabel.textColor = .white
-        self.addressLabel.backgroundColor = .black
-        self.addressLabel.font = UIFont.bitcoinFontWith(size: 17)
-        self.addressLabel.textAlignment = .center
-        self.addressLabel.text = ""
-        self.addressLabel.isUserInteractionEnabled = true
-        
-        self.qrImageView.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(self.qrImageView)
-        self.qrImageView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 25).isActive = true
-        self.qrImageView.bottomAnchor.constraint(equalTo: self.view.centerYAnchor, constant: -25).isActive = true
-        self.qrImageView.heightAnchor.constraint(equalTo: self.qrImageView.widthAnchor, multiplier: 1.0, constant: 0).isActive = true // Aspect ratio 1:1
-        self.qrImageView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        
-        self.copiedLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(self.copiedLabel)
-        self.copiedLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        self.copiedLabel.widthAnchor.constraint(equalToConstant: 175).isActive = true
-        self.copiedLabel.centerYAnchor.constraint(equalTo: self.qrImageView.centerYAnchor).isActive = true
-        self.copiedLabel.centerXAnchor.constraint(equalTo: self.qrImageView.centerXAnchor).isActive = true
-        self.copiedLabel.alpha = 0
-        self.copiedLabel.text = "Copied to Clipboard"
-        self.copiedLabel.textColor = .white
-        self.copiedLabel.font = UIFont.bitcoinFontWith(size: 17)
-        self.copiedLabel.textAlignment = .center
-        
-        
-        self.activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(self.activityIndicator)
-        self.activityIndicator.centerYAnchor.constraint(equalTo: self.qrImageView.centerYAnchor).isActive = true
-        self.activityIndicator.centerXAnchor.constraint(equalTo: self.qrImageView.centerXAnchor).isActive = true
-        
-        if self.defaults.bool(forKey: "testnet") == true {
-            self.copiedLabel.backgroundColor = .green
-            self.activityIndicator.color = .green
-        } else {
-            self.copiedLabel.backgroundColor = #colorLiteral(red: 0.9693624377, green: 0.5771938562, blue: 0.1013594046, alpha: 1)
-            self.activityIndicator.color = #colorLiteral(red: 0.9693624377, green: 0.5771938562, blue: 0.1013594046, alpha: 1)
-        }
+        self.setupViews()
         
         let copyLabelTap = UITapGestureRecognizer(target: self, action: #selector(copyAddressToClipboard))
         self.addressLabel.addGestureRecognizer(copyLabelTap)
-
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -304,6 +259,54 @@ class ReceiveVC: UIViewController {
         self.qrImageView.qrString = self.p2pkhAddr
         self.addressLabel.text = self.p2pkhAddr
         self.qrImageView.createQRCImage()
+    }
+    
+    private func setupViews() {
+        self.addressLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(self.addressLabel)
+        self.addressLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        self.addressLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        self.addressLabel.heightAnchor.constraint(equalToConstant: 75).isActive = true
+        self.addressLabel.topAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+        self.addressLabel.textColor = .white
+        self.addressLabel.backgroundColor = .black
+        self.addressLabel.font = UIFont.bitcoinFontWith(size: 17)
+        self.addressLabel.textAlignment = .center
+        self.addressLabel.text = ""
+        self.addressLabel.isUserInteractionEnabled = true
+        
+        self.qrImageView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(self.qrImageView)
+        self.qrImageView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 25).isActive = true
+        self.qrImageView.bottomAnchor.constraint(equalTo: self.view.centerYAnchor, constant: -25).isActive = true
+        self.qrImageView.heightAnchor.constraint(equalTo: self.qrImageView.widthAnchor, multiplier: 1.0, constant: 0).isActive = true // Aspect ratio 1:1
+        self.qrImageView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        
+        self.copiedLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(self.copiedLabel)
+        self.copiedLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        self.copiedLabel.widthAnchor.constraint(equalToConstant: 175).isActive = true
+        self.copiedLabel.centerYAnchor.constraint(equalTo: self.qrImageView.centerYAnchor).isActive = true
+        self.copiedLabel.centerXAnchor.constraint(equalTo: self.qrImageView.centerXAnchor).isActive = true
+        self.copiedLabel.alpha = 0
+        self.copiedLabel.text = "Copied to Clipboard"
+        self.copiedLabel.textColor = .white
+        self.copiedLabel.font = UIFont.bitcoinFontWith(size: 17)
+        self.copiedLabel.textAlignment = .center
+        
+        
+        self.activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(self.activityIndicator)
+        self.activityIndicator.centerYAnchor.constraint(equalTo: self.qrImageView.centerYAnchor).isActive = true
+        self.activityIndicator.centerXAnchor.constraint(equalTo: self.qrImageView.centerXAnchor).isActive = true
+        
+        if self.defaults.bool(forKey: "testnet") == true {
+            self.copiedLabel.backgroundColor = .green
+            self.activityIndicator.color = .green
+        } else {
+            self.copiedLabel.backgroundColor = #colorLiteral(red: 0.9693624377, green: 0.5771938562, blue: 0.1013594046, alpha: 1)
+            self.activityIndicator.color = #colorLiteral(red: 0.9693624377, green: 0.5771938562, blue: 0.1013594046, alpha: 1)
+        }
     }
     
     deinit {
